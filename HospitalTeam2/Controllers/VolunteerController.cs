@@ -63,7 +63,7 @@ namespace HospitalTeam2.Controllers
             string query = "insert into volunteers ( HospitalTitle, FirstName, LastName, MiddleName,Street, City, Province, Zip, Phone,Email, Age, Gender,Education, Experience, Availability, Name, Phone_em, Relationship, HealthCondition)" +
                 " values ( @location,@fname, @lname,@mname,@street,@city, @province,@zip, @phone, @email,@age, @gender, @education, @experience, @availability, @name, @phone_em, @relationship, @healthcondition)";
             SqlParameter[] myparams = new SqlParameter[18];
-            myparams[0] = new SqlParameter("@locayion", HospitalTitle_New);
+            myparams[0] = new SqlParameter("@location", HospitalTitle_New);
             myparams[1] = new SqlParameter("@fname", FirstName_New);
             myparams[2] = new SqlParameter("@lname", LastName_New);
             myparams[3] = new SqlParameter("@mname", MiddleName_New);

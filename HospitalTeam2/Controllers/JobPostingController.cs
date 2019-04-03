@@ -54,10 +54,10 @@ namespace HospitalTeam2.Controllers
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobpositions = db.JobPostings.Include(h => h.Hospital).Include(d => d.DepartmentID).Include(ja => ja.jobapplications).ToList();
+            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).Include(ja => ja.jobapplications).ToList();
 
             //GOTO Views/jobposition/List.cshtml
-            return View(jobpositions);
+            return View(jobposting);
         }
 
         public ActionResult New()

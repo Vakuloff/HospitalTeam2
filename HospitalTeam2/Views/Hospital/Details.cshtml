@@ -1,0 +1,90 @@
+﻿@model HospitalTeam2.Models.Hospital
+
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h2>Show</h2>
+
+<div>
+    <h4>Hospital</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HospitalTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImgType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HasPic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HasPic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPostingID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobPostingID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BookingID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.HospitalID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -80,7 +80,7 @@ namespace HospitalTeam2.Controllers
             {
                 db.Hospitals.Add(hospital);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             return View(hospital);
@@ -131,7 +131,7 @@ namespace HospitalTeam2.Controllers
             {
                 db.Entry(hospital).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             return View(hospital);
         }
@@ -160,7 +160,7 @@ namespace HospitalTeam2.Controllers
             Hospital hospital = db.Hospitals.Find(id);
             db.Hospitals.Remove(hospital);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)

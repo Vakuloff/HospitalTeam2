@@ -1,0 +1,66 @@
+﻿@model HospitalTeam2.Models.JobPosting
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>JobPosting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HospitalTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HospitalTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPostingTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobPostingTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPostingType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobPostingType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPostingDesc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobPostingDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobPostingReq)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobPostingReq)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobApplicationID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobApplicationID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department.DepartmentTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hospital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hospital.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.JobPostingID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

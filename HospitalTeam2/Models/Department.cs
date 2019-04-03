@@ -25,6 +25,7 @@ namespace HospitalTeam2.Models
         public List<JobPosting> JobPostings { get; set; }
 
 
+
         //one department has one hospital
         [ForeignKey("Hospital")]
         public int HospitalID { get; set; }

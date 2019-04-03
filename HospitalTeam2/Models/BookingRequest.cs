@@ -54,7 +54,7 @@ namespace HospitalTeam2.Models
 
         public virtual Hospital Hospital { get; set; }
 
-        [ForeignKey("Hospital")]
+        [ForeignKey("HospitalID")]
         public int HospitalID { get; set; }
 
         //each bookingrequest has one staff
@@ -62,7 +62,7 @@ namespace HospitalTeam2.Models
 
         public virtual Staff Staff { get; set; }
 
-        [ForeignKey("Staff")]
+        [ForeignKey("StaffID")]
         public int StaffID { get; set; }
 
 

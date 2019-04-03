@@ -1,0 +1,101 @@
+﻿@model IEnumerable<HospitalTeam2.Models.Hospital>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImgType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HasPic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VolunteerID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobPostingID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingID)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HospitalTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImgType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasPic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobPostingID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HospitalID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HospitalID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HospitalID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
