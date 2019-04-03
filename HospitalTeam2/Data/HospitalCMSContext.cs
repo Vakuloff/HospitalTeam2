@@ -40,6 +40,52 @@ namespace HospitalTeam2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //following the diagram on the notebook (picture included in assets folder)
+
+            modelBuilder.Entity<JobApplication>()
+                .HasOne(j => j.jobposting)
+                .WithMany(ja => ja.jobapplications)
+                .HasForeignKey(j => j.JobPostingID);
+
+            //QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS? ans:No
+
+            //eash job position references one hospital, one hospital has many job position
+
+            modelBuilder.Entity<JobPosting>()
+                .HasOne(h => h.Hospital)
+                .WithMany(j => j.JobPostings)
+                .HasForeignKey(h => h.HospitalID);
+
+            //each volunteer references one hospital, one hospital has many volunteer
+
+            modelBuilder.Entity<Volunteer>() //WE ARE TALKING ABOUT VOLUNTEERS
+                .HasOne(v => v.Hospital) //WE ARE TALKING ABOUT HOSPITALS
+                .WithMany(h => h.Volunteers)
+                .HasForeignKey(v => v.HospitalID);
+
+            //each job position has one department, each department has many job
+            modelBuilder.Entity<JobPosting>()
+                .HasOne(d => d.Department)
+                .WithMany(j => j.JobPostings)
+                .HasForeignKey(d => d.DepartmentID);
+
+            //each bookingrequest has one hospital, one hospital has many bookingapp
+
+            modelBuilder.Entity<BookingRequest>()
+                .HasOne(h => h.Hospital)
+                .WithMany(b => b.BookingRequests)
+                .HasForeignKey(h => h.HospitalID);
+
+            //each bookingrequest has one doctor, each doctor has many bookapp
+
+             /*modelBuilder.Entity<BookingRequest>()
+                 .HasOne(s => s.Staff)
+                 .WithMany(b => b.BookingRequests)
+                 .HasForeignKey(s => s.StaffID);*/
+
+
+
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BookingRequest>().ToTable("BookingRequests");
             modelBuilder.Entity<ContactForm>().ToTable("ContactForms");

@@ -31,5 +31,26 @@ namespace HospitalTeam2.Models
 
         [StringLength(int.MaxValue), Display(Name = "Requirements")]
         public string JobPostingReq { get; set; }
+
+        [StringLength(int.MaxValue), Display(Name = "JobApplicationID")]
+        public string JobApplicationID { get; set; }
+
+        //a job position has many applications
+        public virtual IEnumerable<JobApplication> jobapplications { get; set; }
+
+
+        // job has one hospital
+        public virtual Hospital Hospital { get; set; }
+
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
+
+        //job has one department
+        public virtual Department Department { get; set; }
+
+        [ForeignKey("Department")]
+        public int DepartmentID { get; set; }
+
+
     }
 }

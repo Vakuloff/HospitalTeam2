@@ -64,5 +64,12 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(255), Display(Name = "HealthCondition")]
         public string HealthCondition { get; set; }
+
+
+
+        [ForeignKey("hospital")]
+        public int HospitalID { get; set; }
+
+        public virtual Hospital Hospital { get; set; }
     }
 }

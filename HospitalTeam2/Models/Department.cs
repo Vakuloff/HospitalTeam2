@@ -17,7 +17,20 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Title")]
         public string DepartmentTitle { get; set; }
 
-        [Required, StringLength(255), Display(Name = "JobPosition")]
-        public string JobPosition { get; set; }
+        [Required, StringLength(255), Display(Name = "JobPosting")]
+        public string JobPosting { get; set; }
+
+        //one department has many jobs
+        [InverseProperty("Department")]
+        public List<JobPosting> JobPostings { get; set; }
+
+
+        //one department has one hospital
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
+
+        public virtual Hospital Hospital { get; set; }
+
+
     }
 }

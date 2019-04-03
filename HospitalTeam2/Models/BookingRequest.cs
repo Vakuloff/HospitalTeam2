@@ -20,8 +20,11 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "TypeDoctor")]
         public string TypeDoctor { get; set; }
 
-        [Required, StringLength(255), Display(Name = "DoctorName")]
-        public string DoctorName { get; set; }
+        [Required, StringLength(255), Display(Name = "Doctor First Name")]
+        public string StaffFirstName { get; set; }
+
+        [Required, StringLength(255), Display(Name = "Doctor Last Name")]
+        public string StaffLastName { get; set; }
 
         [Required, StringLength(255), Display(Name = "Reason")]
         public string Reason { get; set; }
@@ -46,5 +49,23 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(255), Display(Name = "Age")]
         public string Age { get; set; }
+
+        //each bookingrequest has one hospital
+
+        public virtual Hospital Hospital { get; set; }
+
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
+
+        //each bookingrequest has one staff
+
+
+        public virtual Staff Staff { get; set; }
+
+        [ForeignKey("Staff")]
+        public int StaffID { get; set; }
+
+
+
     }
 }

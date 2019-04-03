@@ -31,5 +31,15 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(255), Display(Name = "Phone")]
         public string Phone { get; set; }
+
+        //we decided that a jobposting is for one job only
+        public virtual JobPosting jobposting { get; set; }
+
+        [ForeignKey("JobPosting")]
+        public int JobPostingID { get; set; }
+
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
+
     }
 }
