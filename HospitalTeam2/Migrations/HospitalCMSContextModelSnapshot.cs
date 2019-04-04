@@ -20,6 +20,96 @@ namespace HospitalTeam2.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HospitalNew.Models.Blog", b =>
+                {
+                    b.Property<int>("BlogId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BlogAuthor")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("BlogDate")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("BlogDescription")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("BlogTime")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("BlogTitle")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("BlogId");
+
+                    b.ToTable("Blog");
+                });
+
+            modelBuilder.Entity("HospitalNew.Models.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("EventDate")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("EventLocation")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("EventTime")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("EventId");
+
+                    b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("HospitalNew.Models.Feedback", b =>
+                {
+                    b.Property<int>("FeedbacksId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("FeedbacksEmail")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("FeedbacksMessage")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("FeedbacksSubject")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("FeedbacksId");
+
+                    b.ToTable("Feedbacks");
+                });
+
             modelBuilder.Entity("HospitalTeam2.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -84,10 +174,6 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<string>("DoctorName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -95,6 +181,8 @@ namespace HospitalTeam2.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<int>("HospitalID");
 
                     b.Property<string>("HospitalTitle")
                         .IsRequired()
@@ -112,6 +200,16 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<string>("StaffFirstName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("StaffID");
+
+                    b.Property<string>("StaffLastName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
                     b.Property<string>("Time")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -121,6 +219,10 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("BookingID");
+
+                    b.HasIndex("HospitalID");
+
+                    b.HasIndex("StaffID");
 
                     b.ToTable("BookingRequests");
                 });
@@ -176,11 +278,15 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<string>("JobPosition")
+                    b.Property<int>("HospitalID");
+
+                    b.Property<string>("JobPosting")
                         .IsRequired()
                         .HasMaxLength(255);
 
                     b.HasKey("DepartmentID");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Departments");
                 });
@@ -230,17 +336,35 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("BookingID");
+
+                    b.Property<string>("Department")
+                        .HasMaxLength(2147483647);
+
+                    b.Property<int>("DepartmentID");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2147483647);
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<int>("HasPic");
 
                     b.Property<string>("HospitalTitle")
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<string>("ImgType");
+
+                    b.Property<int>("JobPostingID");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<int>("VolunteerID");
 
                     b.HasKey("HospitalID");
 
@@ -278,6 +402,10 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("HospitalID");
+
+                    b.Property<int>("JobPostingID");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -288,6 +416,8 @@ namespace HospitalTeam2.Migrations
 
                     b.HasKey("JobApplicationID");
 
+                    b.HasIndex("JobPostingID");
+
                     b.ToTable("JobApplications");
                 });
 
@@ -296,15 +426,24 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("JobPostingID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("DepartmentID");
+
+                    b.Property<string>("DepartmentTitle")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("HospitalID");
+
                     b.Property<string>("HospitalTitle")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<string>("JobPostingDesc")
+                    b.Property<string>("JobApplicationID")
                         .HasMaxLength(2147483647);
 
-                    b.Property<string>("JobPostingReq")
-                        .HasMaxLength(2147483647);
+                    b.Property<string>("JobPostingDesc");
+
+                    b.Property<string>("JobPostingReq");
 
                     b.Property<string>("JobPostingTitle")
                         .IsRequired()
@@ -315,6 +454,10 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("JobPostingID");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("JobPostings");
                 });
@@ -426,6 +569,8 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("HospitalID");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -459,6 +604,8 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("VolunteerID");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Volunteers");
                 });
@@ -569,6 +716,56 @@ namespace HospitalTeam2.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.BookingRequest", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
+                        .WithMany("BookingRequests")
+                        .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HospitalTeam2.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.Department", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
+                        .WithMany("Departments")
+                        .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.JobApplication", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.JobPosting", "jobposting")
+                        .WithMany("jobapplications")
+                        .HasForeignKey("JobPostingID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.JobPosting", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Department", "Department")
+                        .WithMany("JobPostings")
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
+                        .WithMany("JobPostings")
+                        .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

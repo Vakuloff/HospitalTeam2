@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using HospitalTeam2.Models;
+using HospitalNew.Models;
 
 namespace HospitalTeam2.Data
 {
@@ -37,7 +38,9 @@ namespace HospitalTeam2.Data
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
-
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Blog> Blog { get; set; }
+        public DbSet<Event> Event { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //following the diagram on the notebook (picture included in assets folder)
@@ -104,6 +107,9 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Schedule>().ToTable("Schedules");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
+            modelBuilder.Entity<Feedback>().ToTable("Feedbacks");
+            modelBuilder.Entity<Blog>().ToTable("Blog");
+            modelBuilder.Entity<Event>().ToTable("Event");
         }
     }
 }

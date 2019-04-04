@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "New";
+}
+
+<h2>Feedbacks New</h2>
+
+<h2> Feedbacks</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" action="/Feedback/New">
+            <div class="inprow">
+                <label class="inplabel">Full Name</label>
+                <input id="FullName_new" name="FullName_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Feedbacks Email</label>
+                <input id="FeedbacksEmail_new" name="FeedbacksEmail_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Contact Number</label>
+                <input id="ContactNumber_new" name="ContactNumber_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Feedbacks Subject</label>
+                <input id="FeedbacksSubject_new" name="FeedbacksSubject_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Feedbacks Message</label>
+                <input id="FeedbacksMessage_new" name="FeedbacksMessage_new" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+
+

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HospitalTeam2.Migrations
 {
-    public partial class models_1 : Migration
+    public partial class evntmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
