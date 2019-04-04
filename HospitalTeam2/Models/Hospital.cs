@@ -29,15 +29,9 @@ namespace HospitalTeam2.Models
         [StringLength(int.MaxValue), Display(Name = "Description")]
         public string Description { get; set; }
 
-        [StringLength(int.MaxValue), Display(Name = "Department")]
-        public string Department { get; set; }
-       
-
-
-        //Accepted image formats (jpg/jpeg/png/gif)
-
-        public string ImgType { get; set; }
-        public int HasPic { get; set; }
+        [StringLength(int.MaxValue), Display(Name = "DepartmentTitle")]
+        public string DepartmentTitle { get; set; }
+      
 
         //Hospital and Job Positions
         [InverseProperty("Hospital")]

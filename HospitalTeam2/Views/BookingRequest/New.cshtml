@@ -14,23 +14,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="HospitalTitle" class="control-label"></label>
-                <input asp-for="HospitalTitle" class="form-control" />
-                <span asp-validation-for="HospitalTitle" class="text-danger"></span>
+                <select asp-for="HospitalTitle" class="form-control" asp-items="ViewBag.HospitalTitle"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TypeDoctor" class="control-label"></label>
-                <input asp-for="TypeDoctor" class="form-control" />
-                <span asp-validation-for="TypeDoctor" class="text-danger"></span>
+                <select asp-for="TypeDoctor" class="form-control" asp-items="ViewBag.TypeDoctor"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StaffFirstName" class="control-label"></label>
-                <input asp-for="StaffFirstName" class="form-control" />
-                <span asp-validation-for="StaffFirstName" class="text-danger"></span>
+                <select asp-for="StaffFirstName" class="form-control" asp-items="ViewBag.StaffFirstName"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StaffLastName" class="control-label"></label>
-                <input asp-for="StaffLastName" class="form-control" />
-                <span asp-validation-for="StaffLastName" class="text-danger"></span>
+                <select asp-for="StaffLastName" class="form-control" asp-items="ViewBag.StaffLastName"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Reason" class="control-label"></label>
@@ -72,14 +68,8 @@
                 <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <select asp-for="HospitalID" class ="form-control" asp-items="ViewBag.HospitalID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StaffID" class="control-label"></label>
-                <select asp-for="StaffID" class ="form-control" asp-items="ViewBag.StaffID"></select>
-            </div>
+
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

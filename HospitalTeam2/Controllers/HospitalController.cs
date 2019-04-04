@@ -88,53 +88,6 @@ namespace HospitalTeam2.Controllers
 
 
 
-        // POST: Hospitals/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("HospitalID,HospitalTitle,Address,Phone, Description")] Hospital hospital, IFormFile authorimg)
-        {
-            //default to false (no pic)
-            hospital.HasPic = 0;
-            var webRoot = _env.WebRootPath;
-            if (authorimg != null)
-            {
-                if (authorimg.Length > 0)
-                {
-
-                    var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
-                    var extension = Path.GetExtension(authorimg.FileName).Substring(1);
-
-                    if (valtypes.Contains(extension))
-                    {
-
-
-                        string fn = hospital.HospitalID + "." + extension;
-
-                        //get a direct file path to imgs/hospitals/
-                        string path = Path.Combine(webRoot, "images/hospitals");
-                        path = Path.Combine(path, fn);
-
-                        //save the file
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            authorimg.CopyTo(stream);
-                        }
-                        //let the model know that there is a picture with an extension
-                        hospital.HasPic = 1;
-                        hospital.ImgType = extension;
-
-                    }
-                }
-            }
-            if (ModelState.IsValid)
-            {
-                db.Entry(hospital).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("List");
-            }
-            return View(hospital);
-        }
 
 
         // GET: Hospitals/Delete/5
@@ -157,6 +110,9 @@ namespace HospitalTeam2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+
+
             Hospital hospital = db.Hospitals.Find(id);
             db.Hospitals.Remove(hospital);
             db.SaveChanges();

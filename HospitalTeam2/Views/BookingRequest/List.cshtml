@@ -4,10 +4,10 @@
     ViewData["Title"] = "List";
 }
 
-<h2>List</h2>
+<h2>Booking Request</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="New">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -48,29 +48,23 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Age)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hospital)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staff)
-            </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.HospitalTitle)
+                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeDoctor)
+                @Html.DisplayFor(modelItem => item.Staff.TypeDoctor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StaffFirstName)
+                @Html.DisplayFor(modelItem => item.Staff.StaffFirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StaffLastName)
+                @Html.DisplayFor(modelItem => item.Staff.StaffLastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Reason)
@@ -96,16 +90,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Hospital.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.StaffFirstName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookingID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookingID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookingID">Delete</a>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookingID }) |
+                @Html.ActionLink("Show", "Show", new { id = item.BookingID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookingID })
+                
             </td>
         </tr>
 }

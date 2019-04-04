@@ -43,8 +43,8 @@ namespace HospitalTeam2.Data
             //following the diagram on the notebook (picture included in assets folder)
 
             modelBuilder.Entity<JobApplication>()
-                .HasOne(j => j.jobposting)
-                .WithMany(ja => ja.jobapplications)
+                .HasOne(j => j.JobPosting)
+                .WithMany(ja => ja.JobApplications)
                 .HasForeignKey(j => j.JobPostingID);
 
             //QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS? ans:No
@@ -78,7 +78,7 @@ namespace HospitalTeam2.Data
 
             //each bookingrequest has one doctor, each doctor has many bookapp
 
-            /*modelBuilder.Entity<BookingRequest>()
+           /*modelBuilder.Entity<BookingRequest>()
                 .HasOne(s => s.Staff)
                 .WithMany(b => b.BookingRequests)
                 .HasForeignKey(s => s.StaffID);*/

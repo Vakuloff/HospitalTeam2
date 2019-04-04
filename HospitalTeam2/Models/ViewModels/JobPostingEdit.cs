@@ -17,7 +17,6 @@ namespace HospitalTeam2.Models.ViewModels
 
         public IEnumerable<Hospital> Hospitals { get; set; }
 
-        public IEnumerable<JobPosting> JobPosting { get; set; }
     }
 
     

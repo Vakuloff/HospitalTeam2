@@ -13,12 +13,10 @@ namespace HospitalTeam2.Models
     {
         [Key, ScaffoldColumn(false)]
         public int JobApplicationID { get; set; }
+        
+        [Required, StringLength(255), Display(Name = "JobPostingTitle")]
+        public string JobPostingTitle { get; set; }
 
-        /*
-         *  QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS?
-        [Required, StringLength(255), Display(Name = "Department")]
-        public string Department { get; set; }
-        */
 
         [Required, StringLength(255), Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -32,14 +30,20 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Phone")]
         public string Phone { get; set; }
 
+        [Required, StringLength(255), Display(Name = "Cover Letter")]
+        public string CoverLetter { get; set; }
+
+        [Required, StringLength(255), Display(Name = "Resume")]
+        public string Resume { get; set; }
+
         //we decided that a jobposting is for one job only
-        public virtual JobPosting jobposting { get; set; }
+        public virtual JobPosting JobPosting { get; set; }
 
         [ForeignKey("JobPosting")]
         public int JobPostingID { get; set; }
 
-        [ForeignKey("Hospital")]
-        public int HospitalID { get; set; }
+        
+
 
     }
 }

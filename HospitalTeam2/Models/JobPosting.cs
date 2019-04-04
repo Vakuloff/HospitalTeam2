@@ -39,7 +39,7 @@ namespace HospitalTeam2.Models
         public string JobApplicationID { get; set; }
 
         //a job position has many applications
-        public virtual IEnumerable<JobApplication> jobapplications { get; set; }
+        public virtual IEnumerable<JobApplication> JobApplications { get; set; }
 
 
         // job has one hospital

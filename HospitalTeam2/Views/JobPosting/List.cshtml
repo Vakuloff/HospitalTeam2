@@ -4,38 +4,37 @@
     ViewData["Title"] = "List";
 }
 
-<h2>List</h2>
+<h2>Job Posting</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="New">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.HospitalTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobPostingTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobPostingType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobPostingDesc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobPostingReq)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.JobApplicationID)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.Department)
+                @Html.DisplayNameFor(model => model.HospitalTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital)
+                @Html.DisplayNameFor(model => model.DepartmentTitle)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPostingTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPostingType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPostingDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPostingReq)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobApplicationID)
+            </th>
+
+
             <th></th>
         </tr>
     </thead>
@@ -43,7 +42,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.HospitalTitle)
+                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.JobPostingTitle)
@@ -60,12 +62,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.JobApplicationID)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.DepartmentTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hospital.Address)
-            </td>
+
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.JobPostingID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.JobPostingID">Details</a> |

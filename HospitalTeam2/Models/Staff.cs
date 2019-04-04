@@ -19,6 +19,12 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(255), Display(Name = "Last Name")]
         public string StaffLastName { get; set; }
+
+        [Required, StringLength(255), Display(Name = "Type Doctor")]
+        public string TypeDoctor { get; set; }
+
+
+
         //position
         //department
     }
