@@ -13,7 +13,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using HospitalTeam2.Models;
-using HospitalNew.Models;
 
 namespace HospitalTeam2.Data
 {
@@ -39,25 +38,24 @@ namespace HospitalTeam2.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<Blog> Blog { get; set; }
-        public DbSet<Event> Event { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //following the diagram on the notebook (picture included in assets folder)
 
             modelBuilder.Entity<JobApplication>()
-                .HasOne(j => j.JobPosting)
-                .WithMany(ja => ja.JobApplications)
-                .HasForeignKey(j => j.JobPostingID);
+                .HasOne(ja => ja.JobPosting)
+                .WithMany(jp => jp.JobApplications)
+                .HasForeignKey(ja => ja.JobPostingID);
 
             //QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS? ans:No
 
             //eash job position references one hospital, one hospital has many job position
 
             modelBuilder.Entity<JobPosting>()
-                .HasOne(h => h.Hospital)
-                .WithMany(j => j.JobPostings)
-                .HasForeignKey(h => h.HospitalID);
+                .HasOne(jp => jp.Hospital)
+                .WithMany(h => h.JobPostings)
+                .HasForeignKey(jp => jp.HospitalID);
 
             //each volunteer references one hospital, one hospital has many volunteer
 
@@ -68,29 +66,32 @@ namespace HospitalTeam2.Data
 
             //each job position has one department, each department has many job
             modelBuilder.Entity<JobPosting>()
-                .HasOne(d => d.Department)
-                .WithMany(j => j.JobPostings)
-                .HasForeignKey(d => d.DepartmentID);
+                .HasOne(jp => jp.Department)
+                .WithMany(d => d.JobPostings)
+                .HasForeignKey(jp => jp.DepartmentID);
 
             //each bookingrequest has one hospital, one hospital has many bookingapp
 
             modelBuilder.Entity<BookingRequest>()
-                .HasOne(h => h.Hospital)
-                .WithMany(b => b.BookingRequests)
-                .HasForeignKey(h => h.HospitalID);
+                .HasOne(br => br.Hospital)
+                .WithMany(h => h.BookingRequests)
+                .HasForeignKey(br => br.HospitalID);
 
             //each bookingrequest has one doctor, each doctor has many bookapp
 
-         /* modelBuilder.Entity<BookingRequest>()
+            /*modelBuilder.Entity<BookingRequest>()
                 .HasOne(s => s.Staff)
                 .WithMany(b => b.BookingRequests)
                 .HasForeignKey(s => s.StaffID);*/
 
             //each department has one hospital, each hospital has many departments
             modelBuilder.Entity<Department>()
-                 .HasOne( h=> h.Hospital)
-                 .WithMany(d => d.Departments)
-                 .HasForeignKey(h => h.HospitalID);
+                 .HasOne(d=> d.Hospital)
+                 .WithMany(h => h.Departments)
+                 .HasForeignKey(d => d.HospitalID);
+
+            modelBuilder.Entity<Feedback>();
+
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BookingRequest>().ToTable("BookingRequests");
@@ -107,9 +108,7 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Schedule>().ToTable("Schedules");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
-            modelBuilder.Entity<Feedback>().ToTable("Feedbacks");
-            modelBuilder.Entity<Blog>().ToTable("Blog");
-            modelBuilder.Entity<Event>().ToTable("Event");
+            modelBuilder.Entity<Feedback>().ToTable("Feedback");
         }
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190405165815_divymodel")]
+    partial class divymodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,11 +191,7 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<int>("HospitalID");
 
-                    b.Property<string>("HospitalTitle")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("JobPostingTitle")
+                    b.Property<string>("JobPosting")
                         .IsRequired()
                         .HasMaxLength(255);
 
@@ -241,36 +238,6 @@ namespace HospitalTeam2.Migrations
                     b.ToTable("FAQs");
                 });
 
-            modelBuilder.Entity("HospitalTeam2.Models.Feedback", b =>
-                {
-                    b.Property<int>("FeedbacksId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContactNumber")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("FeedbacksEmail")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("FeedbacksMessage")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("FeedbacksSubject")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.HasKey("FeedbacksId");
-
-                    b.ToTable("Feedback");
-                });
-
             modelBuilder.Entity("HospitalTeam2.Models.Hospital", b =>
                 {
                     b.Property<int>("HospitalID")
@@ -280,8 +247,12 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<string>("DepartmentTitle")
+                    b.Property<int>("BookingID");
+
+                    b.Property<string>("Department")
                         .HasMaxLength(2147483647);
+
+                    b.Property<int>("DepartmentID");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2147483647);
@@ -290,13 +261,21 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("HasPic");
+
                     b.Property<string>("HospitalTitle")
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<string>("ImgType");
+
+                    b.Property<int>("JobPostingID");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<int>("VolunteerID");
 
                     b.HasKey("HospitalID");
 
@@ -326,10 +305,6 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("JobApplicationID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CoverLetter")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -338,21 +313,15 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<int>("JobPostingID");
+                    b.Property<int>("HospitalID");
 
-                    b.Property<string>("JobPostingTitle")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<int>("JobPostingID");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(255);
 
                     b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Resume")
                         .IsRequired()
                         .HasMaxLength(255);
 
@@ -462,10 +431,6 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("StaffLastName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("TypeDoctor")
                         .IsRequired()
                         .HasMaxLength(255);
 
@@ -687,8 +652,8 @@ namespace HospitalTeam2.Migrations
 
             modelBuilder.Entity("HospitalTeam2.Models.JobApplication", b =>
                 {
-                    b.HasOne("HospitalTeam2.Models.JobPosting", "JobPosting")
-                        .WithMany("JobApplications")
+                    b.HasOne("HospitalTeam2.Models.JobPosting", "jobposting")
+                        .WithMany("jobapplications")
                         .HasForeignKey("JobPostingID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

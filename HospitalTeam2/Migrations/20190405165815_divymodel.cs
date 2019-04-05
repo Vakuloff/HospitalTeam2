@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace HospitalTeam2.Migrations
 {
-    public partial class hospital_apr4 : Migration
+    public partial class divymodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
                 name: "JobPosition",
                 table: "Departments",
-                newName: "JobPostingTitle");
+                newName: "JobPosting");
 
             migrationBuilder.RenameColumn(
                 name: "DoctorName",
@@ -23,13 +23,6 @@ namespace HospitalTeam2.Migrations
                 table: "Volunteers",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "TypeDoctor",
-                table: "Staffs",
-                maxLength: 255,
-                nullable: false,
-                defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "DepartmentID",
@@ -56,12 +49,11 @@ namespace HospitalTeam2.Migrations
                 maxLength: 2147483647,
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "CoverLetter",
+            migrationBuilder.AddColumn<int>(
+                name: "HospitalID",
                 table: "JobApplications",
-                maxLength: 255,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
                 name: "JobPostingID",
@@ -69,37 +61,9 @@ namespace HospitalTeam2.Migrations
                 nullable: false,
                 defaultValue: 0);
 
-            migrationBuilder.AddColumn<string>(
-                name: "JobPostingTitle",
-                table: "JobApplications",
-                maxLength: 255,
-                nullable: false,
-                defaultValue: "");
+            
 
-            migrationBuilder.AddColumn<string>(
-                name: "Resume",
-                table: "JobApplications",
-                maxLength: 255,
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<int>(
-                name: "BookingID",
-                table: "Hospitals",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "DepartmentID",
-                table: "Hospitals",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "DepartmentTitle",
-                table: "Hospitals",
-                maxLength: 2147483647,
-                nullable: true);
+           
 
             migrationBuilder.AddColumn<string>(
                 name: "Description",
@@ -108,29 +72,25 @@ namespace HospitalTeam2.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "JobPostingID",
+                name: "HasPic",
                 table: "Hospitals",
                 nullable: false,
                 defaultValue: 0);
 
-            migrationBuilder.AddColumn<int>(
-                name: "VolunteerID",
+            migrationBuilder.AddColumn<string>(
+                name: "ImgType",
                 table: "Hospitals",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
+
+            
+
+           
 
             migrationBuilder.AddColumn<int>(
                 name: "HospitalID",
                 table: "Departments",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "HospitalTitle",
-                table: "Departments",
-                maxLength: 255,
-                nullable: false,
-                defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "HospitalID",
@@ -151,6 +111,7 @@ namespace HospitalTeam2.Migrations
                 nullable: false,
                 defaultValue: 0);
 
+            /*
             migrationBuilder.CreateIndex(
                 name: "IX_Volunteers_HospitalID",
                 table: "Volunteers",
@@ -226,13 +187,13 @@ namespace HospitalTeam2.Migrations
                 principalColumn: "DepartmentID",
                 onDelete: ReferentialAction.Cascade);
 
-            //migrationBuilder.AddForeignKey(
-            //    name: "FK_JobPostings_Hospitals_HospitalID",
-            //    table: "JobPostings",
-            //    column: "HospitalID",
-            //    principalTable: "Hospitals",
-            //    principalColumn: "HospitalID",
-            //    onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobPostings_Hospitals_HospitalID",
+                table: "JobPostings",
+                column: "HospitalID",
+                principalTable: "Hospitals",
+                principalColumn: "HospitalID",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Volunteers_Hospitals_HospitalID",
@@ -241,10 +202,12 @@ namespace HospitalTeam2.Migrations
                 principalTable: "Hospitals",
                 principalColumn: "HospitalID",
                 onDelete: ReferentialAction.Cascade);
+                */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropForeignKey(
                 name: "FK_BookingRequests_Hospitals_HospitalID",
                 table: "BookingRequests");
@@ -306,10 +269,6 @@ namespace HospitalTeam2.Migrations
                 table: "Volunteers");
 
             migrationBuilder.DropColumn(
-                name: "TypeDoctor",
-                table: "Staffs");
-
-            migrationBuilder.DropColumn(
                 name: "DepartmentID",
                 table: "JobPostings");
 
@@ -326,7 +285,7 @@ namespace HospitalTeam2.Migrations
                 table: "JobPostings");
 
             migrationBuilder.DropColumn(
-                name: "CoverLetter",
+                name: "HospitalID",
                 table: "JobApplications");
 
             migrationBuilder.DropColumn(
@@ -334,15 +293,11 @@ namespace HospitalTeam2.Migrations
                 table: "JobApplications");
 
             migrationBuilder.DropColumn(
-                name: "JobPostingTitle",
-                table: "JobApplications");
-
-            migrationBuilder.DropColumn(
-                name: "Resume",
-                table: "JobApplications");
-
-            migrationBuilder.DropColumn(
                 name: "BookingID",
+                table: "Hospitals");
+
+            migrationBuilder.DropColumn(
+                name: "Department",
                 table: "Hospitals");
 
             migrationBuilder.DropColumn(
@@ -350,11 +305,15 @@ namespace HospitalTeam2.Migrations
                 table: "Hospitals");
 
             migrationBuilder.DropColumn(
-                name: "DepartmentTitle",
+                name: "Description",
                 table: "Hospitals");
 
             migrationBuilder.DropColumn(
-                name: "Description",
+                name: "HasPic",
+                table: "Hospitals");
+
+            migrationBuilder.DropColumn(
+                name: "ImgType",
                 table: "Hospitals");
 
             migrationBuilder.DropColumn(
@@ -370,10 +329,6 @@ namespace HospitalTeam2.Migrations
                 table: "Departments");
 
             migrationBuilder.DropColumn(
-                name: "HospitalTitle",
-                table: "Departments");
-
-            migrationBuilder.DropColumn(
                 name: "HospitalID",
                 table: "BookingRequests");
 
@@ -386,7 +341,7 @@ namespace HospitalTeam2.Migrations
                 table: "BookingRequests");
 
             migrationBuilder.RenameColumn(
-                name: "JobPostingTitle",
+                name: "JobPosting",
                 table: "Departments",
                 newName: "JobPosition");
 
@@ -394,6 +349,7 @@ namespace HospitalTeam2.Migrations
                 name: "StaffLastName",
                 table: "BookingRequests",
                 newName: "DoctorName");
+                */
         }
     }
 }
