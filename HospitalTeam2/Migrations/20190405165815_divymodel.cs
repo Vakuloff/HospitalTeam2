@@ -8,6 +8,7 @@ namespace HospitalTeam2.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.RenameColumn(
                 name: "JobPosition",
                 table: "Departments",
@@ -17,13 +18,13 @@ namespace HospitalTeam2.Migrations
                 name: "DoctorName",
                 table: "BookingRequests",
                 newName: "StaffLastName");
-
+            
             migrationBuilder.AddColumn<int>(
                 name: "HospitalID",
                 table: "Volunteers",
                 nullable: false,
                 defaultValue: 0);
-
+                
             migrationBuilder.AddColumn<int>(
                 name: "DepartmentID",
                 table: "JobPostings",
