@@ -37,14 +37,15 @@ namespace HospitalTeam2.Data
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //following the diagram on the notebook (picture included in assets folder)
 
             modelBuilder.Entity<JobApplication>()
-                .HasOne(ja => ja.jobposting)
-                .WithMany(jp => jp.jobapplications)
+                .HasOne(ja => ja.JobPosting)
+                .WithMany(jp => jp.JobApplications)
                 .HasForeignKey(ja => ja.JobPostingID);
 
             //QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS? ans:No
@@ -89,6 +90,9 @@ namespace HospitalTeam2.Data
                  .WithMany(h => h.Departments)
                  .HasForeignKey(d => d.HospitalID);
 
+            modelBuilder.Entity<Feedback>();
+
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BookingRequest>().ToTable("BookingRequests");
             modelBuilder.Entity<ContactForm>().ToTable("ContactForms");
@@ -104,6 +108,7 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Schedule>().ToTable("Schedules");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
+            modelBuilder.Entity<Feedback>().ToTable("Feedback");
         }
     }
 }

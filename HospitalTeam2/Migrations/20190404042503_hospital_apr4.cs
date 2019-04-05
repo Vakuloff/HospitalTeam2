@@ -226,13 +226,13 @@ namespace HospitalTeam2.Migrations
                 principalColumn: "DepartmentID",
                 onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_JobPostings_Hospitals_HospitalID",
-                table: "JobPostings",
-                column: "HospitalID",
-                principalTable: "Hospitals",
-                principalColumn: "HospitalID",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_JobPostings_Hospitals_HospitalID",
+            //    table: "JobPostings",
+            //    column: "HospitalID",
+            //    principalTable: "Hospitals",
+            //    principalColumn: "HospitalID",
+            //    onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Volunteers_Hospitals_HospitalID",

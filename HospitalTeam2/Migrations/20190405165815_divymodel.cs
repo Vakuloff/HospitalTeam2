@@ -207,6 +207,7 @@ namespace HospitalTeam2.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropForeignKey(
                 name: "FK_BookingRequests_Hospitals_HospitalID",
                 table: "BookingRequests");
@@ -348,6 +349,7 @@ namespace HospitalTeam2.Migrations
                 name: "StaffLastName",
                 table: "BookingRequests",
                 newName: "DoctorName");
+                */
         }
     }
 }
