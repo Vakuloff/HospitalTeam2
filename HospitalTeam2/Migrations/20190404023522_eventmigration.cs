@@ -154,17 +154,15 @@ namespace HospitalTeam2.Migrations
                     HospitalID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(maxLength: 255, nullable: false),
-                    BookingID = table.Column<int>(nullable: false),
-                    Department = table.Column<string>(maxLength: 2147483647, nullable: true),
-                    DepartmentID = table.Column<int>(nullable: false),
+                    
                     Description = table.Column<string>(maxLength: 2147483647, nullable: true),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
                     HasPic = table.Column<int>(nullable: false),
                     HospitalTitle = table.Column<string>(maxLength: 255, nullable: false),
                     ImgType = table.Column<string>(nullable: true),
-                    JobPostingID = table.Column<int>(nullable: false),
+                    
                     Phone = table.Column<string>(maxLength: 255, nullable: false),
-                    VolunteerID = table.Column<int>(nullable: false)
+                    
                 },
                 constraints: table =>
                 {
@@ -456,12 +454,14 @@ namespace HospitalTeam2.Migrations
                         principalTable: "Departments",
                         principalColumn: "DepartmentID",
                         onDelete: ReferentialAction.Cascade);
+                    
                     table.ForeignKey(
                         name: "FK_JobPostings_Hospitals_HospitalID",
                         column: x => x.HospitalID,
                         principalTable: "Hospitals",
                         principalColumn: "HospitalID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                        
                 });
 
             migrationBuilder.CreateTable(
