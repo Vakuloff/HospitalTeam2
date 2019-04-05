@@ -17,20 +17,20 @@
             @Html.DisplayFor(model => model.DepartmentTitle)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.JobPosting)
+            @Html.DisplayNameFor(model => model.JobPostingTitle)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.JobPosting)
+            @Html.DisplayFor(model => model.JobPostingTitle)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Hospital)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Hospital.Address)
+            @Html.DisplayFor(model => model.Hospital.HospitalTitle)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.DepartmentID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>

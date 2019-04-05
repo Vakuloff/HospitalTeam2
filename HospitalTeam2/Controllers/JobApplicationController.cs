@@ -45,7 +45,7 @@ namespace HospitalTeam2.Controllers
 
             string query = "select * from jobapplications";
 
-            List<JobApplication> jobapplications = db.JobApplications.Include(j => j.jobposting).ToList();
+            List<JobApplication> jobapplications = db.JobApplications.Include(j => j.JobPosting).ToList();
 
             return View(jobapplications);
 
@@ -62,10 +62,11 @@ namespace HospitalTeam2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string JobPostingTitle_New, string FirstName_New, string LastName_New, string Email_New, string Phone_New, string CoverLetter_New, string Summary_New)
+        public ActionResult Create(string JobPostingTitle_New, 
+            string FirstName_New, string LastName_New, string Email_New, string Phone_New, string CoverLetter_New, string Resume_New)
         {
-            string query = "insert into jobapplications (JobPostingTitle, FirstName, LastName, Email, Phone, CoverLetter, Summary)" +
-                " values (@jobtitle, @fname, @lname, @email, @phone, @coverletter, @summary)";
+            string query = "insert into jobapplications (JobPostingTitle,FirstName, LastName, Email, Phone, CoverLetter, Resume)" +
+                " values (@jobtitle, @fname, @lname, @email, @phone, @coverletter, @resume)";
             SqlParameter[] myparams = new SqlParameter[6];
             myparams[0] = new SqlParameter("@jobtitle", JobPostingTitle_New);
             myparams[1] = new SqlParameter("@fname", FirstName_New);
@@ -73,7 +74,7 @@ namespace HospitalTeam2.Controllers
             myparams[3] = new SqlParameter("@email", Email_New);
             myparams[4] = new SqlParameter("@phone", Phone_New);
             myparams[5] = new SqlParameter("@coverletter", CoverLetter_New);
-            myparams[6] = new SqlParameter("@summary", Summary_New);
+            myparams[6] = new SqlParameter("@resume", Resume_New);
 
 
             db.Database.ExecuteSqlCommand(query, myparams);

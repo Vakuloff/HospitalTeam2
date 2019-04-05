@@ -13,6 +13,10 @@
         <form asp-action="New">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="JobPostingTitle" class="control-label"></label>
+                <select asp-for="JobPostingTitle" class="form-control" asp-items="ViewBag.JobPostingTitle"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -32,15 +36,19 @@
                 <input asp-for="Phone" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="JobPostingID" class="control-label"></label>
-                <select asp-for="JobPostingID" class ="form-control" asp-items="ViewBag.JobPostingID"></select>
+                <label asp-for="CoverLetter" class="control-label"></label>
+                <input asp-for="CoverLetter" class="form-control" />
+                <span asp-validation-for="CoverLetter" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <input asp-for="HospitalID" class="form-control" />
-                <span asp-validation-for="HospitalID" class="text-danger"></span>
+                <label asp-for="Resume" class="control-label"></label>
+                <input asp-for="Resume" class="form-control" />
+                <span asp-validation-for="Resume" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -49,7 +57,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>
 
 @section Scripts {

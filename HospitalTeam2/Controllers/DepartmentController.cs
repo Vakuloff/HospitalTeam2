@@ -44,7 +44,7 @@ namespace HospitalTeam2.Controllers
 
             string query = "select * from departments";
 
-            List<Department> departments = db.Departments.Include(j => j.JobPosting).ToList();
+            List<Department> departments = db.Departments.Include(h => h.Hospital).ToList();
 
             return View(departments);
 

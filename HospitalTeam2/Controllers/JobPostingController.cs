@@ -54,7 +54,7 @@ namespace HospitalTeam2.Controllers
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).Include(ja => ja.jobapplications).ToList();
+            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).Include(ja => ja.JobApplications).ToList();
 
             //GOTO Views/jobposition/List.cshtml
             return View(jobposting);
@@ -171,7 +171,7 @@ namespace HospitalTeam2.Controllers
             SqlParameter myparam = new SqlParameter("@id", id);
 
 
-            JobPosting myjob = db.JobPostings.Include(h => h.Hospital).Include(j => j.jobapplications).SingleOrDefault(b => b.JobPostingID == id);
+            JobPosting myjob = db.JobPostings.Include(h => h.Hospital).Include(j => j.JobApplications).SingleOrDefault(b => b.JobPostingID == id);
 
             return View(myjob);
 

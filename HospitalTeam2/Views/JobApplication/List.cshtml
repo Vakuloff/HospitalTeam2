@@ -4,38 +4,47 @@
     ViewData["Title"] = "List";
 }
 
-<h2>List</h2>
+<h2>Job Applications</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="New">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HospitalID)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.jobposting)
+                @Html.DisplayNameFor(model => model.JobPosting)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoverLetter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resume)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobPosting.JobPostingTitle)
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -49,14 +58,15 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HospitalID)
+                @Html.DisplayFor(modelItem => item.CoverLetter)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.jobposting.HospitalTitle)
+                @Html.DisplayFor(modelItem => item.Resume)
             </td>
+
             <td>
-                <a asp-action="Edit" asp-route-id="@item.JobApplicationID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.JobApplicationID">Details</a> |
+
+                <a asp-action="Show" asp-route-id="@item.JobApplicationID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.JobApplicationID">Delete</a>
             </td>
         </tr>

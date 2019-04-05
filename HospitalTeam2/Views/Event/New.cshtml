@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "New";
+}
+
+<h2>Event New</h2>
+
+<h2> Event create</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" action="/Events/New">
+            <div class="inprow">
+                <label class="inplabel">Event Name</label>
+                <input id="EventName_new" name="EventName_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Event Description</label>
+                <input id="EventDescription_new" name="EventDescription_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Event Location</label>
+                <input id="EventLocation_new" name="EventLocation_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Event Date</label>
+                <input id="EventDate_new" name="EventDate_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Event Time</label>
+                <input id="EventTime_new" name="EventTime_new" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

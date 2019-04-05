@@ -4,10 +4,10 @@
     ViewData["Title"] = "List";
 }
 
-<h2>List</h2>
+<h2>Volunteers</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="New">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -124,12 +124,12 @@
                 @Html.DisplayFor(modelItem => item.HealthCondition)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hospital.Address)
+                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.VolunteerID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VolunteerID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VolunteerID">Delete</a>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VolunteerID }) |
+                @Html.ActionLink("Show", "Show", new { id = item.VolunteerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.VolunteerID })
             </td>
         </tr>
 }

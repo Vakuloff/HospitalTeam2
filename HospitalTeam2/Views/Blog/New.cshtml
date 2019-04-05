@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "New";
+}
+
+<h2>Blog New</h2>
+
+<h2> Blog create</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" action="/Blog/New">
+            <div class="inprow">
+                <label class="inplabel">Blog Title</label>
+                <input id="BlogTitle_new" name="BlogTitle_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Blog Description</label>
+                <input id="BlogDescription_new" name="BlogDescription_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Blog Author</label>
+                <input id="BlogAuthor_new" name="BlogAuthor_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Blog Date</label>
+                <input id="BlogDate_new" name="BlogDate_new" />
+            </div>
+            <div class="inprow">
+                <label class="inplabel">Blog Time</label>
+                <input id="BlogTime_new" name="BlogTime_new" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

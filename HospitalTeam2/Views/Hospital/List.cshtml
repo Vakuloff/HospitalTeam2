@@ -4,10 +4,10 @@
     ViewData["Title"] = "List";
 }
 
-<h2>List</h2>
+<h2>Hospitals</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="New">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -28,17 +28,10 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Department)
+                    @Html.DisplayNameFor(model => model.DepartmentTitle)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImgType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HasPic)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DepartmentID)
-                </th>
+                
+                
                 <th>
                     @Html.DisplayNameFor(model => model.VolunteerID)
                 </th>
@@ -70,17 +63,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department)
+                @Html.DisplayFor(modelItem => item.DepartmentTitle)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImgType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HasPic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentID)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.VolunteerID)
             </td>

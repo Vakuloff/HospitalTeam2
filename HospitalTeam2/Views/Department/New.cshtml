@@ -18,13 +18,12 @@
                 <span asp-validation-for="DepartmentTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="JobPosting" class="control-label"></label>
-                <input asp-for="JobPosting" class="form-control" />
-                <span asp-validation-for="JobPosting" class="text-danger"></span>
+                <label asp-for="JobPostingTitle" class="control-label"></label>
+                <select asp-for="JobPostingTitle" class="form-control" asp-items="ViewBag.JobPostingTitle"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <select asp-for="HospitalID" class ="form-control" asp-items="ViewBag.HospitalID"></select>
+                <label asp-for="HospitalTitle" class="control-label"></label>
+                <select asp-for="HospitalTitle" class ="form-control" asp-items="ViewBag.HospitalTitle"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -34,7 +33,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>
 
 @section Scripts {
