@@ -20,12 +20,12 @@ namespace HospitalTeam2.Migrations
             migrationBuilder.DropColumn(
                 name: "ImgType",
                 table: "Hospitals");
-
+            /*
             migrationBuilder.RenameColumn(
                 name: "Department",
                 table: "Hospitals",
                 newName: "DepartmentTitle");
-
+                */
             migrationBuilder.RenameColumn(
                 name: "JobPosting",
                 table: "Departments",

@@ -8,16 +8,18 @@ namespace HospitalTeam2.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.RenameColumn(
                 name: "JobPosition",
                 table: "Departments",
                 newName: "JobPostingTitle");
-
+                */
+                /*
             migrationBuilder.RenameColumn(
                 name: "DoctorName",
                 table: "BookingRequests",
                 newName: "StaffLastName");
-
+                
             migrationBuilder.AddColumn<int>(
                 name: "HospitalID",
                 table: "Volunteers",
@@ -226,13 +228,13 @@ namespace HospitalTeam2.Migrations
                 principalColumn: "DepartmentID",
                 onDelete: ReferentialAction.Cascade);
 
-            //migrationBuilder.AddForeignKey(
-            //    name: "FK_JobPostings_Hospitals_HospitalID",
-            //    table: "JobPostings",
-            //    column: "HospitalID",
-            //    principalTable: "Hospitals",
-            //    principalColumn: "HospitalID",
-            //    onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobPostings_Hospitals_HospitalID",
+                table: "JobPostings",
+                column: "HospitalID",
+                principalTable: "Hospitals",
+                principalColumn: "HospitalID",
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Volunteers_Hospitals_HospitalID",
@@ -241,6 +243,7 @@ namespace HospitalTeam2.Migrations
                 principalTable: "Hospitals",
                 principalColumn: "HospitalID",
                 onDelete: ReferentialAction.Cascade);
+                */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
