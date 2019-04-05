@@ -11,11 +11,15 @@ namespace HospitalTeam2.Models.ViewModels
         {
 
         }
-        // list of hospitals
+        // list of hospitals, departments, jobapplications
 
         public virtual JobPosting JobPostings { get; set; }
 
         public IEnumerable<Hospital> Hospitals { get; set; }
+
+        public IEnumerable<Department> Departments { get; set; }
+
+        public IEnumerable<JobApplication> JobApplications { get; set; }
 
     }
 
