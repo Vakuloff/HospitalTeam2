@@ -8,7 +8,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalTeam2.Models
-{
+{/// <summary>
+/// /
+/// </summary>
     public class Hospital
     {
         [Key, ScaffoldColumn(false)]

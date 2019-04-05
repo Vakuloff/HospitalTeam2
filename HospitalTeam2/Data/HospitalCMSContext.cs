@@ -81,7 +81,7 @@ namespace HospitalTeam2.Data
 
             //each bookingrequest has one doctor, each doctor has many bookapp
 
-           /*modelBuilder.Entity<BookingRequest>()
+         /* modelBuilder.Entity<BookingRequest>()
                 .HasOne(s => s.Staff)
                 .WithMany(b => b.BookingRequests)
                 .HasForeignKey(s => s.StaffID);*/

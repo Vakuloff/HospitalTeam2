@@ -30,12 +30,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                  
                     <li>@Html.ActionLink("Feedbacks", "New", "Feedback")</li>
                     <li>@Html.ActionLink("Blog", "New", "Blog")</li>
                     <li>@Html.ActionLink("Event", "New", "Event")</li>
+
+
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
