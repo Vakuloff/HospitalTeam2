@@ -54,18 +54,6 @@ namespace HospitalTeam2.Models
 
 
         //foreign key
-        [ForeignKey("Department")]
-        public int DepartmentID { get; set; }
-
-        [ForeignKey("Volunteer")]
-        public int VolunteerID { get; set; }
-
-        [ForeignKey("JobPosting")]
-        public int JobPostingID { get; set; }
-
-        [ForeignKey("BokingRequest")]
-        public int BookingID { get; set; }
-
     }
 }
 

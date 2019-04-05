@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190405165815_divymodel")]
+    partial class divymodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,8 +247,12 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("BookingID");
+
                     b.Property<string>("Department")
                         .HasMaxLength(2147483647);
+
+                    b.Property<int>("DepartmentID");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2147483647);
@@ -264,9 +269,13 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<string>("ImgType");
 
+                    b.Property<int>("JobPostingID");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(255);
+
+                    b.Property<int>("VolunteerID");
 
                     b.HasKey("HospitalID");
 

@@ -43,18 +43,18 @@ namespace HospitalTeam2.Data
             //following the diagram on the notebook (picture included in assets folder)
 
             modelBuilder.Entity<JobApplication>()
-                .HasOne(j => j.jobposting)
-                .WithMany(ja => ja.jobapplications)
-                .HasForeignKey(j => j.JobPostingID);
+                .HasOne(ja => ja.jobposting)
+                .WithMany(jp => jp.jobapplications)
+                .HasForeignKey(ja => ja.JobPostingID);
 
             //QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS? ans:No
 
             //eash job position references one hospital, one hospital has many job position
 
             modelBuilder.Entity<JobPosting>()
-                .HasOne(h => h.Hospital)
-                .WithMany(j => j.JobPostings)
-                .HasForeignKey(h => h.HospitalID);
+                .HasOne(jp => jp.Hospital)
+                .WithMany(h => h.JobPostings)
+                .HasForeignKey(jp => jp.HospitalID);
 
             //each volunteer references one hospital, one hospital has many volunteer
 
@@ -65,16 +65,16 @@ namespace HospitalTeam2.Data
 
             //each job position has one department, each department has many job
             modelBuilder.Entity<JobPosting>()
-                .HasOne(d => d.Department)
-                .WithMany(j => j.JobPostings)
-                .HasForeignKey(d => d.DepartmentID);
+                .HasOne(jp => jp.Department)
+                .WithMany(d => d.JobPostings)
+                .HasForeignKey(jp => jp.DepartmentID);
 
             //each bookingrequest has one hospital, one hospital has many bookingapp
 
             modelBuilder.Entity<BookingRequest>()
-                .HasOne(h => h.Hospital)
-                .WithMany(b => b.BookingRequests)
-                .HasForeignKey(h => h.HospitalID);
+                .HasOne(br => br.Hospital)
+                .WithMany(h => h.BookingRequests)
+                .HasForeignKey(br => br.HospitalID);
 
             //each bookingrequest has one doctor, each doctor has many bookapp
 
@@ -85,9 +85,9 @@ namespace HospitalTeam2.Data
 
             //each department has one hospital, each hospital has many departments
             modelBuilder.Entity<Department>()
-                 .HasOne( h=> h.Hospital)
-                 .WithMany(d => d.Departments)
-                 .HasForeignKey(h => h.HospitalID);
+                 .HasOne(d=> d.Hospital)
+                 .WithMany(h => h.Departments)
+                 .HasForeignKey(d => d.HospitalID);
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BookingRequest>().ToTable("BookingRequests");
