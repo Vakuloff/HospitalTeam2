@@ -10,55 +10,21 @@
 <hr />
 
 
-<form method="POST" action="/Blog/Create">
-    <div class="inprow">
-        <label class="inplabel">Title</label>
-        <input id="BlogTitle_New" name="BlogTitle_New" />
-    </div>
-    <div class="inptrow">
-        <label class="inplabel">Author</label>
-        <select id="BlogAuthor_New" name="BlogAuthor_New">
-            @foreach (var author in Model.Authors)
-            {
-                <option value="@author.AuthorID">@author.AuthorFName @author.AuthorLName aka @author.AuthorPenName</option>
-            }
-        </select>
-    </div>
-    <div class="inprow">
-        <div class="inplabel">Content</div>
-        <textarea id="BlogBio_New" name="BlogBio_New"></textarea>
-    </div>
-    <div class="inprow">
-        <input type="submit" value="Submit" />
-    </div>
-
-
-</form>
-
-
 <div class="row">
     <div class="col-md-4">
         <form method="POST" action="/JobPosting/Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label class="control-label">Hospital</label>
-                <select id="HospitalTitle_New" name="HospitalTitle_New">
-                    @foreach (var hospital in Model.Hospitals)
-                    {
-                        <option value="@location.HospitalD">@hospitaltitle.HospitalTitle @author.AuthorLName aka @author.AuthorPenName</option>
-                    }
+            
 
-                    HospitalTitle, JobPostingTitle,Department, JobPostingType, JobPostingDesc, JobPostingReq,  JobApplicationID) values (@location, @title, @department,@type, @desc, @req, @resume)";
-                </select>
+
+            <div class="form-group">
+                <label asp-for="Hospitals" class="control-label"></label>
+                <select asp-for="Hospitals" class="form-control" asp-items="ViewBag.HospitalTitle"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HospitalTitle" class="control-label"></label>
-                <select asp-for="HospitalTitle" class="form-control" asp-items="ViewBag.HospitalTitle"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DepartmentTitle" class="control-label"></label>
-                <select asp-for="DepartmentTitle" class="form-control" asp-items="ViewBag.DepartmentTitle"></select>
+                <label asp-for="Departments" class="control-label"></label>
+                <select asp-for="Departments" class="form-control" asp-items="ViewBag.DepartmentTitle"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">Title</label>

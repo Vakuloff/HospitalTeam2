@@ -71,7 +71,7 @@ namespace HospitalTeam2.Controllers
 
         // POST: Hospitals/Create
 
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("HospitalID,HospitalTitle,Address,Email,Phone,Description")] Hospital hospital)
         {
@@ -84,7 +84,8 @@ namespace HospitalTeam2.Controllers
             }
 
             return View(hospital);
-        }
+        }*/
+
 
 
 

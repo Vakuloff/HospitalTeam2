@@ -48,7 +48,7 @@ namespace HospitalTeam2.Models
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
 
-        //foreign key
+        
     }
 }
 
