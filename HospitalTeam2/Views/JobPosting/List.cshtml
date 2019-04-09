@@ -12,12 +12,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.HospitalTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentTitle)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.JobPostingTitle)
             </th>
@@ -30,9 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.JobPostingReq)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobApplicationID)
-            </th>
+           
 
 
             <th></th>
@@ -41,12 +34,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.DepartmentTitle)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.JobPostingTitle)
             </td>
@@ -59,9 +47,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.JobPostingReq)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobApplicationID)
-            </td>
+            
 
 
             <td>

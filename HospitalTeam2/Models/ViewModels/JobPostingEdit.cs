@@ -19,9 +19,15 @@ namespace HospitalTeam2.Models.ViewModels
 
         public IEnumerable<Department> Departments { get; set; }
 
-        public IEnumerable<JobApplication> JobApplications { get; set; }
+      //  public IEnumerable<JobApplication> JobApplications { get; set; }
+
+       
+
+        
+
+
 
     }
 
-    
+
 }

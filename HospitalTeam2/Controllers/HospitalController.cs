@@ -64,14 +64,14 @@ namespace HospitalTeam2.Controllers
 
 
         // GET: Hospitals/Create
-        public ActionResult Create()
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Hospitals/Create
 
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("HospitalID,HospitalTitle,Address,Email,Phone,Description")] Hospital hospital)
         {
@@ -84,7 +84,7 @@ namespace HospitalTeam2.Controllers
             }
 
             return View(hospital);
-        }*/
+        }
 
 
 
@@ -110,9 +110,7 @@ namespace HospitalTeam2.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-
-
+        { 
 
             Hospital hospital = db.Hospitals.Find(id);
             db.Hospitals.Remove(hospital);

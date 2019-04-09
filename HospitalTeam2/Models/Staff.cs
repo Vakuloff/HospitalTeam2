@@ -24,6 +24,8 @@ namespace HospitalTeam2.Models
         public string TypeDoctor { get; set; }
 
 
+        //one doctor has many bookingrequests
+        public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
         //position
         //department

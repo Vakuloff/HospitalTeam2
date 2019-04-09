@@ -1,4 +1,4 @@
-﻿@model HospitalTeam2.Models.ViewModels.JobPostingEdit
+﻿@model  HospitalTeam2.Models.ViewModels.JobPostingEdit
 
 @{
     ViewData["Title"] = "New";
@@ -8,46 +8,44 @@
 
 <h4>JobPosting</h4>
 <hr />
-
-
 <div class="row">
     <div class="col-md-4">
-        <form method="POST" action="/JobPosting/Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            
-
-
+        <form asp-action="New">
             <div class="form-group">
-                <label asp-for="Hospitals" class="control-label"></label>
-                <select asp-for="Hospitals" class="form-control" asp-items="ViewBag.HospitalTitle"></select>
+                <label class="inplabel">Hospital</label>
+                <select id="HospitalTitle_New" name="HospitalTitle_New">
+                    @foreach (var hospital in Model.Hospitals)
+                    {
+                        <option value="@hospital.HospitalID">@hospital.HospitalTitle</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Departments" class="control-label"></label>
-                <select asp-for="Departments" class="form-control" asp-items="ViewBag.DepartmentTitle"></select>
+                <label class="inplabel">Department</label>
+                <select id="DepartmentTitle_New" name="DepartmentTitle_New">
+                    @foreach (var department in Model.Departments)
+                    {
+                        <option value="@department.DepartmentID">@department.DepartmentTitle</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label class="control-label">Title</label>
+                <label class="inplabel">Title</label>
                 <input id="JobPostingTitle_New" name="JobPostingTitle_New" />
             </div>
             <div class="form-group">
-                <label class="control-label">Type</label>
+                <label class="inplabel">Type</label>
                 <input id="JobPostingType_New" name="JobPostingType_New" />
             </div>
             <div class="form-group">
-                <label class="control-label">Description</label>
+                <label class="inplabel">Description</label>
                 <input id="JobPostingDesc_New" name="JobPostingDesc_New" />
             </div>
             <div class="form-group">
-                <label class="control-label">Requirements</label>
+                <label class="inplabel">Requirement</label>
                 <input id="JobPostingReq_New" name="JobPostingReq_New" />
             </div>
-
-            <div class="form-group">
-                <label class="control-label">Job Application</label>
-                <input id="JobApplicationID_New" name="JobApplicationID_New" />
-            </div>
-
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -59,6 +57,3 @@
     <a asp-action="List">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

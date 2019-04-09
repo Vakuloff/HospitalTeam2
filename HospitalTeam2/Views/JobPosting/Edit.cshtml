@@ -13,11 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="JobPostingID" />
-            <div class="form-group">
-                <label asp-for="HospitalTitle" class="control-label"></label>
-                <input asp-for="HospitalTitle" class="form-control" />
-                <span asp-validation-for="HospitalTitle" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="JobPostingTitle" class="control-label"></label>
                 <input asp-for="JobPostingTitle" class="form-control" />
@@ -38,11 +34,7 @@
                 <input asp-for="JobPostingReq" class="form-control" />
                 <span asp-validation-for="JobPostingReq" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JobApplicationID" class="control-label"></label>
-                <input asp-for="JobApplicationID" class="form-control" />
-                <span asp-validation-for="JobApplicationID" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="HospitalID" class="control-label"></label>
                 <select asp-for="HospitalID" class="form-control" asp-items="ViewBag.HospitalID"></select>
