@@ -26,5 +26,10 @@ namespace HospitalTeam2.Models
 
         [Required, Timestamp, Display(Name = "EndShift")]
         public DateTime EndShift { get; set; }
+
+        [ForeignKey("Staff")]
+        public int StaffId { get; set; }
+
+        public virtual Staff Staff { get; set; }
     }
 }

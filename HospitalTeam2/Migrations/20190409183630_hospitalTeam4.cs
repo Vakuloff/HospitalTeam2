@@ -8,9 +8,9 @@ namespace HospitalTeam2.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "DepartmentTitle",
-                table: "JobPostings");
+            //migrationBuilder.DropColumn(
+            //    name: "DepartmentTitle",
+            //    table: "JobPostings");
 
             migrationBuilder.DropColumn(
                 name: "HospitalTitle",
@@ -20,9 +20,9 @@ namespace HospitalTeam2.Migrations
                 name: "JobApplicationID",
                 table: "JobPostings");
 
-            migrationBuilder.DropColumn(
-                name: "DepartmentTitle",
-                table: "Hospitals");
+            //migrationBuilder.DropColumn(
+            //    name: "DepartmentTitle",
+            //    table: "Hospitals");
 
             migrationBuilder.DropColumn(
                 name: "HospitalTitle",

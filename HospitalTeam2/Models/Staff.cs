@@ -23,6 +23,8 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Type Doctor")]
         public string TypeDoctor { get; set; }
 
+        //one staff has maty shifts
+        public IEnumerable<Schedule> schedules { get; set; }
 
         //one doctor has many bookingrequests
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
