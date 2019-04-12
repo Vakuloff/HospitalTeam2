@@ -22,9 +22,9 @@ namespace HospitalTeam2.Controllers
         // GET: Parkings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Parkings.ToListAsync());
+            var hospitalCMSContext = _context.Parkings.Include(p => p.hospital);
+            return View(await hospitalCMSContext.ToListAsync());
         }
-        
 
         // GET: Parkings/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -35,6 +35,7 @@ namespace HospitalTeam2.Controllers
             }
 
             var parking = await _context.Parkings
+                .Include(p => p.hospital)
                 .SingleOrDefaultAsync(m => m.ParkingID == id);
             if (parking == null)
             {
@@ -47,6 +48,7 @@ namespace HospitalTeam2.Controllers
         // GET: Parkings/Create
         public IActionResult Create()
         {
+            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address");
             return View();
         }
 
@@ -55,7 +57,7 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact")] Parking parking)
+        public async Task<IActionResult> Create([Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact,HospitalID")] Parking parking)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +65,7 @@ namespace HospitalTeam2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
             return View(parking);
         }
 
@@ -79,6 +82,7 @@ namespace HospitalTeam2.Controllers
             {
                 return NotFound();
             }
+            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
             return View(parking);
         }
 
@@ -87,7 +91,7 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact")] Parking parking)
+        public async Task<IActionResult> Edit(int id, [Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact,HospitalID")] Parking parking)
         {
             if (id != parking.ParkingID)
             {
@@ -114,6 +118,7 @@ namespace HospitalTeam2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
             return View(parking);
         }
 
@@ -126,6 +131,7 @@ namespace HospitalTeam2.Controllers
             }
 
             var parking = await _context.Parkings
+                .Include(p => p.hospital)
                 .SingleOrDefaultAsync(m => m.ParkingID == id);
             if (parking == null)
             {

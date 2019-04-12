@@ -26,6 +26,8 @@ namespace HospitalTeam2.Models
         [Required, StringLength(30), Display(Name = "Contact")]
         public string ParkingContact { get; set; }
 
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
         public virtual Hospital hospital { get; set; }
     }
 }

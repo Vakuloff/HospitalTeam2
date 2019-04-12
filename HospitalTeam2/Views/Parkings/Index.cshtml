@@ -13,44 +13,47 @@
     <thead>
         <tr>
                 <th>
-                    Visitor Name
+                    @Html.DisplayNameFor(model => model.VisitorName)
                 </th>
                 <th>
-                    Car Number
+                    @Html.DisplayNameFor(model => model.VisitoCarNo)
                 </th>
                 <th>
-                    Purpose of visit
+                    @Html.DisplayNameFor(model => model.ParkingPurpose)
                 </th>
                 <th>
-                   Contact
+                    @Html.DisplayNameFor(model => model.ParkingContact)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hospital)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @item.VisitorName
-                    </td>
-                    <td>
-                        @item.VisitoCarNo
-                    </td>
-                    <td>
-                        @item.ParkingPurpose
-                    </td>
-                    <td>
-                        @item.ParkingContact)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ParkingID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ParkingID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ParkingID">Delete</a>
-                    </td>
-                </tr>
-            }
-           
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitoCarNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingPurpose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hospital.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ParkingID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ParkingID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ParkingID">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
