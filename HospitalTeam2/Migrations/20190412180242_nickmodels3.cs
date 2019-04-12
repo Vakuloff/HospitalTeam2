@@ -12,30 +12,30 @@ namespace HospitalTeam2.Migrations
                 name: "HospitalID",
                 table: "Staffs",
                 nullable: true);
-
+            /*
             migrationBuilder.AddColumn<int>(
                 name: "StaffId",
                 table: "Departments",
                 nullable: false,
                 defaultValue: 0);
-
+                */
             migrationBuilder.CreateIndex(
                 name: "IX_Staffs_HospitalID",
                 table: "Staffs",
                 column: "HospitalID");
-
+            /*
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_StaffId",
                 table: "Departments",
                 column: "StaffId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Departments_Staffs_StaffId",
-                table: "Departments",
-                column: "StaffId",
-                principalTable: "Staffs",
-                principalColumn: "StaffId",
-                onDelete: ReferentialAction.Cascade);
+                */
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Departments_Staffs_StaffId",
+            //    table: "Departments",
+            //    column: "StaffId",
+            //    principalTable: "Staffs",
+            //    principalColumn: "StaffId",
+            //    onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Staffs_Hospitals_HospitalID",

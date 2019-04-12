@@ -1,4 +1,4 @@
-﻿@model HospitalTeam2.Models.Department
+﻿@model HospitalTeam2.Models.ViewModels.DepartmentEdit
 
 @{
     ViewData["Title"] = "New";
@@ -10,17 +10,25 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="New">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DepartmentTitle" class="control-label"></label>
-                <input asp-for="DepartmentTitle" class="form-control" />
-                <span asp-validation-for="DepartmentTitle" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <form action="/Department/Create" method="post">
+
+            <label>Department Title</label>
+            <input type="text" name="DepartmentTitle_New"/>
+
+            <label>which hospital does this code belong to?</label>
+            <select name="hospitalid">
+                @{ 
+                    foreach(var hospital in Model.Hospitals)
+                    {
+                        <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                    }
+
+                }
+            </select>
+
+
+            <input type="submit" value="submit" />
+
         </form>
     </div>
 </div>

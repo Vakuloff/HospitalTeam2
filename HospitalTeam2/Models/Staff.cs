@@ -23,7 +23,6 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Type Doctor")]
         public string TypeDoctor { get; set; }
 
-        
 
         //one staff has many shifts
         public IEnumerable<Schedule> schedules { get; set; }
@@ -31,8 +30,12 @@ namespace HospitalTeam2.Models
         //one doctor has many bookingrequests
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
-        //one staff has many departments
-        public IEnumerable<Department> Departments { get; set; }
+        //one department has many staff
+        [ForeignKey("Department")]
+        public int DepartmentID { get; set; }
+
+        public virtual Department Departments { get; set; }
+        
         //position
         //department
     }

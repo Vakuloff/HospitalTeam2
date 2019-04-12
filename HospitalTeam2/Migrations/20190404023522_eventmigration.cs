@@ -221,7 +221,8 @@ namespace HospitalTeam2.Migrations
                     StaffId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     StaffFirstName = table.Column<string>(maxLength: 255, nullable: false),
-                    StaffLastName = table.Column<string>(maxLength: 255, nullable: false)
+                    StaffLastName = table.Column<string>(maxLength: 255, nullable: false),
+                    DepartmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

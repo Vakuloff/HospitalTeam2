@@ -98,6 +98,12 @@ namespace HospitalTeam2.Data
                 .HasForeignKey(d => d.HospitalID);
 
 
+            //each staff has one department, each department has many staffs
+            modelBuilder.Entity<Staff>()
+                .HasOne(s => s.Departments)
+                .WithMany(d => d.Staff)
+                .HasForeignKey(s => s.DepartmentID);
+
             modelBuilder.Entity<Feedback>();
 
 

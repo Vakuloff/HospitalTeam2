@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190412192207_nickmodels4")]
+    partial class nickmodels4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -493,7 +494,7 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("StaffId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("DepartmentID");
+                    b.Property<int>("DepartmentId");
 
                     b.Property<int?>("HospitalID");
 
@@ -511,7 +512,7 @@ namespace HospitalTeam2.Migrations
 
                     b.HasKey("StaffId");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("HospitalID");
 
@@ -784,7 +785,7 @@ namespace HospitalTeam2.Migrations
                 {
                     b.HasOne("HospitalTeam2.Models.Department", "Departments")
                         .WithMany("Staff")
-                        .HasForeignKey("DepartmentID")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HospitalTeam2.Models.Hospital")
