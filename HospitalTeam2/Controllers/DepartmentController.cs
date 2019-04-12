@@ -53,18 +53,21 @@ namespace HospitalTeam2.Controllers
 
         public ActionResult New()
         {
+            //need to give a list of the hospitals so that they can select the one they want
+            var deptedit = new DepartmentEdit();
+            deptedit.Hospitals = db.Hospitals.ToList();
 
-            return View();
+            return View(deptedit);
         }
 
         [HttpPost]
-        public ActionResult Create(string DepartmentTitle_New)
+        public ActionResult Create(string DepartmentTitle_New, int hospitalid)
         {
-            string query = "insert into departments ( DepartmentTitle)" +
-                " values ( @dtitle)";
-            SqlParameter[] myparams = new SqlParameter[0];
+            string query = "insert into departments ( DepartmentTitle, HospitalID)" +
+                " values ( @dtitle, @hid)";
+            SqlParameter[] myparams = new SqlParameter[2];
             myparams[0] = new SqlParameter("@dtitle", DepartmentTitle_New);
-            
+            myparams[1] = new SqlParameter("@hid", hospitalid);
 
 
             db.Database.ExecuteSqlCommand(query, myparams);
