@@ -59,7 +59,7 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Phone_em")]
         public string Phone_em { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Relationssahip")]
+        [Required, StringLength(255), Display(Name = "Relationship")]
         public string Relationship { get; set; }
 
         [Required, StringLength(255), Display(Name = "HealthCondition")]
@@ -67,7 +67,7 @@ namespace HospitalTeam2.Models
 
 
 
-        [ForeignKey("hospital")]
+        [ForeignKey("Hospital")]
         public int HospitalID { get; set; }
 
         public virtual Hospital Hospital { get; set; }
