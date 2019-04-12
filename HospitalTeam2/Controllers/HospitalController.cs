@@ -62,28 +62,47 @@ namespace HospitalTeam2.Controllers
             return RedirectToAction("Details/" + id);
         }
 
+        public ActionResult Show(int? id)
+        {
+            if ((id == null) || (db.Hospitals.Find(id) == null))
+            {
+                return NotFound();
+
+            }
+            string query = "select * from hospitals where hospitalid=@id";
+            SqlParameter param = new SqlParameter("@id", id);
+
+            Hospital hospshow = db.Hospitals.SingleOrDefault(h => h.HospitalID == id);
+
+            return View(hospshow);
+
+        }
 
         // GET: Hospitals/Create
+
         public ActionResult New()
         {
+
             return View();
         }
 
         // POST: Hospitals/Create
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("HospitalID,HospitalTitle,Address,Email,Phone,Description")] Hospital hospital)
+        public ActionResult Create(string HospitalTitle_New,string Address_New, string Email_New, string Phone_New, string Description_New)
         {
+            string query = "insert into hospitals (HospitalTitle, Address, Email, Phone, Description)" +
+                " values (@htitle, @address, @email, @phone, @description)";
+            SqlParameter[] myparams = new SqlParameter[4];
+            myparams[0] = new SqlParameter("@htitle", HospitalTitle_New);
+            myparams[1] = new SqlParameter("@address", Address_New);
+            myparams[2] = new SqlParameter("@email", Email_New);
+            myparams[3] = new SqlParameter("@phone", Phone_New);
+            myparams[4] = new SqlParameter("@description", Description_New);
 
-            if (ModelState.IsValid)
-            {
-                db.Hospitals.Add(hospital);
-                db.SaveChanges();
-                return RedirectToAction("List");
-            }
+            db.Database.ExecuteSqlCommand(query, myparams);
 
-            return View(hospital);
+            return RedirectToAction("List");
         }
 
 
