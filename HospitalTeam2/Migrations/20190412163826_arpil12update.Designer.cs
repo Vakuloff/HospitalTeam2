@@ -11,8 +11,8 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    [Migration("20190409183630_hospitalTeam4")]
-    partial class hospitalTeam4
+    [Migration("20190412163826_arpil12update")]
+    partial class arpil12update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,6 +211,8 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<string>("ImageUrl");
+
                     b.HasKey("DonorID");
 
                     b.ToTable("Donors");
@@ -259,7 +261,11 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int?>("HospitalID");
+
                     b.HasKey("FeedbacksId");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Feedback");
                 });
@@ -388,9 +394,11 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("ParkingID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("HospitalID");
+
                     b.Property<string>("ParkingContact")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(30);
 
                     b.Property<string>("ParkingPurpose")
                         .IsRequired()
@@ -398,13 +406,15 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<string>("VisitoCarNo")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(30);
 
                     b.Property<string>("VisitorName")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(30);
 
                     b.HasKey("ParkingID");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Parkings");
                 });
@@ -664,6 +674,13 @@ namespace HospitalTeam2.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("HospitalTeam2.Models.Feedback", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalID");
+                });
+
             modelBuilder.Entity("HospitalTeam2.Models.JobApplication", b =>
                 {
                     b.HasOne("HospitalTeam2.Models.JobPosting", "JobPosting")
@@ -683,6 +700,13 @@ namespace HospitalTeam2.Migrations
                         .WithMany("JobPostings")
                         .HasForeignKey("HospitalID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.Parking", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "hospital")
+                        .WithMany("parkings")
+                        .HasForeignKey("HospitalID");
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>

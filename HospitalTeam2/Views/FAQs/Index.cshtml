@@ -13,10 +13,10 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FaqQues)
+                    Question
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FaqAns)
+                    Answer
                 </th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FaqQues)
+                @item.FaqQues)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FaqAns)
+                @item.FaqAns)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FaqID">Edit</a> |

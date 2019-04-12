@@ -54,7 +54,7 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage")] Donor donor)
+        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage")] Donor donor)
+        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor)
         {
             if (id != donor.DonorID)
             {

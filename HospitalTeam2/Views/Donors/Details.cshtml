@@ -10,17 +10,19 @@
     <h4>Donor</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DonorName)
-        </dt>
+        
         <dd>
-            @Html.DisplayFor(model => model.DonorName)
+            <h2>@Html.DisplayFor(model => model.DonorName)</h2>
+        </dd>
+        
+        <dd>
+            <p>@Html.DisplayFor(model => model.DonorMessage)</p>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DonorMessage)
+            @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DonorMessage)
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" class="imageCell" />
         </dd>
     </dl>
 </div>
