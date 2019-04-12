@@ -29,6 +29,8 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Topic")]
         public string Topic { get; set; }
 
+
+
         [Required, StringLength(255), Display(Name = "Message")]
         public string Message { get; set; }
 
@@ -37,5 +39,10 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(255), Display(Name = "Admin Reply")]
         public string AdminReply { get; set; }
+
+        [ForeignKey("Hospital")]
+        public int HospitalID { get; set; }
+
+        public virtual Hospital Hospital { get; set; }
     }
 }
