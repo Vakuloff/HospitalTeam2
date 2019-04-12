@@ -31,5 +31,7 @@ namespace HospitalTeam2.Models
         public int StaffId { get; set; }
 
         public virtual Staff Staff { get; set; }
+
+
     }
 }
