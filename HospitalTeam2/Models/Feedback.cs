@@ -28,5 +28,6 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Feedbacks Message")]
         public string FeedbacksMessage { get; set; }
 
+        public virtual Hospital hospital { get; set; }
     }
 }

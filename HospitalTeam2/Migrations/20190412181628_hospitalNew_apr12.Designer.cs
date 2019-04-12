@@ -11,8 +11,8 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    [Migration("20190409183630_hospitalTeam4")]
-    partial class hospitalTeam4
+    [Migration("20190412181628_hospitalNew_apr12")]
+    partial class hospitalNew_apr12
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace HospitalTeam2.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HospitalTeam2.Models.Alert", b =>
+                {
+                    b.Property<int>("AlertId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AlertMessage")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("AlertTitle")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int?>("HospitalID");
+
+                    b.HasKey("AlertId");
+
+                    b.HasIndex("HospitalID");
+
+                    b.ToTable("Alert");
+                });
 
             modelBuilder.Entity("HospitalTeam2.Models.ApplicationUser", b =>
                 {
@@ -155,6 +177,8 @@ namespace HospitalTeam2.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("HospitalID");
+
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -177,6 +201,8 @@ namespace HospitalTeam2.Migrations
 
                     b.HasKey("ContactId");
 
+                    b.HasIndex("HospitalID");
+
                     b.ToTable("ContactForms");
                 });
 
@@ -191,9 +217,13 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<int>("HospitalID");
 
+                    b.Property<int>("StaffId");
+
                     b.HasKey("DepartmentID");
 
                     b.HasIndex("HospitalID");
+
+                    b.HasIndex("StaffId");
 
                     b.ToTable("Departments");
                 });
@@ -422,11 +452,15 @@ namespace HospitalTeam2.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
+                    b.Property<int>("StaffId");
+
                     b.Property<DateTime>("StartShift")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("ScheduleId");
+
+                    b.HasIndex("StaffId");
 
                     b.ToTable("Schedules");
                 });
@@ -435,6 +469,8 @@ namespace HospitalTeam2.Migrations
                 {
                     b.Property<int>("StaffId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("HospitalID");
 
                     b.Property<string>("StaffFirstName")
                         .IsRequired()
@@ -449,6 +485,8 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("StaffId");
+
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Staffs");
                 });
@@ -643,6 +681,13 @@ namespace HospitalTeam2.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HospitalTeam2.Models.Alert", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital")
+                        .WithMany("Alerts")
+                        .HasForeignKey("HospitalID");
+                });
+
             modelBuilder.Entity("HospitalTeam2.Models.BookingRequest", b =>
                 {
                     b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
@@ -656,11 +701,24 @@ namespace HospitalTeam2.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("HospitalTeam2.Models.ContactForm", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("HospitalTeam2.Models.Department", b =>
                 {
                     b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
                         .WithMany("Departments")
                         .HasForeignKey("HospitalID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HospitalTeam2.Models.Staff", "Staff")
+                        .WithMany("Departments")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -683,6 +741,21 @@ namespace HospitalTeam2.Migrations
                         .WithMany("JobPostings")
                         .HasForeignKey("HospitalID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.Schedule", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Staff", "Staff")
+                        .WithMany("schedules")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HospitalTeam2.Models.Staff", b =>
+                {
+                    b.HasOne("HospitalTeam2.Models.Hospital")
+                        .WithMany("Staffs")
+                        .HasForeignKey("HospitalID");
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>
