@@ -32,9 +32,6 @@ namespace HospitalTeam2.Models
         public virtual Hospital Hospital { get; set; }
 
         //one department has many staff
-        [ForeignKey("Staff")]
-        public int StaffId { get; set; }
-
-        public virtual Staff Staff { get; set; }
+        public IEnumerable<Staff> Staff { get; set; }
     }
 }
