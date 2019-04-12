@@ -14,16 +14,18 @@ namespace HospitalTeam2.Models
         [Key]
         public int ParkingID { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Name")]
+        [Required, StringLength(30), Display(Name = "Name")]
         public string VisitorName { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Car Number")]
+        [Required, StringLength(30), Display(Name = "Car Number")]
         public string VisitoCarNo { get; set; }
 
         [Required, StringLength(255), Display(Name = "Purpose of Visit")]
         public string ParkingPurpose { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Contact")]
+        [Required, StringLength(30), Display(Name = "Contact")]
         public string ParkingContact { get; set; }
+
+        public virtual Hospital hospital { get; set; }
     }
 }
