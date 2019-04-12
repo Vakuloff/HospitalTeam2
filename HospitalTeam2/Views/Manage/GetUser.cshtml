@@ -8,8 +8,9 @@
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 <div class="row">
     <div class="col-md-6">
-        <form method="post"  >
+        <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
+            @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.Email)
             <div class="form-group">
                 <label asp-for="Username"></label>

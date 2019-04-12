@@ -1,16 +1,32 @@
-﻿@using HospitalTeam2.Views.Manage
+﻿@using HospitalNew.Views.Manage
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
-}
+    Microsoft.Extensions.Primitives.StringValues queryValues;
+    Context.Request.Query.TryGetValue("id", out queryValues);
 
+}
 <ul class="nav nav-pills nav-stacked">
-    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profile</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Password</a></li>
+    @if (queryValues.FirstOrDefault() != null)
+    {
+        <li class="@ManageNavPages.IndexNavClass(ViewContext)">
+           
+            @Html.ActionLink("Profile", "GetUser", "Manage", new { id = queryValues.FirstOrDefault() })
+        </li>
+        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)">            
+            @Html.ActionLink("Password", "ChangePassword", "Manage", new { id = queryValues.FirstOrDefault() })
+        </li>
+    }
+    else
+    {
+        <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profile</a>  </li>
+        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Password</a></li>
+    }
+
+
     @if (hasExternalLogins)
     {
-        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ExternalLogins">External logins</a></li>
+        <li style="display:none;" class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ExternalLogins">External logins</a></li>
     }
-    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-action="TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li style="display:none;" class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-action="TwoFactorAuthentication">Two-factor authentication</a></li>
 </ul>
-

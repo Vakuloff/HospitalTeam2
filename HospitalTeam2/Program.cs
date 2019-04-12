@@ -23,7 +23,10 @@ namespace HospitalTeam2
                 try
                 {
                     var context = services.GetRequiredService<HospitalCMSContext>();
+                    var serviceProvider = services.GetRequiredService<IServiceProvider>();
+
                     DbInitializer.Initialize(context);
+                    DbInitializer.CreateRoles(serviceProvider).Wait();
                 }
                 catch (Exception ex)
                 {

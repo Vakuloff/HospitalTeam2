@@ -29,20 +29,7 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HospitalTeam2</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                    <li>@Html.ActionLink("Hospital", "list", "Hospital")</li>
-                    <li>@Html.ActionLink("Department", "List", "Department")</li>
-                    <li>@Html.ActionLink("JobApplication", "List", "JobApplication")</li>
-                    <li>@Html.ActionLink("JobPosting", "List", "JobPosting")</li>
-                    <li>@Html.ActionLink("BookingRequest", "List", "BookingRequest")</li>
-                    <li>@Html.ActionLink("Volunteer", "List", "Volunteer")</li>
-                    <li>@Html.ActionLink("Feedbacks", "New", "Feedback")</li>
-                    <li>@Html.ActionLink("Blog", "New", "Blog")</li>
-                    <li>@Html.ActionLink("Event", "New", "Event")</li>
-
-
-                </ul>
+                @await Component.InvokeAsync("Navigation")
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
