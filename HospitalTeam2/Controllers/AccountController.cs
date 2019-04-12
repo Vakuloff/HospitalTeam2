@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,12 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using HospitalTeam2.Models;
 using HospitalTeam2.Models.AccountViewModels;
 using HospitalTeam2.Services;
+using HospitalTeam2.Data;
+using HospitalTeam2.Models;
+using HospitalTeam2.Controllers;
 
-namespace HospitalTeam2.Controllers
+namespace HospitalNew.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -24,9 +24,14 @@ namespace HospitalTeam2.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly HospitalCMSContext db;
+
+
+
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
+            HospitalCMSContext context,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
@@ -35,6 +40,8 @@ namespace HospitalTeam2.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            db = context;
+
         }
 
         [TempData]
@@ -205,38 +212,45 @@ namespace HospitalTeam2.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            var allRoles = (db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name })).ToList();
+            ViewBag.Roles = allRoles;
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                var checkExists = await _userManager.FindByEmailAsync(model.Email);
+                if (checkExists == null)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName,
+                        LastName = model.LastName,PhoneNumber=model.PhoneNumber };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User created a new account with password.");
+                        await _userManager.AddToRoleAsync(user, model.UserRole);
+                        _logger.LogInformation("User created a new account with password.");
+                        return RedirectToLocal(returnUrl);
+                    }
+                  
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User with this emailid already exists. Please try with new emailId.");
+                }
             }
 
+            var allRoles = (db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name })).ToList();
+            ViewBag.Roles = allRoles;
             // If we got this far, something failed, redisplay form
             return View(model);
         }

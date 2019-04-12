@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using HospitalTeam2.Models;
+using HospitalNew.Models;
 
 namespace HospitalTeam2.Data
 {
@@ -38,6 +39,7 @@ namespace HospitalTeam2.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<NavMenu> NavMenus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -109,6 +111,7 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Staff>().ToTable("Staffs");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
             modelBuilder.Entity<Feedback>().ToTable("Feedback");
+            modelBuilder.Entity<NavMenu>().ToTable("NavMenus");
         }
     }
 }

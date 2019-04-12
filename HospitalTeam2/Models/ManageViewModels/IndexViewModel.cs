@@ -8,6 +8,8 @@ namespace HospitalTeam2.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public string Id { get; set; }
+
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -20,6 +22,14 @@ namespace HospitalTeam2.Models.ManageViewModels
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
+        [Required, Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required, Display(Name = "LastName")]
+        public string LastName { get; set; }
+
         public string StatusMessage { get; set; }
+
+        public List<string> Roles { get; set; }
     }
 }

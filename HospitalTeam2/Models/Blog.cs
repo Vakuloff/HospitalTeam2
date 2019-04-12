@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HospitalNew.Models
+namespace HospitalTeam2.Models
 {
     public class Blog
     {
@@ -27,3 +27,4 @@ namespace HospitalNew.Models
         public string BlogTime { get; set; }
     }
 }
+

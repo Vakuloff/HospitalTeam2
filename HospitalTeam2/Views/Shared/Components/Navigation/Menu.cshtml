@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NavMenu>
+
+<ul class="nav navbar-nav">
+
+    @foreach (var item in Model)
+    {
+        if (item.IsShown)
+        {
+            if (item.ChildMenuItems != null && item.ChildMenuItems.Count > 0)
+            {
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        @item.Title
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach (var child in item.ChildMenuItems)
+                        {
+                            <li><a href="@child.Url">@child.Title</a></li>
+                        }
+
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <li><a href="@item.Url">@item.Title</a></li>
+            }
+
+        }
+    }
+
+</ul>
