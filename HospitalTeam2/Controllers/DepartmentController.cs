@@ -58,15 +58,13 @@ namespace HospitalTeam2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string DepartmentTitle_New, string HospitalTitle_New, string JobPosting_New)
+        public ActionResult Create(string DepartmentTitle_New)
         {
-            string query = "insert into departments ( DepartmentTitle, HospitalTitle,JobPosting)" +
-                " values ( @dtitle,@htitle, @jposting)";
-            SqlParameter[] myparams = new SqlParameter[2];
+            string query = "insert into departments ( DepartmentTitle)" +
+                " values ( @dtitle)";
+            SqlParameter[] myparams = new SqlParameter[0];
             myparams[0] = new SqlParameter("@dtitle", DepartmentTitle_New);
-            myparams[1] = new SqlParameter("@htitle", HospitalTitle_New);
-            myparams[2] = new SqlParameter("@jposting", JobPosting_New);
-           
+            
 
 
             db.Database.ExecuteSqlCommand(query, myparams);
@@ -90,20 +88,19 @@ namespace HospitalTeam2.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(int? id, string DepartmentTitle, string HospitalTitle, string JobPosting)
+        public ActionResult Edit(int? id, string DepartmentTitle)
         {
             if ((id == null) || (db.Departments.Find(id) == null))
             {
                 return NotFound();
             }
-            string query = "update departments set DepartmentTitle=@dtitle, HospitalTitle=@htitle, JobPosting=@jposting" +
+            string query = "update departments set DepartmentTitle=@dtitle" +
                 " where departmentid=@id";
-            SqlParameter[] myparams = new SqlParameter[3];
+            SqlParameter[] myparams = new SqlParameter[1];
 
             myparams[0] = new SqlParameter("@dtitle",DepartmentTitle);
-            myparams[1] = new SqlParameter("@htitle", HospitalTitle);
-            myparams[2] = new SqlParameter("@jposting", JobPosting); 
-            myparams[3] = new SqlParameter("@id", id);
+            
+            myparams[1] = new SqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -124,7 +121,7 @@ namespace HospitalTeam2.Controllers
         }
 
 
-       /* public ActionResult Show(int? id)
+       public ActionResult Show(int? id)
         {
             if ((id == null) || (db.Departments.Find(id) == null))
             {
@@ -133,12 +130,10 @@ namespace HospitalTeam2.Controllers
             }
             string query = "select * from departments where departmentid=@id";
             SqlParameter param = new SqlParameter("@id", id);
-
-             departmentshow = db.Departments.Include(h => h.Hospital).Include(j => j.JobPostings).SingleOrDefault(d => d.DepartmentID == id);
-
+            Department departmentshow = db.Departments.Include(h => h.Hospital).Include(j => j.JobPostings).SingleOrDefault(d => d.DepartmentID == id);
             return View(departmentshow);
 
-        }*/
+        }
 
         protected override void Dispose(bool disposing)
         {

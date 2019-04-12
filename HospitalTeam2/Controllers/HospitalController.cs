@@ -64,7 +64,7 @@ namespace HospitalTeam2.Controllers
 
 
         // GET: Hospitals/Create
-        public ActionResult Create()
+        public ActionResult New()
         {
             return View();
         }
@@ -90,6 +90,7 @@ namespace HospitalTeam2.Controllers
 
 
 
+
         // GET: Hospitals/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,9 +110,7 @@ namespace HospitalTeam2.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {
-
-
+        { 
 
             Hospital hospital = db.Hospitals.Find(id);
             db.Hospitals.Remove(hospital);

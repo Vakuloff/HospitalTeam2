@@ -17,11 +17,7 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Title")]
         public string DepartmentTitle { get; set; }
 
-        [Required, StringLength(255), Display(Name = "JobPostingTitle")]
-        public string JobPostingTitle { get; set; }
-
-        [Required, StringLength(255), Display(Name = "HospitalTitle")]
-        public string HospitalTitle { get; set; }
+       
 
         //one department has many jobs
         [InverseProperty("Department")]

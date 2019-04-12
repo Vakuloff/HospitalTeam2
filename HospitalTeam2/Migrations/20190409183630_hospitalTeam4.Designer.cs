@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190409183630_hospitalTeam4")]
+    partial class hospitalTeam4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,10 +35,6 @@ namespace HospitalTeam2.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -386,30 +383,6 @@ namespace HospitalTeam2.Migrations
                     b.ToTable("JobPostings");
                 });
 
-            modelBuilder.Entity("HospitalTeam2.Models.NavMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("IsShown");
-
-                    b.Property<int?>("NavMenuItemId");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasMaxLength(500);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NavMenuItemId");
-
-                    b.ToTable("NavMenus");
-                });
-
             modelBuilder.Entity("HospitalTeam2.Models.Parking", b =>
                 {
                     b.Property<int>("ParkingID")
@@ -710,13 +683,6 @@ namespace HospitalTeam2.Migrations
                         .WithMany("JobPostings")
                         .HasForeignKey("HospitalID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("HospitalTeam2.Models.NavMenu", b =>
-                {
-                    b.HasOne("HospitalTeam2.Models.NavMenu", "NavMenuItem")
-                        .WithMany("ChildMenuItems")
-                        .HasForeignKey("NavMenuItemId");
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>

@@ -81,53 +81,7 @@ namespace HospitalTeam2.Controllers
 
             return RedirectToAction("List");
         }
-        /*
-        public ActionResult Edit(int? id)
-        {
-            if ((id == null) || (db.JobApplications.Find(id) == null))
-            {
-                return NotFound();
-            }
-            string query = "select * from jobapplications where jobapplicationid=@id";
-            SqlParameter param = new SqlParameter("@id", id);
-            JobApplication myresume = db.JobApplications.FromSql(query, param).FirstOrDefault();
-            return View(myresume);
-        }*/
-
-
-        //We investigated what it means to edit a job applications
-        //spongebob applies to be a doctor, but made a mistake on the application,
-        //he wants to go back and edit how own applciation, but he CAN ONLY edit his own, and not patricks
-        //however, our system currently only has accounts for admins. How would we know whether this is spongebob on the
-        //computer or patrick?
-        //because we don't have account functionality for (non-admins), we can't make edit work
-        //Also, we investigated that admins shouldn't edit
-        //squidward is an admin but can not change spongebob's application because those are spongebobs words, not his own.
-        //so it doesn't make sense for admins to edit either
-        //in conclusion, not edit.
-        /*[HttpPost]
-        public ActionResult Edit(int? id, string JobTitle, string FirstName, string LastName, string Email, string Phone, string CoverLetter, string Summary)
-        {
-            if ((id == null) || (db.JobApplications.Find(id) == null))
-            {
-                return NotFound();
-            }
-            string query = "update resumes set JobTitle=@jobtitle, FirstName=@fname, LastName=@lname, Email=@email, Phone=@phone, CoverLetter=@coverletter, Summary=@summary" +
-                " where resumeid=@id";
-            SqlParameter[] myparams = new SqlParameter[7];
-            myparams[0] = new SqlParameter("@jobtitle", JobTitle);
-            myparams[1] = new SqlParameter("@fname", FirstName);
-            myparams[2] = new SqlParameter("@lname", LastName);
-            myparams[3] = new SqlParameter("@email", Email);
-            myparams[4] = new SqlParameter("@phone", Phone);
-            myparams[5] = new SqlParameter("@coverletter", CoverLetter);
-            myparams[6] = new SqlParameter("@summary", Summary);
-            myparams[7] = new SqlParameter("@id", id);
-
-            db.Database.ExecuteSqlCommand(query, myparams);
-
-            return RedirectToAction("Show/" + id);
-        }*/
+  //we decided that admin can't edit jobapplication
 
         [HttpPost]
         public ActionResult Delete(int? id)

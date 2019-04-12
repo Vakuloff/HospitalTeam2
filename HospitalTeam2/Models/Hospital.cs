@@ -29,12 +29,9 @@ namespace HospitalTeam2.Models
 
         [StringLength(int.MaxValue), Display(Name = "Description")]
         public string Description { get; set; }
-
-        [StringLength(int.MaxValue), Display(Name = "DepartmentTitle")]
-        public string DepartmentTitle { get; set; }
       
 
-        //Hospital and Job Positions
+        //Hospital and Job Posting
         [InverseProperty("Hospital")]
         public List<JobPosting> JobPostings { get; set; }
 
@@ -48,7 +45,7 @@ namespace HospitalTeam2.Models
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
 
-        //foreign key
+        
     }
 }
 
