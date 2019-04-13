@@ -35,6 +35,12 @@
         <dd>
             @Html.DisplayFor(model => model.ParkingContact)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.hospital)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.hospital.Address)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
