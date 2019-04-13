@@ -54,23 +54,12 @@ namespace HospitalTeam2.Controllers
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).Include(ja => ja.JobApplications).ToList();
+            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).ToList();
 
             //GOTO Views/jobposition/List.cshtml
             return View(jobposting);
         }
 
-        /*public ActionResult New()
-        {
-            JobPostingEdit positioneditview = new JobPostingEdit();
-
-
-            //object positioneditview = null;
-            positioneditview.Hospitals = db.Hospitals.ToList();
-
-            //GOTO Views/Position/New.cshtml
-            return View(positioneditview);
-        }*/
 
         public ActionResult New()
         {
@@ -88,29 +77,28 @@ namespace HospitalTeam2.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(string HospitalTitle_New, string JobPostingTitle_New, string DepartmentTitle_New, string JobPostingType_New, string JobPostingDesc_New, string JobPostingReq_New, int? JobApplicationID_New)
+        public ActionResult Create(int HospitalId, int DepartmentId, string JobPostingTitle_New,  string JobPostingType_New, string JobPostingDesc_New, string JobPostingReq_New)
         {
 
 
             //Query   
-            string query = "insert into jobpostings (HospitalTitle, JobPostingTitle,DepartmentTitle, JobPostingType, JobPostingDesc, JobPostingReq,  JobApplicationID) values (@location, @title, @department,@type, @desc, @req, @apid)";
+            string query = "insert into jobpostings (HospitalId, DepartmentId, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq) values (@hid, @did, @title, @type, @desc, @req)";
 
 
             SqlParameter[] myparams = new SqlParameter[6];
+            //@hospital (id) FOREIGN KEY param
+            myparams[0] = new SqlParameter("@hid", HospitalId);
+            //@department (id) FOREIGN KEY param
+            myparams[1] = new SqlParameter("@did", DepartmentId);
             //@title parameter
-            myparams[0] = new SqlParameter("@location", HospitalTitle_New);
-            //@type parameter
-            myparams[1] = new SqlParameter("@title", JobPostingTitle_New);
-            //@category (id) FOREIGN KEY param
-            myparams[2] = new SqlParameter("@department", DepartmentTitle_New);
+            myparams[2] = new SqlParameter("@title", JobPostingTitle_New);
             //@type paramter
             myparams[3] = new SqlParameter("@type", JobPostingType_New);
             //@desc parameter
             myparams[4] = new SqlParameter("@desc", JobPostingDesc_New);
             //@req parameter
             myparams[5] = new SqlParameter("@req", JobPostingReq_New);
-            //@resume (id) FOREIGN KEY param
-            myparams[6] = new SqlParameter("@apid", JobApplicationID_New);
+           
             
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -144,16 +132,16 @@ namespace HospitalTeam2.Controllers
 
             }
             //Raw Update MSSQL query
-            string query = "update jobpostings set HospitalTitle=@location, JobPostingTitle=@title, Department = @department, JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req,JobApplicationID=@resume where JobPostingID=@id";
+            string query = "update jobpostings set HospitalTitle=@hid, Department = @did, JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req where JobPostingID=@id";
 
 
             SqlParameter[] myparams = new SqlParameter[6];
-            //Parameter for @title "jobtitle"
-            myparams[0] = new SqlParameter("@location", HospitalTitle);
-            //Parameter for @type "jobtype"
-            myparams[1] = new SqlParameter("@title", JobPostingTitle);
+            //Parameter for @hospital FK
+            myparams[0] = new SqlParameter("@hid", HospitalTitle);
             //Parameter for (department) id FOREIGN KEY
-            myparams[2] = new SqlParameter("@department", Department);
+            myparams[1] = new SqlParameter("@did", Department);
+            //Parameter for @title "jobPostTitle"
+            myparams[2] = new SqlParameter("@title", JobPostingTitle); 
             //Parameter for @type "jobpostingtype"
             myparams[3] = new SqlParameter("@type", JobPostingType);
             //Parameter for @desc "JobDesc"

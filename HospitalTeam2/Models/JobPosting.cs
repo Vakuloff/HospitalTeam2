@@ -24,7 +24,7 @@ namespace HospitalTeam2.Models
         //[Required, StringLength(255), Display(Name = "DepartmentTitle")]
         //public string DepartmentTitle { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Title")]
+        [Required, StringLength(255), Display(Name = "JobPosting Title")]
         public string JobPostingTitle { get; set; }
 
         [Required, StringLength(255), Display(Name = "Type")]
@@ -36,10 +36,6 @@ namespace HospitalTeam2.Models
         [DataType(DataType.Text), Display(Name = "Requirements")]
         public string JobPostingReq { get; set; }
 
-        /* you cant have a foreign key when you are associating this job posting with many other things*/
-
-        //[StringLength(int.MaxValue), Display(Name = "JobApplicationID")]
-        //public string JobApplicationID { get; set; }
 
         //a job position has many applications
         public virtual IEnumerable<JobApplication> JobApplications { get; set; }

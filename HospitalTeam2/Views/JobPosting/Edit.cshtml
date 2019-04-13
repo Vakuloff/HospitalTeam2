@@ -1,4 +1,4 @@
-﻿@model HospitalTeam2.Models.JobPosting
+﻿@model HospitalTeam2.Models.ViewModels.JobPostingEdit
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,43 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="JobPostingID" />
             
-            <div class="form-group">
-                <label asp-for="JobPostingTitle" class="control-label"></label>
-                <input asp-for="JobPostingTitle" class="form-control" />
-                <span asp-validation-for="JobPostingTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobPostingType" class="control-label"></label>
-                <input asp-for="JobPostingType" class="form-control" />
-                <span asp-validation-for="JobPostingType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobPostingDesc" class="control-label"></label>
-                <input asp-for="JobPostingDesc" class="form-control" />
-                <span asp-validation-for="JobPostingDesc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobPostingReq" class="control-label"></label>
-                <input asp-for="JobPostingReq" class="form-control" />
-                <span asp-validation-for="JobPostingReq" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <select asp-for="HospitalID" class="form-control" asp-items="ViewBag.HospitalID"></select>
-                <span asp-validation-for="HospitalID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DepartmentID" class="control-label"></label>
-                <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.DepartmentID"></select>
-                <span asp-validation-for="DepartmentID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </form>
     </div>
 </div>

@@ -12,11 +12,14 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DepartmentTitle)
-                </th>
-                
-            
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hospital.HospitalTitle)
+            </th>
+
+
             <th></th>
         </tr>
     </thead>
@@ -26,11 +29,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DepartmentTitle)
             </td>
-          
-           
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartmentID">Details</a> |
+                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
+            </td>
+
+
+            <td>
+               <!-- <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |-->
+                <a asp-action="Show" asp-route-id="@item.DepartmentID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.DepartmentID">Delete</a>
             </td>
         </tr>

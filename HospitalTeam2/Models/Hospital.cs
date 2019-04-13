@@ -15,7 +15,7 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int HospitalID { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Title")]
+        [Required, StringLength(255), Display(Name = "Hospital Title")]
         public string HospitalTitle { get; set; }
 
         [Required, StringLength(255), Display(Name = "Address")]

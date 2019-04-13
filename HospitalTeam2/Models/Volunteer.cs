@@ -20,7 +20,7 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        [Required, StringLength(255), Display(Name = "MiddleName")]
+        [Required, StringLength(255), Display(Name = "Middle")]
         public string Middle { get; set; }
 
         [Required, StringLength(255), Display(Name = "City")]
