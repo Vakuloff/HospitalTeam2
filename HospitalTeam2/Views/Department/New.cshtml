@@ -11,25 +11,26 @@
 <div class="row">
     <div class="col-md-4">
         <form action="/Department/Create" method="post">
+            <div class="form-group">
+            <label class="control-label">Department Title</label>
+            <input class="form-control" type="text" name="DepartmentTitle_New"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Hospital Title</label>
+                <select class="form-control" name="hospitalid">
+                    @{
+                        foreach (var hospital in Model.Hospitals)
+                        {
+                            <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                        }
 
-            <label>Department Title</label>
-            <input type="text" name="DepartmentTitle_New"/>
-
-            <label>Hospital Title</label>
-            <select name="hospitalid">
-                @{ 
-                    foreach(var hospital in Model.Hospitals)
-                    {
-                        <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
                     }
-
-                }
-            </select>
-
-
-            <input type="submit" value="submit" />
-
-        </form>
+                </select>
+                </div>
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="submit" />
+            </div>
+</form>
     </div>
 </div>
 

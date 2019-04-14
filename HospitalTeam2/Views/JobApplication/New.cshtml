@@ -11,41 +11,46 @@
 <div class="row">
     <div class="col-md-4">
         <form action="/JobApplication/Create" method="post">
+            <div class="form-group">
+                <label class="control-label">Job Posting</label>
+                <select class="form-control" name="jobpostingid">
+                    @{
+                        foreach (var jobposting in Model.JobPostings)
+                        {
+                            <option value="@(jobposting.JobPostingID)">@(jobposting.JobPostingTitle)</option>
+                        }
 
-            <label>Job Posting</label>
-            <select name="jobpostingid">
-                @{
-                    foreach (var jobposting in Model.JobPostings)
-                    {
-                        <option value="@(jobposting.JobPostingID)">@(jobposting.JobPostingTitle)</option>
                     }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input class="form-control" type="text" name="FirstName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input class="form-control" type="text" name="LastName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input  class="form-control"type="text" name="Email_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone</label>
+                <input class="form-control" type="text" name="Phone_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cover Letter</label>
+                <input class="form-control" type="text" name="CoverLetter_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Resume</label>
+                <input class="form-control" type="text" name="Resume_New" />
+            </div>
 
-                }
-            </select>
-
-
-            <label>First Name</label>
-            <input type="text" name="FirstName_New" />
-
-            <label>Last Name</label>
-            <input type="text" name="LastName_New" />
-
-            <label>Email</label>
-            <input type="text" name="Email_New" />
-
-            <label>Phone</label>
-            <input type="text" name="Phone_New" />
-
-            <label>Cover Letter</label>
-            <input type="text" name="CoverLetter_New" />
-
-            <label>Resume</label>
-            <input type="text" name="Resume_New" />
-
-            
-
-            <input type="submit" value="submit" />
-
+            <div class="form-group">
+                <input  type="submit" value="submit" class="btn btn-default"/>
+</div>
         </form>
     </div>
 </div>

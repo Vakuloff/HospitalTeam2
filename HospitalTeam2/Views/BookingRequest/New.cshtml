@@ -11,73 +11,91 @@
 <div class="row">
     <div class="col-md-4">
         <form action="/BookingRequest/Create" method="post">
+            <div class="form-group">
+                <label class="control-label">Hospital Title</label>
+                <select class="form-control" name="hospitalid">
+                    @{
+                        foreach (var hospital in Model.Hospitals)
+                        {
+                            <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                        }
 
-            <label>Hospital Title</label>
-            <select name="hospitalid">
-                @{
-                    foreach (var hospital in Model.Hospitals)
-                    {
-                        <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
                     }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Type Doctor</label>
+                <select class="form-control" name="staffid">
+                    @{
+                        foreach (var staff in Model.Staffs)
+                        {
+                            <option value="@(staff.StaffId)">@(staff.TypeDoctor)</option>
+                        }
 
-                }
-            </select>
-            <select name="staffid">
-                @{
-                    foreach (var staff in Model.Staffs)
-                    {
-                        <option value="@(staff.StaffId)">@(staff.TypeDoctor)</option>
                     }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Doctor First Name</label>
+                <select class="form-control" name="staffid">
+                    @{
+                        foreach (var staff in Model.Staffs)
+                        {
+                            <option value="@(staff.StaffId)">@(staff.StaffFirstName)</option>
+                        }
 
-                }
-            </select>
-            <select name="staffid">
-                @{
-                    foreach (var staff in Model.Staffs)
-                    {
-                        <option value="@(staff.StaffId)">@(staff.StaffFirstName)</option>
                     }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Doctor Last Name</label>
+                <select class="form-control" name="staffid">
+                    @{
+                        foreach (var staff in Model.Staffs)
+                        {
+                            <option value="@(staff.StaffId)">@(staff.StaffLastName)</option>
+                        }
 
-                }
-            </select>
-            <select name="staffid">
-                @{
-                    foreach (var staff in Model.Staffs)
-                    {
-                        <option value="@(staff.StaffId)">@(staff.StaffLastName)</option>
                     }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Reason</label>
+                <input class="form-control"type="text" name="Reason_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date</label>
+                <input class="form-control"type="text" name="Date_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Time</label>
+                <input class="form-control" type="text" name="Time_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input class="form-control"type="text" name="FirstName_New" />
+            </div>
+            <div class="form-group">
 
-                }
-            </select>
-
-            <label>Reason</label>
-            <input type="text" name="Reason_New" />
-
-            <label>Date</label>
-            <input type="text" name="Date_New" />
-
-            <label>Time</label>
-            <input type="text" name="Time_New" />
-
-            <label>First Name</label>
-            <input type="text" name="FirstName_New" />
-
-            <label>Last Name</label>
-            <input type="text" name="LastName_New" />
-
-            <label>Email</label>
-            <input type="text" name="Email_New" />
-
-            <label>Phone</label>
-            <input type="text" name="Phone_New" />
-
-            <label>Age</label>
-            <input type="text" name="Age_New" />
-
-
-            <input type="submit" value="submit" />
-
-        </form>
+                <label class="control-label">Last Name</label>
+                <input class="form-control" type="text" name="LastName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" name="Email_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone</label>
+                <input class="form-control"type="text" name="Phone_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Age</label>
+                <input class="form-control"type="text" name="Age_New" />
+</div>
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="submit" />
+</div>
+</form>
     </div>
 </div>
 
