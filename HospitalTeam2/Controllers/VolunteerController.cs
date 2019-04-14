@@ -99,6 +99,7 @@ namespace HospitalTeam2.Controllers
 
             VolunteerEdit voleditview = new VolunteerEdit();
 
+            voleditview.Hospitals = db.Hospitals.ToList();
             voleditview.Volunteer = db.Volunteers.Include(h => h.Hospital).SingleOrDefault(vl => vl.VolunteerID == id); //finds all volunteer
 
             //GOTO: Views/Job/Edit.cshtml
@@ -107,37 +108,36 @@ namespace HospitalTeam2.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(int? id, string HospitalTitle, string FirstName, string LastName, string MiddleName, string Street, string City, string Province, string Zip, string Phone, string Email, string Age, string Gender, string Education, string Experience, string Availability, string Name, string Phone_em, string Relationship, string HealthCondition)
+        public ActionResult Edit(int? id, int Hospitalid, string FirstName, string LastName, string Middle, string City, string Province, string Zip, string Phone, string Email, string Age, string Gender, string Education, string Experience, string Availability, string Name, string Phone_em, string Relationship, string HealthCondition)
         {
             if ((id == null) || (db.Volunteers.Find(id) == null))
             {
                 return NotFound();
             }
-            string query = "update volunteers set HospitalTitle=@location, FirstName=@fname, LastName=@lname, MiddleName=@mname, Street=@street, City=@city, Province=@province, Zip=@zip, Phone=@phone, Email=@email, Aage=@age, Gender=@gender, Education=@education, Experience=@experience, Availability=@availability, Name=@name, Phone_em=@phone_em, Relationship=@relationship, HealthCondition=@healthcondition" +
+            string query = "update volunteers set HospitalId=@hid, FirstName=@fname, LastName=@lname, Middle=@mname, City=@city, Province=@province, Zip=@zip, Phone=@phone, Email=@email, Age=@age, Gender=@gender, Education=@education, Experience=@experience, Availability=@availability, Name=@name, Phone_em=@phone_em, Relationship=@relationship, HealthCondition=@healthcondition" +
                 " where volunteerid=@id";
-            SqlParameter[] myparams = new SqlParameter[20];
+            SqlParameter[] myparams = new SqlParameter[19];
 
-            myparams[0] = new SqlParameter("@location", HospitalTitle);
+            myparams[0] = new SqlParameter("@hid", Hospitalid);
             myparams[1] = new SqlParameter("@fname", FirstName);
             myparams[2] = new SqlParameter("@fname", FirstName);
             myparams[3] = new SqlParameter("@lname", LastName);
-            myparams[4] = new SqlParameter("@mname", MiddleName);
-            myparams[5] = new SqlParameter("@street", Street);
-            myparams[6] = new SqlParameter("@city", City);
-            myparams[7] = new SqlParameter("@province", Province);
-            myparams[8] = new SqlParameter("@zip", Zip);
-            myparams[9] = new SqlParameter("@phone", Phone);
-            myparams[10] = new SqlParameter("@email", Email);
-            myparams[11] = new SqlParameter("@age", Age);
-            myparams[12] = new SqlParameter("@gender", Gender);
-            myparams[13] = new SqlParameter("@education", Education);
-            myparams[14] = new SqlParameter("@experience", Experience);
-            myparams[15] = new SqlParameter("@availability", Availability);
-            myparams[16] = new SqlParameter("@name", Name);
-            myparams[17] = new SqlParameter("@phone_em", Phone_em);
-            myparams[18] = new SqlParameter("@relationship", Relationship);
-            myparams[19] = new SqlParameter("@healthcondition", HealthCondition);
-            myparams[20] = new SqlParameter("@id", id);
+            myparams[4] = new SqlParameter("@mname", Middle);
+            myparams[5] = new SqlParameter("@city", City);
+            myparams[6] = new SqlParameter("@province", Province);
+            myparams[7] = new SqlParameter("@zip", Zip);
+            myparams[8] = new SqlParameter("@phone", Phone);
+            myparams[9] = new SqlParameter("@email", Email);
+            myparams[10] = new SqlParameter("@age", Age);
+            myparams[11] = new SqlParameter("@gender", Gender);
+            myparams[12] = new SqlParameter("@education", Education);
+            myparams[13] = new SqlParameter("@experience", Experience);
+            myparams[14] = new SqlParameter("@availability", Availability);
+            myparams[15] = new SqlParameter("@name", Name);
+            myparams[16] = new SqlParameter("@phone_em", Phone_em);
+            myparams[17] = new SqlParameter("@relationship", Relationship);
+            myparams[18] = new SqlParameter("@healthcondition", HealthCondition);
+            myparams[19] = new SqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -159,7 +159,7 @@ namespace HospitalTeam2.Controllers
             return View(volunteer);
         }
 
-        // POST: Hospitals/Delete/5
+        // POST: Volunteer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

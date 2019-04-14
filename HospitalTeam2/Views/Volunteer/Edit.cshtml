@@ -15,7 +15,7 @@
                     @foreach (var Hospital in Model.Hospitals)
                     {
                         string current = "false";
-                        @if (Hospital.HospitalID == Model.Volunteer.Hospital.HospitalID)
+                        @if (Hospital.HospitalID == Model.Volunteer.HospitalID)
                         {
                             current = "true";
                         }

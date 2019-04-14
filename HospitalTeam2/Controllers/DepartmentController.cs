@@ -67,14 +67,13 @@ namespace HospitalTeam2.Controllers
             //the db is asking for the hospitaltitle and jobposting title,
             //neither of which should exist correct way is to fix db migrations with all laptops there
             //however, we sate this by adding dummy info into hospitaltitle and jobpostingtitle
-            string query = "insert into departments ( DepartmentTitle, HospitalID,JobPostingTitle, HospitalTitle)" +
-                " values ( @dtitle, @hid, @d1, @d2)";
-            string dummytext = "";
-            SqlParameter[] myparams = new SqlParameter[4];
+            string query = "insert into departments ( DepartmentTitle, HospitalID)" +
+                " values ( @dtitle, @hid)";
+          
+            SqlParameter[] myparams = new SqlParameter[2];
             myparams[0] = new SqlParameter("@dtitle", DepartmentTitle_New);
             myparams[1] = new SqlParameter("@hid", hospitalid);
-            myparams[2] = new SqlParameter("@d1", dummytext);
-            myparams[3] = new SqlParameter("@d2", dummytext);
+         
 
 
             db.Database.ExecuteSqlCommand(query, myparams);
@@ -82,35 +81,36 @@ namespace HospitalTeam2.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if ((id == null) || (db.Departments.Find(id) == null))
-            {
-                return NotFound();
-            }
-            string query = "select * from departments where departmentid=@id";
-            SqlParameter param = new SqlParameter("@id", id);
-            Department mydep = db.Departments.FromSql(query, param).FirstOrDefault();
-            return View(mydep);
+
+
+            DepartmentEdit depeditview = new DepartmentEdit();
+
+            depeditview.Hospitals = db.Hospitals.ToList();
+            depeditview.Departments = db.Departments.Include(h => h.Hospital).SingleOrDefault(d => d.DepartmentID == id); //finds all department
+
+            //GOTO: Views/Job/Edit.cshtml
+            return View(depeditview);
         }
 
-        
-        
+
+
 
         [HttpPost]
-        public ActionResult Edit(int? id, string DepartmentTitle)
+        public ActionResult Edit(int? id, int HospitalID, string DepartmentTitle)
         {
             if ((id == null) || (db.Departments.Find(id) == null))
             {
                 return NotFound();
             }
-            string query = "update departments set DepartmentTitle=@dtitle" +
+            string query = "update departments set HospitalID=@hid, DepartmentTitle=@dtitle" +
                 " where departmentid=@id";
-            SqlParameter[] myparams = new SqlParameter[1];
+            SqlParameter[] myparams = new SqlParameter[2];
 
-            myparams[0] = new SqlParameter("@dtitle",DepartmentTitle);
-            
-            myparams[1] = new SqlParameter("@id", id);
+            myparams[0] = new SqlParameter("@hid",HospitalID);
+            myparams[1] = new SqlParameter("@dtitle", DepartmentTitle);
+            myparams[2] = new SqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -133,7 +133,7 @@ namespace HospitalTeam2.Controllers
             return View(department);
         }
 
-        // POST: Hospitals/Delete/5
+        // POST: Department/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -156,7 +156,7 @@ namespace HospitalTeam2.Controllers
             }
             string query = "select * from departments where departmentid=@id";
             SqlParameter param = new SqlParameter("@id", id);
-            Department departmentshow = db.Departments.Include(h => h.Hospital).Include(j => j.JobPostings).SingleOrDefault(d => d.DepartmentID == id);
+            Department departmentshow = db.Departments.Include(h => h.Hospital).SingleOrDefault(d => d.DepartmentID == id);
             return View(departmentshow);
 
         }

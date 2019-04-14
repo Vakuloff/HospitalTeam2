@@ -14,18 +14,6 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int BookingID { get; set; }
 
-        [Required, StringLength(255), Display(Name = "HospitalTitle")]
-        public string HospitalTitle { get; set; }
-
-        [Required, StringLength(255), Display(Name = "TypeDoctor")]
-        public string TypeDoctor { get; set; }
-
-        [Required, StringLength(255), Display(Name = "Doctor First Name")]
-        public string StaffFirstName { get; set; }
-
-        [Required, StringLength(255), Display(Name = "Doctor Last Name")]
-        public string StaffLastName { get; set; }
-
         [Required, StringLength(255), Display(Name = "Reason")]
         public string Reason { get; set; }
 

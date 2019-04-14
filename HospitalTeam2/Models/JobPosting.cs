@@ -14,16 +14,6 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int JobPostingID { get; set; }
 
-
-        // QUESTION FOR GROUP: IS SOMEONE DOING DEPARTMENTS?
-        //job application doesn't have a title, a job application has a hospital and a hospital has a title
-        //[Required, StringLength(255), Display(Name = "HospitalTitle")]
-        //public string HospitalTitle { get; set; }
-
-        //job application doesn[t have a department title, a job application has a department and a department has a departmenttitle
-        //[Required, StringLength(255), Display(Name = "DepartmentTitle")]
-        //public string DepartmentTitle { get; set; }
-
         [Required, StringLength(255), Display(Name = "JobPosting Title")]
         public string JobPostingTitle { get; set; }
 
@@ -35,10 +25,6 @@ namespace HospitalTeam2.Models
 
         [DataType(DataType.Text), Display(Name = "Requirements")]
         public string JobPostingReq { get; set; }
-
-
-        //a job position has many applications
-        public virtual IEnumerable<JobApplication> JobApplications { get; set; }
 
 
         // job has one hospital
@@ -53,6 +39,6 @@ namespace HospitalTeam2.Models
         [ForeignKey("Department")]
         public int DepartmentID { get; set; }
 
-
+        public IEnumerable<JobApplication> JobApplications { get; set; }
     }
 }
