@@ -13,43 +13,43 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.VisitorName)
+                    Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.VisitoCarNo)
+                    Car No.
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ParkingPurpose)
+                    Purpose
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ParkingContact)
+                    Contact
                 </th>
             <th>
-                @Html.DisplayNameFor(model => model.hospital)
+                Hospital
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VisitorName)
+                @item.VisitorName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VisitoCarNo)
+                @item.VisitoCarNo
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParkingPurpose)
+                @item.ParkingPurpose
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParkingContact)
+                @item.ParkingContact
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.hospital.Address)
+                @item.hospital.HospitalTitle
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ParkingID">Edit</a> |
+                <a asp-action="Create" asp-route-id="@item.ParkingID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ParkingID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ParkingID">Delete</a>
             </td>
