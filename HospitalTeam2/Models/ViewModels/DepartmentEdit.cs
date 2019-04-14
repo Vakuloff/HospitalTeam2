@@ -12,5 +12,6 @@ namespace HospitalTeam2.Models.ViewModels
         //I need to know all the hospitals so that the user can pick one\
 
         public IEnumerable<Hospital> Hospitals { get; set; }
+        public Department Departments { get; set; }
     }
 }

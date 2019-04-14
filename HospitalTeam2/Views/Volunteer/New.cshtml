@@ -1,4 +1,4 @@
-﻿@model HospitalTeam2.Models.Volunteer
+﻿@model HospitalTeam2.Models.ViewModels.VolunteerEdit
 
 @{
     ViewData["Title"] = "New";
@@ -10,108 +10,84 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="New">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Middle" class="control-label"></label>
-                <input asp-for="Middle" class="form-control" />
-                <span asp-validation-for="Middle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Province" class="control-label"></label>
-                <input asp-for="Province" class="form-control" />
-                <span asp-validation-for="Province" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Zip" class="control-label"></label>
-                <input asp-for="Zip" class="form-control" />
-                <span asp-validation-for="Zip" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Education" class="control-label"></label>
-                <input asp-for="Education" class="form-control" />
-                <span asp-validation-for="Education" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Experience" class="control-label"></label>
-                <input asp-for="Experience" class="form-control" />
-                <span asp-validation-for="Experience" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Availability" class="control-label"></label>
-                <input asp-for="Availability" class="form-control" />
-                <span asp-validation-for="Availability" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone_em" class="control-label"></label>
-                <input asp-for="Phone_em" class="form-control" />
-                <span asp-validation-for="Phone_em" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Relationship" class="control-label"></label>
-                <input asp-for="Relationship" class="form-control" />
-                <span asp-validation-for="Relationship" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HealthCondition" class="control-label"></label>
-                <input asp-for="HealthCondition" class="form-control" />
-                <span asp-validation-for="HealthCondition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <select asp-for="HospitalID" class ="form-control" asp-items="ViewBag.HospitalID"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <form action="/Volunteer/Create" method="post">
+
+            <label>Hospital Title</label>
+            <select name="hospitalid">
+                @{
+                    foreach (var hospital in Model.Hospitals)
+                    {
+                        <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                    }
+
+                }
+            </select>
+
+
+            <label>First Name</label>
+            <input type="text" name="FirstName_New" />
+
+            <label>Last Name</label>
+            <input type="text" name="LastName_New" />
+
+            <label>Middle Name</label>
+            <input type="text" name="Middle_New" /> 
+
+            <label>City</label>
+            <input type="text" name="City_New" />
+
+            <label>Province</label>
+            <input type="text" name="Province_New" />
+
+            <label>ZIP</label>
+            <input type="text" name="Zip_New" />
+
+            <label>Phone</label>
+            <input type="text" name="Phone_New" />
+
+            <label>Email</label>
+            <input type="text" name="Email_New" />
+
+            <label>Age</label>
+            <input type="text" name="Age_New" />
+
+            <label>Gender</label>
+            <input type="text" name="Gender_New" />
+
+            <label>Education</label>
+            <input type="text" name="Education_New" />
+
+            <label>Experience</label>
+            <input type="text" name="Experience_New" />
+
+            <label>Availability</label>
+            <input type="text" name="Availability_New" />
+
+            <label>Name</label>
+            <input type="text" name="Name_New" />
+
+            <label>Phone</label>
+            <input type="text" name="Phone_em_New" />
+
+            <label>Relationship</label>
+            <input type="text" name="Relationship_New" />
+
+            <label>Health Condition</label>
+            <input type="text" name="HealthCondition_New" />
+
+
+
+            <input type="submit" value="submit" />
+
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

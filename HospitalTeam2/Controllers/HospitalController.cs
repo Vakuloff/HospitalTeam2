@@ -93,7 +93,7 @@ namespace HospitalTeam2.Controllers
         {
             string query = "insert into hospitals (HospitalTitle, Address, Email, Phone, Description)" +
                 " values (@htitle, @address, @email, @phone, @description)";
-            SqlParameter[] myparams = new SqlParameter[4];
+            SqlParameter[] myparams = new SqlParameter[5];
             myparams[0] = new SqlParameter("@htitle", HospitalTitle_New);
             myparams[1] = new SqlParameter("@address", Address_New);
             myparams[2] = new SqlParameter("@email", Email_New);
@@ -101,7 +101,7 @@ namespace HospitalTeam2.Controllers
             myparams[4] = new SqlParameter("@description", Description_New);
 
             db.Database.ExecuteSqlCommand(query, myparams);
-
+            Debug.WriteLine(query);
             return RedirectToAction("List");
         }
 

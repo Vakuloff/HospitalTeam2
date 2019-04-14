@@ -15,7 +15,7 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int HospitalID { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Title")]
+        [Required, StringLength(255), Display(Name = "Hospital Title")]
         public string HospitalTitle { get; set; }
 
         [Required, StringLength(255), Display(Name = "Address")]
@@ -43,6 +43,7 @@ namespace HospitalTeam2.Models
 
         //one hospital has many bookingrequests
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
+
         //parking that belong to hospital
         public IList<Parking> parking { get; set; }
 

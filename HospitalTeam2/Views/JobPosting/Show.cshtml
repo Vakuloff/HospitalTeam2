@@ -1,7 +1,7 @@
 ﻿@model HospitalTeam2.Models.JobPosting
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Show";
 }
 
 <h2>Details</h2>
@@ -11,10 +11,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HospitalTitle)
+            @Html.DisplayNameFor(model => model.Hospital.HospitalTitle)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HospitalTitle)
+            @Html.DisplayFor(model => model.Hospital.HospitalTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.DepartmentTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department.DepartmentTitle)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.JobPostingTitle)
@@ -39,24 +45,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.JobPostingReq)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.JobApplicationID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JobApplicationID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.DepartmentTitle)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hospital)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hospital.Address)
         </dd>
     </dl>
 </div>

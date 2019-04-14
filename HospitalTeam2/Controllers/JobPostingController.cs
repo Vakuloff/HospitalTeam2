@@ -43,34 +43,32 @@ namespace HospitalTeam2.Controllers
 
             return View(db.JobPostings.ToList());
         }
-
-        public ActionResult Show(int id)
-        {
-            //wrapper
-            return RedirectToAction("Details/" + id);
-        }
-
         public ActionResult List()
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).Include(ja => ja.JobApplications).ToList();
+            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).ToList();
 
             //GOTO Views/jobposition/List.cshtml
             return View(jobposting);
         }
 
-        /*public ActionResult New()
+        public ActionResult Show(int? id)
         {
-            JobPostingEdit positioneditview = new JobPostingEdit();
+            if ((id == null) || (db.JobPostings.Find(id) == null))
+            {
+                return NotFound();
 
+            }
+            string query = "select * from jobposting where jobpostingid=@id";
+            SqlParameter param = new SqlParameter("@id", id);
 
-            //object positioneditview = null;
-            positioneditview.Hospitals = db.Hospitals.ToList();
+            JobPosting jobpostshow = db.JobPostings.Include(v => v.Hospital).ThenInclude(d =>d.Departments).SingleOrDefault(jp => jp.JobPostingID == id);
 
-            //GOTO Views/Position/New.cshtml
-            return View(positioneditview);
-        }*/
+            return View(jobpostshow);
+
+        }
+
 
         public ActionResult New()
         {
@@ -88,29 +86,28 @@ namespace HospitalTeam2.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(string HospitalTitle_New, string JobPostingTitle_New, string DepartmentTitle_New, string JobPostingType_New, string JobPostingDesc_New, string JobPostingReq_New, int? JobApplicationID_New)
+        public ActionResult Create (int HospitalID, int DepartmentID, string JobPostingTitle_New,  string JobPostingType_New, string JobPostingDesc_New, string JobPostingReq_New)
         {
 
 
             //Query   
-            string query = "insert into jobpostings (HospitalTitle, JobPostingTitle,DepartmentTitle, JobPostingType, JobPostingDesc, JobPostingReq,  JobApplicationID) values (@location, @title, @department,@type, @desc, @req, @apid)";
+            string query = "insert into jobpostings (HospitalID, DepartmentID, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq) values (@hid, @did, @title, @type, @desc, @req)";
 
 
             SqlParameter[] myparams = new SqlParameter[6];
+            //@hospital (id) FOREIGN KEY param
+            myparams[0] = new SqlParameter("@hid", HospitalID);
+            //@department (id) FOREIGN KEY param
+            myparams[1] = new SqlParameter("@did", DepartmentID);
             //@title parameter
-            myparams[0] = new SqlParameter("@location", HospitalTitle_New);
-            //@type parameter
-            myparams[1] = new SqlParameter("@title", JobPostingTitle_New);
-            //@category (id) FOREIGN KEY param
-            myparams[2] = new SqlParameter("@department", DepartmentTitle_New);
+            myparams[2] = new SqlParameter("@title", JobPostingTitle_New);
             //@type paramter
             myparams[3] = new SqlParameter("@type", JobPostingType_New);
             //@desc parameter
             myparams[4] = new SqlParameter("@desc", JobPostingDesc_New);
             //@req parameter
             myparams[5] = new SqlParameter("@req", JobPostingReq_New);
-            //@resume (id) FOREIGN KEY param
-            myparams[6] = new SqlParameter("@apid", JobApplicationID_New);
+           
             
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -126,16 +123,16 @@ namespace HospitalTeam2.Controllers
 
 
             positioneditview.Hospitals = db.Hospitals.ToList(); //Finds all hospitals
+            positioneditview.Departments = db.Departments.ToList();
 
-
-            positioneditview.JobPostings = db.JobPostings.Include(h => h.Hospital).SingleOrDefault(j => j.JobPostingID == id); //finds all job
+            positioneditview.JobPostings = db.JobPostings.Include(h => h.HospitalID).SingleOrDefault(j => j.JobPostingID == id); //finds all job
 
             //GOTO: Views/Job/Edit.cshtml
             return View(positioneditview);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, string HospitalTitle, string JobPostingTitle, string Department, string JobPostingType, string JobPostingDesc, string JobPostingReq)
+        public ActionResult Edit(int? id, int HospitalID,int DepartmentID, string JobPostingTitle, string JobPostingType, string JobPostingDesc, string JobPostingReq)
         {
 
             if ((id == null) || (db.JobPostings.Find(id) == null))
@@ -144,16 +141,16 @@ namespace HospitalTeam2.Controllers
 
             }
             //Raw Update MSSQL query
-            string query = "update jobpostings set HospitalTitle=@location, JobPostingTitle=@title, Department = @department, JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req,JobApplicationID=@resume where JobPostingID=@id";
+            string query = "update jobpostings set HospitalID=@hid, DepartmentID = @did, JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req where JobPostingID=@id";
 
 
             SqlParameter[] myparams = new SqlParameter[6];
-            //Parameter for @title "jobtitle"
-            myparams[0] = new SqlParameter("@location", HospitalTitle);
-            //Parameter for @type "jobtype"
-            myparams[1] = new SqlParameter("@title", JobPostingTitle);
+            //Parameter for @hospital FK
+            myparams[0] = new SqlParameter("@hid", HospitalID);
             //Parameter for (department) id FOREIGN KEY
-            myparams[2] = new SqlParameter("@department", Department);
+            myparams[1] = new SqlParameter("@did",DepartmentID);
+            //Parameter for @title "jobPostTitle"
+            myparams[2] = new SqlParameter("@title", JobPostingTitle); 
             //Parameter for @type "jobpostingtype"
             myparams[3] = new SqlParameter("@type", JobPostingType);
             //Parameter for @desc "JobDesc"
@@ -170,51 +167,36 @@ namespace HospitalTeam2.Controllers
             //GOTO: View/Blog/Show.cshtml with paramter Blogid passed
             return RedirectToAction("Show/" + id);
         }
-        public ActionResult Show(int? id)
-        {
-
-            if ((id == null) || (db.JobPostings.Find(id) == null))
-            {
-                return NotFound();
-
-            }
-            //Raw MSSQL query
-            string query = "select * from jobpostings where jobpostingid=@id";
-
-
-            SqlParameter myparam = new SqlParameter("@id", id);
-
-
-            JobPosting myjob = db.JobPostings.Include(h => h.Hospital).Include(d =>d.Department).SingleOrDefault(b => b.JobPostingID == id);
-
-            return View(myjob);
-
-        }
-
+        // GET: JobPosting/Delete/5
         public ActionResult Delete(int? id)
         {
-
-            if ((id == null) || (db.JobPostings.Find(id) == null))
+            if (id == null)
+            {
+                return new StatusCodeResult(400);
+            }
+            JobPosting jobposting = db.JobPostings.Find(id);
+            if (jobposting == null)
             {
                 return NotFound();
-
             }
-
-            string query = "delete from hospitals where JobPostingID=@id";
-            SqlParameter param = new SqlParameter("@id", id);
-            db.Database.ExecuteSqlCommand(query, param);
-
-            query = "delete from departments where JobPostingID=@id";
-            param = new SqlParameter("@id", id);
-            db.Database.ExecuteSqlCommand(query, param);
-
-            query = "delete from jobposting where jobpostingid=@id";
-            param = new SqlParameter("@id", id);
-            db.Database.ExecuteSqlCommand(query, param);
-            return RedirectToAction("List");
-
-
+            return View(jobposting);
         }
+
+        // POST: JobPosting/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            JobPosting jobposting = db.JobPostings.Find(id);
+            db.JobPostings.Remove(jobposting);
+            db.SaveChanges();
+            return RedirectToAction("List");
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

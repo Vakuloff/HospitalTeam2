@@ -14,7 +14,7 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int DepartmentID { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Title")]
+        [Required, StringLength(255), Display(Name = "DepartmentTitle")]
         public string DepartmentTitle { get; set; }
 
        
@@ -33,5 +33,8 @@ namespace HospitalTeam2.Models
 
         //one department has many staff
         public IEnumerable<Staff> Staff { get; set; }
+
+        //one department has many jobpostings
+        public IEnumerable<JobPosting> JobPosting { get; set; }
     }
 }

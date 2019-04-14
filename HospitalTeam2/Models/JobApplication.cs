@@ -13,9 +13,6 @@ namespace HospitalTeam2.Models
     {
         [Key, ScaffoldColumn(false)]
         public int JobApplicationID { get; set; }
-        
-        [Required, StringLength(255), Display(Name = "JobPostingTitle")]
-        public string JobPostingTitle { get; set; }
 
 
         [Required, StringLength(255), Display(Name = "First Name")]
@@ -42,7 +39,7 @@ namespace HospitalTeam2.Models
         [ForeignKey("JobPosting")]
         public int JobPostingID { get; set; }
 
-        
+      
 
 
     }

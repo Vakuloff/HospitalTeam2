@@ -1,4 +1,4 @@
-﻿@model HospitalTeam2.Models.JobApplication
+﻿@model HospitalTeam2.Models.ViewModels.JobApplicationEdit
 
 @{
     ViewData["Title"] = "New";
@@ -10,48 +10,42 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="New">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="JobPostingTitle" class="control-label"></label>
-                <select asp-for="JobPostingTitle" class="form-control" asp-items="ViewBag.JobPostingTitle"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
+        <form action="/JobApplication/Create" method="post">
 
-            <div class="form-group">
-                <label asp-for="CoverLetter" class="control-label"></label>
-                <input asp-for="CoverLetter" class="form-control" />
-                <span asp-validation-for="CoverLetter" class="text-danger"></span>
-            </div>
+            <label>Job Posting</label>
+            <select name="jobpostingid">
+                @{
+                    foreach (var jobposting in Model.JobPostings)
+                    {
+                        <option value="@(jobposting.JobPostingID)">@(jobposting.JobPostingTitle)</option>
+                    }
 
-            <div class="form-group">
-                <label asp-for="Resume" class="control-label"></label>
-                <input asp-for="Resume" class="form-control" />
-                <span asp-validation-for="Resume" class="text-danger"></span>
-            </div>
+                }
+            </select>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+
+            <label>First Name</label>
+            <input type="text" name="FirstName_New" />
+
+            <label>Last Name</label>
+            <input type="text" name="LastName_New" />
+
+            <label>Email</label>
+            <input type="text" name="Email_New" />
+
+            <label>Phone</label>
+            <input type="text" name="Phone_New" />
+
+            <label>Cover Letter</label>
+            <input type="text" name="CoverLetter_New" />
+
+            <label>Resume</label>
+            <input type="text" name="Resume_New" />
+
+            
+
+            <input type="submit" value="submit" />
+
         </form>
     </div>
 </div>
