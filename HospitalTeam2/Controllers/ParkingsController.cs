@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalTeam2.Data;
 using HospitalTeam2.Models;
+using System.Data.SqlClient;
+using HospitalTeam2.Models.ViewModels;
 
 namespace HospitalTeam2.Controllers
 {
@@ -20,10 +22,11 @@ namespace HospitalTeam2.Controllers
         }
 
         // GET: Parkings
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var hospitalCMSContext = _context.Parkings.Include(p => p.hospital);
-            return View(await hospitalCMSContext.ToListAsync());
+            IList<Parking> parkings = _context.Parkings.Include(p => p.hospital).ToList();
+            //var hospitalCMSContext = _context.Parkings.Include(p => p.hospital);
+            return View(parkings);
         }
 
         // GET: Parkings/Details/5
@@ -48,25 +51,30 @@ namespace HospitalTeam2.Controllers
         // GET: Parkings/Create
         public IActionResult Create()
         {
-            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address");
-            return View();
+            var parkedit = new ParkingEdit();
+            parkedit.Hospitals = _context.Hospitals.ToList();
+            return View(parkedit);
         }
 
         // POST: Parkings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact,HospitalID")] Parking parking)
+        
+        public ActionResult Create(string ParkingName_New, string ParkingCar_New, string ParkingPurpose_New, string ParkingContact_New, int ParkHospital_New)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(parking);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
-            return View(parking);
+            string query = "insert into parkings (VisitorName, VisitoCarNo, ParkingPurpose, ParkingContact, HospitalID) values (@name, @car, @ppurpose, @contact, @hospital)";
+            SqlParameter[] myparams = new SqlParameter[5];
+            myparams[0] = new SqlParameter("@name", ParkingName_New);
+            myparams[1] = new SqlParameter("@car", ParkingCar_New);
+            myparams[2] = new SqlParameter("@ppurpose", ParkingPurpose_New);
+            myparams[3] = new SqlParameter("@contact", ParkingContact_New);
+            myparams[4] = new SqlParameter("@hospital", ParkHospital_New);
+
+            _context.Database.ExecuteSqlCommand(query, myparams);
+
+            
+            //ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.hospital);
+            return RedirectToAction("Index");
         }
 
         // GET: Parkings/Edit/5
@@ -82,44 +90,33 @@ namespace HospitalTeam2.Controllers
             {
                 return NotFound();
             }
-            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
+            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "HospitalTitle", parking.hospital);
             return View(parking);
         }
 
         // POST: Parkings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ParkingID,VisitorName,VisitoCarNo,ParkingPurpose,ParkingContact,HospitalID")] Parking parking)
+        
+        public ActionResult Edit(int id, string VisitorName, string VisitoCarNo, string ParkingPurpose, string ParkingContact, int ParkingHospital)
         {
-            if (id != parking.ParkingID)
+            if (_context.Parkings.Find(id) == null) 
             {
                 return NotFound();
             }
+            string query = "update parkings set VisitorName=@name, VisitoCarNo=@car, ParkingPurpose=@ppurpose, ParkingContact=@contact, HospitalID=@hospital where ParkingID=@id";
+            SqlParameter[] myparams = new SqlParameter[5];
+            myparams[0] = new SqlParameter("@name", VisitorName);
+            myparams[1] = new SqlParameter("@car", VisitoCarNo);
+            myparams[2] = new SqlParameter("@ppurpose", ParkingPurpose);
+            myparams[3] = new SqlParameter("@contact", ParkingContact);
+            myparams[4] = new SqlParameter("@hospital", ParkingHospital);
+            myparams[4] = new SqlParameter("@id", id);
+            _context.Database.ExecuteSqlCommand(query, myparams);
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(parking);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ParkingExists(parking.ParkingID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["HospitalID"] = new SelectList(_context.Hospitals, "HospitalID", "Address", parking.HospitalID);
-            return View(parking);
+
+
+            return RedirectToAction("Index");
         }
 
         // GET: Parkings/Delete/5

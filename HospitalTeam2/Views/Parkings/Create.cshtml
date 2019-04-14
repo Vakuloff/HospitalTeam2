@@ -1,5 +1,4 @@
-﻿@model HospitalTeam2.Models.Parking
-
+﻿@model HospitalTeam2.Models.ViewModels.ParkingEdit
 @{
     ViewData["Title"] = "Create";
 }
@@ -13,34 +12,43 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="VisitorName" class="control-label"></label>
-                <input asp-for="VisitorName" class="form-control" />
-                <span asp-validation-for="VisitorName" class="text-danger"></span>
+                <label class="control-label">Name</label>
+                <input id="ParkingName_New" name="ParkingName_New" />
             </div>
             <div class="form-group">
-                <label asp-for="VisitoCarNo" class="control-label"></label>
-                <input asp-for="VisitoCarNo" class="form-control" />
-                <span asp-validation-for="VisitoCarNo" class="text-danger"></span>
+                <label class="control-label">Car No.</label>
+                <input id="ParkingCar_New" name="ParkingCar_New" />
             </div>
             <div class="form-group">
-                <label asp-for="ParkingPurpose" class="control-label"></label>
-                <input asp-for="ParkingPurpose" class="form-control" />
-                <span asp-validation-for="ParkingPurpose" class="text-danger"></span>
+                <label class="control-label">Purpose of visit</label>
+                <input id="ParkingPurpose_New" name="ParkingPurpose_New" />
+                @*<select id="ParkingPurpose_New" class="form-control">
+            <option value="appointment">Appointment</option>
+            <option value="visitor">Visitor</option>
+            <option value="patient">Patient</option>
+            <option value="other">Other</option>
+        </select>*@
             </div>
             <div class="form-group">
-                <label asp-for="ParkingContact" class="control-label"></label>
-                <input asp-for="ParkingContact" class="form-control" />
-                <span asp-validation-for="ParkingContact" class="text-danger"></span>
+                <label class="control-label">Contact</label>
+                <input id="ParkingContact_New" name="ParkingContact_New" />
             </div>
             <div class="form-group">
-                <label asp-for="HospitalID" class="control-label"></label>
-                <select id="HospitalTitle_New" name="HospitalTitle_New">
-                    @foreach (var hospital in Model.Hospitals)
-                    {
-                        <option value="@hospital.HospitalID">@hospital.HospitalTitle</option>
+                <label class="control-label">Hospital</label>
+                <select id="ParkHospital_New" name="ParkHospital_New">
+                    @{
+                        foreach (var hospital in Model.Hospitals)
+                        {
+                            <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                        }
+
                     }
                 </select>
             </div>
+
+
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

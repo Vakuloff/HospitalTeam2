@@ -1,22 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using HospitalTeam2.Data;
+using System.Data.SqlClient;
+using System.Net;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using HospitalTeam2.Models;
+using HospitalTeam2.Models.ViewModels;
+using HospitalTeam2.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace HospitalTeam2.Controllers
 {
     public class DonorsController : Controller
     {
         private readonly HospitalCMSContext _context;
+        
+        private readonly IHostingEnvironment _env;
 
-        public DonorsController(HospitalCMSContext context)
+        public DonorsController(HospitalCMSContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Donors
@@ -43,25 +58,39 @@ namespace HospitalTeam2.Controllers
             return View(donor);
         }
 
-        // GET: Donors/Create
         public IActionResult Create()
         {
             return View();
         }
+
 
         // POST: Donors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor)
+        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor, IFormFile imageUrl)
         {
+            if (imageUrl == null || imageUrl.Length == 0)
+            {
+                donor.ImageUrl = "no-image.png";
+            }
+            else
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/donors", imageUrl.FileName);
+                var stream = new FileStream(path, FileMode.Create);
+                donor.ImageUrl = imageUrl.FileName;
+            }
+                         
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(donor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                                   
+             _context.Add(donor);
+             await _context.SaveChangesAsync();
+             return RedirectToAction(nameof(Index));
+             }
             return View(donor);
         }
 
@@ -86,8 +115,18 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor)
+        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor, IFormFile ImageUrl)
         {
+            if (ImageUrl == null || ImageUrl.Length == 0)
+            {
+                donor.ImageUrl = "no-image.png";
+            }
+            else
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/donors", ImageUrl.FileName);
+                var stream = new FileStream(path, FileMode.Create);
+                donor.ImageUrl = ImageUrl.FileName;
+            }
             if (id != donor.DonorID)
             {
                 return NotFound();

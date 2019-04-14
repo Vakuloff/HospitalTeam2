@@ -44,7 +44,7 @@ namespace HospitalTeam2.Models
         //one hospital has many bookingrequests
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
         //parking that belong to hospital
-        public IEnumerable<Parking> Parkings { get; set; }
+        public IList<Parking> parking { get; set; }
 
         //one hospital has many bookingrequests
         public IEnumerable<Alert> Alerts { get; set; }

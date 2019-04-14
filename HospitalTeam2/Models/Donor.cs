@@ -6,6 +6,9 @@ using System.Web;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+
+
 namespace HospitalTeam2.Models
 {
     public class Donor
@@ -20,5 +23,7 @@ namespace HospitalTeam2.Models
         public string DonorMessage { get; set; }
         
         public string ImageUrl { get; set; }
+
+        
     }
 }

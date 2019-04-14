@@ -93,9 +93,9 @@ namespace HospitalTeam2.Data
                  .HasForeignKey(d => d.HospitalID);
             //each parking has one hospital, each hospital many parkings
             modelBuilder.Entity<Parking>()
-                .HasOne(d => d.hospital)
-                .WithMany(p => p.Parkings)
-                .HasForeignKey(d => d.HospitalID);
+                 .HasOne(d => d.hospital)
+                 .WithMany(p => p.parking)
+                 .HasForeignKey(d => d.HospitalID);
 
 
             //each staff has one department, each department has many staffs
