@@ -13,12 +13,12 @@ namespace HospitalTeam2.Migrations
                 name: "FK_Parkings_Hospitals_HospitalID",
                 table: "Parkings");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "HospitalID",
-                table: "Parkings",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldNullable: true);
+            //migrationBuilder.AlterColumn<int>(
+            //    name: "HospitalID",
+            //    table: "Parkings",
+            //    nullable: false,
+            //    oldClrType: typeof(int),
+            //    oldNullable: true);
 
             //migrationBuilder.AddColumn<string>(
             //    name: "FirstName",
