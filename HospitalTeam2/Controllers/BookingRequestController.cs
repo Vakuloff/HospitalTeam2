@@ -91,7 +91,7 @@ namespace HospitalTeam2.Controllers
 
             BookingRequestEdit bookeditview = new BookingRequestEdit();
 
-            bookeditview.BookingRequest = db.BookingRequests.Include(h => h.Hospital).Include(s => s.Staff).SingleOrDefault(b => b.BookingID == id); //finds all booking
+            bookeditview.BookingRequests = db.BookingRequests.Include(h => h.Hospital).Include(s => s.Staff).SingleOrDefault(b => b.BookingID == id); //finds all booking
 
             //GOTO: Views/Job/Edit.cshtml
             return View(bookeditview);

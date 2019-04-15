@@ -6,58 +6,62 @@
 <h4>Edit @Model.JobPostings.JobPostingTitle</h4>
 
 <hr />
-<form method="POST" action="/JobPosting/Edit/@Model.JobPostings.JobPostingID">
-    <div class="inprow">
-        <div class="inplabel">Hospital Title</div>
-        <select id="HospitalJobPosting" name="HospitalJobPosting">
-            @foreach (var Hospital in Model.Hospitals)
-            {
-                string current = "false";
-                @if (Hospital.HospitalID == Model.JobPostings.HospitalID)
-                {
-                    current = "true";
-                }
+<div class="row">
+    <div class="col-md-4">
+        <form method="POST" action="/JobPosting/Edit/@Model.JobPostings.JobPostingID">
+            <div class="form-group">
+                <div class="control-label">Hospital Title</div>
+                <select class="form-control" id="HospitalJobPosting" name="HospitalJobPosting">
+                    @foreach (var Hospital in Model.Hospitals)
+                    {
+                        string current = "false";
+                        @if (Hospital.HospitalID == Model.JobPostings.HospitalID)
+                        {
+                            current = "true";
+                        }
 
-                <option value="@Hospital.HospitalID" selected="@current">@Hospital.HospitalTitle</option>
-            }
+                        <option value="@Hospital.HospitalID" selected="@current">@Hospital.HospitalTitle</option>
+                    }
 
-        </select>
+                </select>
 
-    </div>
-    <div class="inplabel">Department Title</div>
+            </div>
+            <div class="control-label">Department Title</div>
 
-    <div>
-    <select id="DepartmentJobPosting" name="DepartmentJobPosting">
-        @foreach (var Department in Model.Departments)
-        {
-            string current = "false";
-            @if (Department.DepartmentID == Model.JobPostings.DepartmentID)
-            {
-                current = "true";
-            }
+            <div>
+                <select class="form-control" id="DepartmentJobPosting" name="DepartmentJobPosting">
+                    @foreach (var Department in Model.Departments)
+                    {
+                        string current = "false";
+                        @if (Department.DepartmentID == Model.JobPostings.DepartmentID)
+                        {
+                            current = "true";
+                        }
 
-            <option value="@Department.DepartmentID" selected="@current">@Department.DepartmentTitle</option>
-        }
+                        <option value="@Department.DepartmentID" selected="@current">@Department.DepartmentTitle</option>
+                    }
 
-    </select>
-    </div>
-    <div class="inprow">
-        <label class="inplabel">JobPosting Title</label>
-        <input type="text" value="@Model.JobPostings.JobPostingTitle" id="JobPostingTitle" name="JobPostingTitle" />
-    </div>
-    <div class="inprow">
-        <label class="inplabel">JobPosting Type</label>
-        <input type="text" value="@Model.JobPostings.JobPostingType" id="JobPostingType" name="JbPostingType" />
-    </div>
-    <div class="inprow">
-        <label class="inplabel">Job Description</label>
-        <input type="text" value="@Model.JobPostings.JobPostingDesc" id="JobPostingDesc" name="JobPostingDesc" />
-    </div>
-    <div class="inprow">
-        <label class="inplabel">Job Requirements</label>
-        <input type="text" value="@Model.JobPostings.JobPostingReq" id="JobPostingReq" name="JobPostingReq" />
-    </div>
-    <div class="inprow">
-        <input type="submit" value="Submit" />
-    </div>
-</form>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">JobPosting Title</label>
+                <input class="form-control" type="text" value="@Model.JobPostings.JobPostingTitle" id="JobPostingTitle" name="JobPostingTitle" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">JobPosting Type</label>
+                <input class="form-control" type="text" value="@Model.JobPostings.JobPostingType" id="JobPostingType" name="JbPostingType" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Job Description</label>
+                <input class="form-control" type="text" value="@Model.JobPostings.JobPostingDesc" id="JobPostingDesc" name="JobPostingDesc" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Job Requirements</label>
+                <input class="form-control" type="text" value="@Model.JobPostings.JobPostingReq" id="JobPostingReq" name="JobPostingReq" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+</div>
+</div>

@@ -3,15 +3,17 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<h3>Edit</h3>
 
-
-<h4>Edit @Model.Volunteer.FirstName.@Model.Volunteer.LastName</h4>
+<h4> @Model.Volunteer.FirstName.@Model.Volunteer.LastName</h4>
 
 <hr />
+<div class="row">
+    <div class="col-md-4">
         <form method="POST" action="/Volunteer/Edit/@Model.Volunteer.VolunteerID">
-            <div class="inprow">
-                <div class="inplabel">Hospital Title</div>
-                <select id="HospitalVolunteer" name="HospitalVolunteer">
+            <div class="form-group">
+                <div class="control-label">Hospital Title</div>
+                <select class="form-control" id="HospitalVolunteer" name="HospitalVolunteer">
                     @foreach (var Hospital in Model.Hospitals)
                     {
                         string current = "false";
@@ -22,80 +24,81 @@
 
                         <option value="@Hospital.HospitalID" selected="@current">@Hospital.HospitalTitle</option>
                     }
-                    
+
                 </select>
-            
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.FirstName" id="FirstName" name="FirstName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.LastName" id="LastName" name="LastName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Middle Name</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Middle" id="Middle" name="Middle" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">City</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.City" id="City" name="City" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Province</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Province" id="Province" name="Province" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">ZIP</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Zip" id="Zip" name="Zip" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Phone" id="Phone" name="Phone" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Email" id="Email" name="Email" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Age</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Age" id="Age" name="Age" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Gender</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Gender" id="Gender" name="Gender" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Education</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Education" id="Education" name="Education" />
+            </div>
+            <div class="form-group">
+                <div class="control-label">Experience</div>
+                <textarea class="form-control" id="Experience" name="Experience">@Model.Volunteer.Experience</textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Availability</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Availability" id="Availability" name="Availability" />
             </div>
             <div class="inprow">
-                <label class="inplabel">First Name</label>
-                <input type="text" value="@Model.Volunteer.FirstName" id="FirstName" name="FirstName" />
+                <label class="control-label">Name</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Name" id="Name" name="Name" />
             </div>
-            <div class="inprow">
-                <label class="inplabel">Last Name</label>
-                <input type="text" value="@Model.Volunteer.LastName" id="LastName" name="LastName" />
+            <div class="form-group">
+                <label class="control-label">Phone_em</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Phone_em" id="Phone_em" name="Phone_em" />
             </div>
-            <div class="inprow">
-                <label class="inplabel">Middle Name</label>
-                <input type="text" value="@Model.Volunteer.Middle" id="Middle" name="Middle" />
+            <div class="form-group">
+                <label class="control-label">Relationship</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.Relationship" id="Relationship" name="Relationship" />
             </div>
-            <div class="inprow">
-                <label class="inplabel">City</label>
-                <input type="text" value="@Model.Volunteer.City" id="City" name="City" />
+            <div class="form-group">
+                <label class="control-label">Health Condition</label>
+                <input class="form-control" type="text" value="@Model.Volunteer.HealthCondition" id="HealthCondition" name="HealthCondition" />
             </div>
-            <div class="inprow">
-                <label class="inplabel">Province</label>
-                <input type="text" value="@Model.Volunteer.Province" id="Province" name="Province" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">ZIP</label>
-                <input type="text" value="@Model.Volunteer.Zip" id="Zip" name="Zip" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Phone</label>
-                <input type="text" value="@Model.Volunteer.Phone" id="Phone" name="Phone" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Email</label>
-                <input type="text" value="@Model.Volunteer.Email" id="Email" name="Email" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Age</label>
-                <input type="text" value="@Model.Volunteer.Age" id="Age" name="Age" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Gender</label>
-                <input type="text" value="@Model.Volunteer.Gender" id="Gender" name="Gender" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Education</label>
-                <input type="text" value="@Model.Volunteer.Education" id="Education" name="Education" />
-            </div>
-            <div class="inprow">
-                <div class="inplabel">Experience</div>
-                <textarea id="Experience" name="Experience">@Model.Volunteer.Experience</textarea>
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Availability</label>
-                <input type="text" value="@Model.Volunteer.Availability" id="Availability" name="Availability" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Name</label>
-                <input type="text" value="@Model.Volunteer.Name" id="Name" name="Name" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Phone_em</label>
-                <input type="text" value="@Model.Volunteer.Phone_em" id="Phone_em" name="Phone_em" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Relationship</label>
-                <input type="text" value="@Model.Volunteer.Relationship" id="Relationship" name="Relationship" />
-            </div>
-            <div class="inprow">
-                <label class="inplabel">Health Condition</label>
-                <input type="text" value="@Model.Volunteer.HealthCondition" id="HealthCondition" name="HealthCondition" />
-            </div>
-            <div class="inprow">
+            <div class="form-group">
                 <input type="submit" value="Submit" />
             </div>
-       </form>
-    
+        </form>
+</div>
+</div>
