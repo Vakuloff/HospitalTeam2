@@ -45,15 +45,15 @@ namespace HospitalTeam2.Controllers
         public ActionResult List()
         {
             //LIST WILL SHOW ALL STAFF
-            List<Staff> staffs = db.Staffs.Include(d => d.Department).Include(h => h.Hospital).ToList();
+            List<Staff> staffs = db.Staffs.Include(s => s.Department).Include(s => s.hospital).ToList();
 
- 
+
             return View(staffs);
         }
 
         public ActionResult Show(int id)
         {
-            return RedirectToAction("Details/" + id);
+            return RedirectToAction("Show/" + id);
         }
         public ActionResult Show(int? id)
         {
@@ -65,40 +65,43 @@ namespace HospitalTeam2.Controllers
             string query = "select * from staff where staffid=@id";
             SqlParameter param = new SqlParameter("@id", id);
 
-            Staff staffstoshow = db.Staffs.Include(d => d.Department).Include(h => h.Hospital);
+            var staffstoshow = db.Staffs.Include(s => s.Department).Include(s => s.hospital);
 
             return View(staffstoshow);
         }
 
-        public ActionResult New()
+        public ActionResult Create()
         {
-            return View();
+            StaffEdit se = new StaffEdit();
+            se.Departments = db.Departments.ToList();
+            se.Hospitals = db.Hospitals.ToList();
+            return View(se);
         }
 
 
 
         [HttpPost]
-        public ActionResult Create(int StaffId, string StaffFirstName_New, string StaffLastName_New, int DepartmentId, string TypeDoctor, int HospitalId)
+        public ActionResult Create(string StaffFirstName, string StaffLastName, string TypeDoctor, int DepartmentID,  int HospitalId)
         {
 
 
             //Query   
-            string query = "insert into staffs (StaffId, StaffFirstName, StaffLastName, DepartmentId, TypeDoctor, HospitalId) values (@sid, @sfn, @sln, @depid, @td, @hid)";
+            string query = "insert into staffs ( StaffFirstName, StaffLastName, TypeDoctor, DepartmentID,  HospitalId) values (@sfn, @sln, @td, @depid,  @hid)";
 
 
-            SqlParameter[] myparams = new SqlParameter[6];
+            SqlParameter[] myparams = new SqlParameter[5];
 
-            myparams[0] = new SqlParameter("@sid", StaffId);
+            //myparams[0] = new SqlParameter("@sid", StaffId);
 
-            myparams[1] = new SqlParameter("@sfn", StaffFirstName_New);
+            myparams[0] = new SqlParameter("@sfn", StaffFirstName);
 
-            myparams[2] = new SqlParameter("@sln", StaffLastName_New);
+            myparams[1] = new SqlParameter("@sln", StaffLastName);
 
-            myparams[3] = new SqlParameter("@depid", DepartmentId);
+            myparams[2] = new SqlParameter("@td", TypeDoctor);
 
-            myparams[4] = new SqlParameter("@td", TypeDoctor);
+            myparams[3] = new SqlParameter("@depid", DepartmentID);
 
-            myparams[5] = new SqlParameter("@hid", HospitalId);
+            myparams[4] = new SqlParameter("@hid", HospitalId);
 
 
             db.Database.ExecuteSqlCommand(query, myparams);
@@ -107,56 +110,56 @@ namespace HospitalTeam2.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult Edit(int id)
-        {
+        //public ActionResult Edit(int id)
+        //{
 
-            StaffEdit staffeditview = new StaffEdit();
+        //    StaffEdit staffeditview = new StaffEdit();
 
-            //Finds all hospitals
-            staffeditview.Hospitals = db.Hospitals.ToList();
-            //Finds all departments
-            staffeditview.Departments = db.Departments.ToList();
-
-
- 
-            return View(staffeditview);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(int StaffId, string StaffFirstName_New, string StaffLastName_New, int DepartmentId, string TypeDoctor, int HospitalId)
-        {
-
-            if ((id == null) || (db.Staff.Find(id) == null))
-            {
-                return NotFound();
-
-            }
-            //Raw Update MSSQL query
-
-            string query = "update staffs set StaffId=@sid, StaffFirstName = @sfn, StaffLastName=@sln,  DepartmentId=@depid,TypeDoctor=@td, HospitalId=@hid where StaffId=@id";
+        //    //Finds all hospitals
+        //    staffeditview.Hospitals = db.Hospitals.ToList();
+        //    //Finds all departments
+        //    staffeditview.Departments = db.Departments.ToList();
 
 
-            SqlParameter[] myparams = new SqlParameter[6];
 
-            myparams[0] = new SqlParameter("@sid", StaffId);
+        //    return View(staffeditview);
+        //}
 
-            myparams[1] = new SqlParameter("@sfn", StaffFirstName_New);
+        //[HttpPost]
+        //public ActionResult Edit(int StaffId, string StaffFirstName_New, string StaffLastName_New, int DepartmentId, string TypeDoctor, int HospitalId)
+        //{
 
-            myparams[2] = new SqlParameter("@sln", StaffLastName_New);
+        //    if ((StaffId == null) || (db.Staff.Find(id) == null))
+        //    {
+        //        return NotFound();
 
-            myparams[3] = new SqlParameter("@depid", DepartmentId);
+        //    }
+        //    //Raw Update MSSQL query
 
-            myparams[4] = new SqlParameter("@td", TypeDoctor);
-
-            myparams[5] = new SqlParameter("@hid", HospitalId);
+        //    string query = "update staffs set StaffId=@sid, StaffFirstName = @sfn, StaffLastName=@sln,  DepartmentId=@depid,TypeDoctor=@td, HospitalId=@hid where StaffId=@id";
 
 
-            //Execute the custom SQL command with parameters
-            db.Database.ExecuteSqlCommand(query, myparams);
+        //    SqlParameter[] myparams = new SqlParameter[6];
 
-            //GOTO: View/Blog/Show.cshtml with paramter Blogid passed
-            return RedirectToAction("Show/" + id);
-        }
+        //    myparams[0] = new SqlParameter("@sid", StaffId);
+
+        //    myparams[1] = new SqlParameter("@sfn", StaffFirstName_New);
+
+        //    myparams[2] = new SqlParameter("@sln", StaffLastName_New);
+
+        //    myparams[3] = new SqlParameter("@depid", DepartmentId);
+
+        //    myparams[4] = new SqlParameter("@td", TypeDoctor);
+
+        //    myparams[5] = new SqlParameter("@hid", HospitalId);
+
+
+        //    //Execute the custom SQL command with parameters
+        //    db.Database.ExecuteSqlCommand(query, myparams);
+
+        //    //GOTO: View/Blog/Show.cshtml with paramter Blogid passed
+        //    return RedirectToAction("Show/" + StaffId);
+        //}
 
     }
 }

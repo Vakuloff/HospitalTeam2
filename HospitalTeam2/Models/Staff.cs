@@ -35,7 +35,12 @@ namespace HospitalTeam2.Models
         public int DepartmentID { get; set; }
 
         public virtual Department Department { get; set; }
-        
+        //one hospital has many staff
+        [ForeignKey("HospitalId")]
+        public int HospitalId { get; set; }
+
+        public virtual Hospital hospital { get; set; }
+
         //position
         //department
     }
