@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190416043803_nickmodels6")]
+    partial class nickmodels6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -375,6 +376,8 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<int>("DepartmentID");
 
+                    b.Property<int?>("DepartmentID1");
+
                     b.Property<int>("HospitalID");
 
                     b.Property<string>("JobPostingDesc");
@@ -392,6 +395,8 @@ namespace HospitalTeam2.Migrations
                     b.HasKey("JobPostingID");
 
                     b.HasIndex("DepartmentID");
+
+                    b.HasIndex("DepartmentID1");
 
                     b.HasIndex("HospitalID");
 
@@ -486,7 +491,7 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<int>("DepartmentID");
 
-                    b.Property<int>("HospitalId");
+                    b.Property<int?>("HospitalID");
 
                     b.Property<string>("StaffFirstName")
                         .IsRequired()
@@ -504,7 +509,7 @@ namespace HospitalTeam2.Migrations
 
                     b.HasIndex("DepartmentID");
 
-                    b.HasIndex("HospitalId");
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Staffs");
                 });
@@ -757,6 +762,10 @@ namespace HospitalTeam2.Migrations
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("HospitalTeam2.Models.Department")
+                        .WithMany("JobPosting")
+                        .HasForeignKey("DepartmentID1");
+
                     b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
                         .WithMany("JobPostings")
                         .HasForeignKey("HospitalID")
@@ -793,10 +802,9 @@ namespace HospitalTeam2.Migrations
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HospitalTeam2.Models.Hospital", "hospital")
+                    b.HasOne("HospitalTeam2.Models.Hospital")
                         .WithMany("Staffs")
-                        .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("HospitalID");
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>

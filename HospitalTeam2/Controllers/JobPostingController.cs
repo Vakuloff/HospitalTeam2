@@ -28,7 +28,7 @@ namespace HospitalTeam2.Controllers
 
         private readonly IHostingEnvironment _env;
 
-        public SqlDbType JobPostingTitle { get; private set; }
+        public SqlDbType StaffFirstName { get; private set; }
 
         public JobPostingController(HospitalCMSContext context, IHostingEnvironment env)
         {

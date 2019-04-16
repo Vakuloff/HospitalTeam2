@@ -31,6 +31,7 @@ namespace HospitalTeam2.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldMaxLength: 255);
+        }
 
             //migrationBuilder.AddColumn<int>(
             //    name: "HospitalID",
@@ -47,32 +48,32 @@ namespace HospitalTeam2.Migrations
                 table: "Donors",
                 nullable: true);
             */
-            migrationBuilder.CreateIndex(
-                name: "IX_Parkings_HospitalID",
-                table: "Parkings",
-                column: "HospitalID");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Parkings_HospitalID",
+            //    table: "Parkings",
+            //    column: "HospitalID");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Feedback_HospitalID",
-                table: "Feedback",
-                column: "HospitalID");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Feedback_HospitalID",
+            //    table: "Feedback",
+            //    column: "HospitalID");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Feedback_Hospitals_HospitalID",
-                table: "Feedback",
-                column: "HospitalID",
-                principalTable: "Hospitals",
-                principalColumn: "HospitalID",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Feedback_Hospitals_HospitalID",
+            //    table: "Feedback",
+            //    column: "HospitalID", 
+            //    principalTable: "Hospitals",
+            //    principalColumn: "HospitalID",
+            //    onDelete: ReferentialAction.NoAction);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings",
-                column: "HospitalID",
-                principalTable: "Hospitals",
-                principalColumn: "HospitalID",
-                onDelete: ReferentialAction.Restrict);
-        }
+        //    migrationBuilder.AddForeignKey(
+        //        name: "FK_Parkings_Hospitals_HospitalID",
+        //        table: "Parkings",
+        //        column: "HospitalID",
+        //        principalTable: "Hospitals",
+        //        principalColumn: "HospitalID",
+        //        onDelete: ReferentialAction.Restrict);
+        //}
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
@@ -80,9 +81,9 @@ namespace HospitalTeam2.Migrations
                 name: "FK_Feedback_Hospitals_HospitalID",
                 table: "Feedback");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings");
 
             migrationBuilder.DropIndex(
                 name: "IX_Parkings_HospitalID",

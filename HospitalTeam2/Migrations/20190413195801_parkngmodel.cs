@@ -82,9 +82,9 @@ namespace HospitalTeam2.Migrations
                 name: "FK_Feedback_Hospitals_HospitalID",
                 table: "Feedback");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings");
 
             migrationBuilder.DropIndex(
                 name: "IX_Parkings_HospitalID",
