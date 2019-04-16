@@ -13,11 +13,11 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Hospital.HospitalTitle)
+                @Html.DisplayNameFor(model => model.Hospital.HospitalID)
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Department.DepartmentTitle)
+                @Html.DisplayNameFor(model => model.Department.DepartmentID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.JobPostingTitle)
@@ -31,16 +31,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.JobPostingReq)
             </th>
-
-
-
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-
 
             <td>
                 @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
@@ -63,10 +58,10 @@
 
 
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.JobPostingID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.JobPostingID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.JobPostingID">Delete</a>
+           <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.JobPostingID }) |
+            @Html.ActionLink("Show", "Show", new { id = item.JobPostingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.JobPostingID })
             </td>
         </tr>
 }
