@@ -8,9 +8,9 @@ namespace HospitalTeam2.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings");
 
             migrationBuilder.DropColumn(
                 name: "JobPostingTitle",
@@ -73,9 +73,9 @@ namespace HospitalTeam2.Migrations
                 name: "FK_JobPostings_Departments_DepartmentID1",
                 table: "JobPostings");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings");
 
             migrationBuilder.DropIndex(
                 name: "IX_JobPostings_DepartmentID1",
@@ -127,13 +127,13 @@ namespace HospitalTeam2.Migrations
                 nullable: false,
                 defaultValue: "");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings",
-                column: "HospitalID",
-                principalTable: "Hospitals",
-                principalColumn: "HospitalID",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings",
+            //    column: "HospitalID",
+            //    principalTable: "Hospitals",
+            //    principalColumn: "HospitalID",
+            //    onDelete: ReferentialAction.NoAction);
         }
     }
 }

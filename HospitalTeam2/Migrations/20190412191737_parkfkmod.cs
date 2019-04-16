@@ -9,9 +9,9 @@ namespace HospitalTeam2.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings");
 
             //migrationBuilder.AlterColumn<int>(
             //    name: "HospitalID",
@@ -57,13 +57,13 @@ namespace HospitalTeam2.Migrations
             //    table: "NavMenus",
             //    column: "NavMenuItemId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Parkings_Hospitals_HospitalID",
-                table: "Parkings",
-                column: "HospitalID",
-                principalTable: "Hospitals",
-                principalColumn: "HospitalID",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Parkings_Hospitals_HospitalID",
+            //    table: "Parkings",
+            //    column: "HospitalID",
+            //    principalTable: "Hospitals",
+            //    principalColumn: "HospitalID",
+            //    onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

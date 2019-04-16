@@ -100,7 +100,7 @@ namespace HospitalTeam2.Data
 
             //each staff has one department, each department has many staffs
             modelBuilder.Entity<Staff>()
-                .HasOne(s => s.Departments)
+                .HasOne(s => s.Department)
                 .WithMany(d => d.Staff)
                 .HasForeignKey(s => s.DepartmentID);
 
