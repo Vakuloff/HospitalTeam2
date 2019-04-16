@@ -22,9 +22,25 @@ namespace HospitalTeam2.Controllers
         }
 
         // GET: Parkings
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pagenum)
         {
-            IList<Parking> parkings = _context.Parkings.Include(p => p.hospital).ToList();
+            var _parking = await _context.Parkings.Include(p => p.hospital).ToListAsync();
+            int parkingcount = _parking.Count();
+            int perpage = 3;
+            int maxpage = (int)Math.Ceiling((decimal)parkingcount / perpage) - 1;
+            if (maxpage < 0) maxpage = 0;
+            if (pagenum < 0) pagenum = 0;
+            if (pagenum > maxpage) pagenum = maxpage;
+            int start = perpage * pagenum;
+            ViewData["pagenum"] = (int)pagenum;
+            ViewData["PaginationSummary"] = "";
+            if (maxpage > 0)
+            {
+                ViewData["PaginationSummary"] =
+                    (pagenum + 1).ToString() + " of " +
+                    (maxpage + 1).ToString();
+            }
+            List<Parking> parkings = await _context.Parkings.Include(p => p.hospital).Skip(start).Take(perpage).ToListAsync();
             //var hospitalCMSContext = _context.Parkings.Include(p => p.hospital);
             return View(parkings);
         }

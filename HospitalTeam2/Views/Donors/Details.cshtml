@@ -3,32 +3,27 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h2>Details</h2>
+<link href="~/css/DivyaStyle.css" rel="stylesheet" type="text/css" />
+<h2>
+    @Html.DisplayFor(model => model.DonorName)
+</h2>
 
 <div>
     <h4>Donor</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DonorName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DonorName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DonorMessage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DonorMessage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-    </dl>
+    <div class="container">   
+            <p>
+                Message
+            </p>
+            <p>
+                @Html.DisplayFor(model => model.DonorMessage)
+            </p>
+            <div class="donorImage">
+                <img src="~/images/Donors/@Html.DisplayFor(model => model.ImageUrl)" />
+                
+            </div>
+        
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.DonorID">Edit</a> |
