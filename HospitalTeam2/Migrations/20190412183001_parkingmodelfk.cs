@@ -32,15 +32,15 @@ namespace HospitalTeam2.Migrations
                 oldClrType: typeof(string),
                 oldMaxLength: 255);
 
-            migrationBuilder.AddColumn<int>(
-                name: "HospitalID",
-                table: "Parkings",
-                nullable: true);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "HospitalID",
+            //    table: "Parkings",
+            //    nullable: true);
 
-            migrationBuilder.AddColumn<int>(
-                name: "HospitalID",
-                table: "Feedback",
-                nullable: true);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "HospitalID",
+            //    table: "Feedback",
+            //    nullable: true);
             /*
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
