@@ -47,7 +47,10 @@ namespace HospitalTeam2.Controllers
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).ToList();
+
+            //JobPosting testposting = new JobPosting();
+            
+            List<JobPosting> jobposting = db.JobPostings.Include(jp=>jp.Hospital).Include(jp=>jp.Department).ToList();
 
             //GOTO Views/jobposition/List.cshtml
             return View(jobposting);

@@ -32,9 +32,9 @@ namespace HospitalTeam2.Models
         public virtual Hospital Hospital { get; set; }
 
         //one department has many staff
-        public IEnumerable<Staff> Staff { get; set; }
+        [InverseProperty("Department")]
+        public List<Staff> Staff { get; set; }
 
-        //one department has many jobpostings
-        public IEnumerable<JobPosting> JobPosting { get; set; }
+       
     }
 }

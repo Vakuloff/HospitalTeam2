@@ -68,9 +68,9 @@ namespace HospitalTeam2.Data
 
             //each job position has one department, each department has many job
             modelBuilder.Entity<JobPosting>()
-                .HasOne(d => d.Department)
-                .WithMany(jp => jp.JobPostings)
-                .HasForeignKey(d => d.DepartmentID);
+                .HasOne(jp => jp.Department)
+                .WithMany(d => d.JobPostings)
+                .HasForeignKey(jp => jp.DepartmentID);
 
             //each bookingrequest has one hospital, one hospital has many bookingapp
 
@@ -100,7 +100,7 @@ namespace HospitalTeam2.Data
 
             //each staff has one department, each department has many staffs
             modelBuilder.Entity<Staff>()
-                .HasOne(s => s.Departments)
+                .HasOne(s => s.Department)
                 .WithMany(d => d.Staff)
                 .HasForeignKey(s => s.DepartmentID);
 
