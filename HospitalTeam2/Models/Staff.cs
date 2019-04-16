@@ -31,18 +31,11 @@ namespace HospitalTeam2.Models
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
         //one department has many staff
-        public virtual Department Department { get; set; }
-
-        [ForeignKey("Department")]
+        [ForeignKey("DepartmentID")]
         public int DepartmentID { get; set; }
 
-        public virtual Hospital Hospital { get; set; }
-
-        [ForeignKey("Hospital")]
-        public int HospitalID { get; set; }
-
-
-
+        public virtual Department Department { get; set; }
+        
         //position
         //department
     }
