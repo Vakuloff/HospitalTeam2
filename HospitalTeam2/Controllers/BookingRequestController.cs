@@ -63,11 +63,11 @@ namespace HospitalTeam2.Controllers
 
         [HttpPost]
         public ActionResult Create(int HospitalID, int StaffID, string Reason_New, string Date_New, string Time_New, string FirstName_New,
-            string LastName_New, string Email_New, string Phone_New, string Age_New)
+            string LastName_New, string Email_New, string Phone_New, string Age_New, string StaffFirstName_New, string StaffLastName_New, string TypeDoctor_New)
         {
-            string query = "insert into bookingrequests (HospitalID, staffID, Reason, Date, Time, FirstName, LastName, Email, Phone, Age)" +
-                " values (@hid, @sid, @reason, @date, @time, @fname,@lname, @email, @phone, @age)";
-            SqlParameter[] myparams = new SqlParameter[10];
+            string query = "insert into bookingrequests (HospitalID, staffID, Reason, Date, Time, FirstName, LastName, Email, Phone, Age,StaffFirstName, StaffLastName, TypeDoctor)" +
+                " values (@hid, @sid, @reason, @date, @time, @fname,@lname, @email, @phone, @age, @sfname,@slname,@tdoctor)";
+            SqlParameter[] myparams = new SqlParameter[13];
             myparams[0] = new SqlParameter("@hid", HospitalID);
             myparams[1] = new SqlParameter("@sid", StaffID);
             myparams[2] = new SqlParameter("@reason", Reason_New);
@@ -78,7 +78,9 @@ namespace HospitalTeam2.Controllers
             myparams[7] = new SqlParameter("@email", Email_New);
             myparams[8] = new SqlParameter("@phone", Phone_New);
             myparams[9] = new SqlParameter("@age", Age_New);
-
+            myparams[10] = new SqlParameter("@sfname", StaffFirstName_New);
+            myparams[11] = new SqlParameter("@slname", StaffLastName_New);
+            myparams[12] = new SqlParameter("@tdoctor", TypeDoctor_New);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 
