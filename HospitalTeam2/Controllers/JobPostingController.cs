@@ -66,7 +66,7 @@ namespace HospitalTeam2.Controllers
             string query = "select * from jobposting where jobpostingid=@id";
             SqlParameter param = new SqlParameter("@id", id);
 
-            JobPosting jobpostshow = db.JobPostings.Include(v => v.Hospital).ThenInclude(d =>d.Departments).SingleOrDefault(jp => jp.JobPostingID == id);
+            JobPosting jobpostshow = db.JobPostings.Include(jp => jp.Hospital).ThenInclude(jp =>jp.Departments).SingleOrDefault(h => h.JobPostingID == id);
 
             return View(jobpostshow);
 
@@ -94,10 +94,11 @@ namespace HospitalTeam2.Controllers
 
 
             //Query   
-            string query = "insert into jobpostings (HospitalID, DepartmentID, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq) values (@hid, @did, @title, @type, @desc, @req)";
+            string query = "insert into jobpostings (HospitalID, DepartmentID, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq, DepartmentTitle, HospitalTitle) values (@hid, @did, @title, @type, @desc, @req, @d1, @d2)";
+            //DUMMY DATA FOR DEPARTMENTITLE AND HOSPITAL TITLE BECAUSE WE DON'T NEED THAT BUT IT'S FROM THE PREVIOUS DATABASE
+            //CORRECT WAY IS TO REMOVE THESE COLUMNS ENTIRE FROM THE DB
 
-
-            SqlParameter[] myparams = new SqlParameter[6];
+            SqlParameter[] myparams = new SqlParameter[8];
             //@hospital (id) FOREIGN KEY param
             myparams[0] = new SqlParameter("@hid", HospitalID);
             //@department (id) FOREIGN KEY param
@@ -110,7 +111,11 @@ namespace HospitalTeam2.Controllers
             myparams[4] = new SqlParameter("@desc", JobPostingDesc_New);
             //@req parameter
             myparams[5] = new SqlParameter("@req", JobPostingReq_New);
-           
+
+            var dummytext = "";
+
+            myparams[6] = new SqlParameter("@d1", dummytext);
+            myparams[7] = new SqlParameter("@d2", dummytext);
             
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -126,9 +131,9 @@ namespace HospitalTeam2.Controllers
 
 
             positioneditview.Hospitals = db.Hospitals.ToList(); //Finds all hospitals
-            positioneditview.Departments = db.Departments.ToList();
+            positioneditview.Departments = db.Departments.ToList();//find all departments
 
-            positioneditview.JobPostings = db.JobPostings.Include(h => h.HospitalID).SingleOrDefault(j => j.JobPostingID == id); //finds all job
+            positioneditview.JobPostings = db.JobPostings.Include(jp => jp.HospitalID).Include(jp => jp.DepartmentID).SingleOrDefault(h => h.JobPostingID == id); //finds all job
 
             //GOTO: Views/Job/Edit.cshtml
             return View(positioneditview);
