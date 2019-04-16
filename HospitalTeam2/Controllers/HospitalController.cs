@@ -56,11 +56,7 @@ namespace HospitalTeam2.Controllers
         }
 
 
-        public ActionResult Show(int id)
-        {
-            //wrapper
-            return RedirectToAction("Details/" + id);
-        }
+  
 
         public ActionResult Show(int? id)
         {
