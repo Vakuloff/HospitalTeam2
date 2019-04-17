@@ -130,9 +130,10 @@ namespace HospitalTeam2.Controllers
 
             JobPostingEdit positioneditview = new JobPostingEdit();
 
-
-          positioneditview.Hospitals = db.Hospitals.ToList();
-          positioneditview.Departments = db.Departments.ToList();//find all departments
+            //find all hospitals
+            positioneditview.Hospitals = db.Hospitals.ToList();
+            //find all departments
+            positioneditview.Departments = db.Departments.ToList();
 
             positioneditview.JobPostings = db.JobPostings.Include(jp => jp.Hospital).Include(jp => jp.Department).SingleOrDefault(h => h.JobPostingID == id); //finds all job
 
