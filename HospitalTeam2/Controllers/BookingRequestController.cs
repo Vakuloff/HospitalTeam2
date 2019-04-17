@@ -37,37 +37,40 @@ namespace HospitalTeam2.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("List");
-        }
 
+            return View(db.BookingRequests.ToList());
+        }
 
         public ActionResult List()
         {
+          
 
             string query = "select * from bookingrequests";
 
-            List<BookingRequest> bookingRequests = db.BookingRequests.Include(h => h.Hospital).ThenInclude(s => s.Staffs).ToList();
+            List<BookingRequest> bookingRequests = db.BookingRequests.Include(br => br.Hospital).ThenInclude(b => b.Staffs).ToList();
 
             return View(bookingRequests);
 
         }
 
         public ActionResult New()
-        {
+        { 
+
             //need to give a list of the hospitals so that they can select the one they want
             var bookedit = new BookingRequestEdit();
             bookedit.Hospitals = db.Hospitals.ToList();
             bookedit.Staffs = db.Staffs.ToList();
+           
             return View(bookedit);
         }
 
         [HttpPost]
         public ActionResult Create(int HospitalID, int StaffID, string Reason_New, string Date_New, string Time_New, string FirstName_New,
-            string LastName_New, string Email_New, string Phone_New, string Age_New, string StaffFirstName_New, string StaffLastName_New, string TypeDoctor_New)
+            string LastName_New, string Email_New, string Phone_New, string Age_New)
         {
-            string query = "insert into bookingrequests (HospitalID, staffID, Reason, Date, Time, FirstName, LastName, Email, Phone, Age,StaffFirstName, StaffLastName, TypeDoctor)" +
-                " values (@hid, @sid, @reason, @date, @time, @fname,@lname, @email, @phone, @age, @sfname,@slname,@tdoctor)";
-            SqlParameter[] myparams = new SqlParameter[13];
+            string query = "insert into bookingrequests (HospitalID, StaffId, Reason, Date, Time, FirstName, LastName, Email, Phone, Age)" +
+                " values (@hid, @sid, @reason, @date, @time, @fname,@lname, @email, @phone, @age)";
+            SqlParameter[] myparams = new SqlParameter[10];
             myparams[0] = new SqlParameter("@hid", HospitalID);
             myparams[1] = new SqlParameter("@sid", StaffID);
             myparams[2] = new SqlParameter("@reason", Reason_New);
@@ -78,10 +81,7 @@ namespace HospitalTeam2.Controllers
             myparams[7] = new SqlParameter("@email", Email_New);
             myparams[8] = new SqlParameter("@phone", Phone_New);
             myparams[9] = new SqlParameter("@age", Age_New);
-            myparams[10] = new SqlParameter("@sfname", StaffFirstName_New);
-            myparams[11] = new SqlParameter("@slname", StaffLastName_New);
-            myparams[12] = new SqlParameter("@tdoctor", TypeDoctor_New);
-
+           
             db.Database.ExecuteSqlCommand(query, myparams);
 
             return RedirectToAction("List");
@@ -93,34 +93,36 @@ namespace HospitalTeam2.Controllers
 
             BookingRequestEdit bookeditview = new BookingRequestEdit();
 
-            bookeditview.BookingRequests = db.BookingRequests.Include(h => h.Hospital).Include(s => s.Staff).SingleOrDefault(b => b.BookingID == id); //finds all booking
+            bookeditview.BookingRequests = db.BookingRequests.Include(br => br.Hospital).Include(b => b.Staff).SingleOrDefault(s => s.BookingID == id); //finds all booking
 
             //GOTO: Views/Job/Edit.cshtml
             return View(bookeditview);
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, int HospitalId, int StaffId,string Reason, string Date, string Time, string FirstName, string LastName, string Email, string Phone, string Age)
+        public ActionResult Edit(int? id, string HospitalTitle,string StaffFirstName, string StaffLastName, string TypeDoctor, string Reason, string Date, string Time, string FirstName, string LastName, string Email, string Phone, string Age)
         {
             if ((id == null) || (db.BookingRequests.Find(id) == null))
             {
                 return NotFound();
             }
-            string query = "update bookingrequests set HospitalID=@hid, StaffID=@sid, Reason=@reason, Date=@date, Time=@time, FirstName@fname, LastName=@lname, Email=@email, Phone=@phone, Age=@age"
+            string query = "update bookingrequests set HospitalTitle=@htitle, StaffFirstName=@sfname, StaffLastname=@slname, TypeDoctor=@tdoc, Reason=@reason, Date=@date, Time=@time, FirstName@fname, LastName=@lname, Email=@email, Phone=@phone, Age=@age"
                 + " where bookingid=@id";
-            SqlParameter[] myparams = new SqlParameter[10];
+            SqlParameter[] myparams = new SqlParameter[13];
 
-            myparams[0] = new SqlParameter("@hid", HospitalId);
-            myparams[1] = new SqlParameter("@sid", StaffId);
-            myparams[2] = new SqlParameter("@reason", Reason);
-            myparams[3] = new SqlParameter("@date", Date);
-            myparams[4] = new SqlParameter("@time", Time);
-            myparams[5] = new SqlParameter("@fname", FirstName);
-            myparams[6] = new SqlParameter("@lname", LastName);
-            myparams[7] = new SqlParameter("@email", Email);
-            myparams[8] = new SqlParameter("@phone", Phone);
-            myparams[9] = new SqlParameter("@age", Age);
-            myparams[10] = new SqlParameter("@id", id);
+            myparams[0] = new SqlParameter("@htitle", HospitalTitle);
+            myparams[1] = new SqlParameter("@sfname", StaffFirstName);
+            myparams[2] = new SqlParameter("@slname", StaffLastName);
+            myparams[3] = new SqlParameter("@tdoc", TypeDoctor);
+            myparams[4] = new SqlParameter("@reson", Reason);
+            myparams[5] = new SqlParameter("@date", Date);
+            myparams[6] = new SqlParameter("@time", Time);
+            myparams[7] = new SqlParameter("@fname", FirstName);
+            myparams[8] = new SqlParameter("@lname", LastName);
+            myparams[9] = new SqlParameter("@email", Email);
+            myparams[10] = new SqlParameter("@phone", Phone);
+            myparams[11] = new SqlParameter("@age", Age);
+            myparams[12] = new SqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -134,12 +136,12 @@ namespace HospitalTeam2.Controllers
             {
                 return new StatusCodeResult(400);
             }
-            Department department = db.Departments.Find(id);
-            if (department == null)
+            BookingRequest bookingRequest = db.BookingRequests.Find(id);
+            if (bookingRequest == null)
             {
                 return NotFound();
             }
-            return View(department);
+            return View(bookingRequest);
         }
 
         // POST: BookingRequest/Delete/5
@@ -165,7 +167,7 @@ namespace HospitalTeam2.Controllers
             string query = "select * from bookingrequests where bookingid=@id";
             SqlParameter param = new SqlParameter("@id", id);
 
-            BookingRequest bookingshow = db.BookingRequests.Include(h => h.Hospital).Include(s => s.Staff).SingleOrDefault(b => b.BookingID == id);
+            BookingRequest bookingshow = db.BookingRequests.Include(br => br.Hospital).Include(b => b.Staff).SingleOrDefault(h => h.BookingID == id);
 
             return View(bookingshow);
 

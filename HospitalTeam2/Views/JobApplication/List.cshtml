@@ -65,9 +65,9 @@
             </td>
 
             <td>
-
-                <a asp-action="Show" asp-route-id="@item.JobApplicationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.JobApplicationID">Delete</a>
+               
+                @Html.ActionLink("Show", "Show", new { id = item.JobApplicationID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.JobApplicationID })
             </td>
         </tr>
 }

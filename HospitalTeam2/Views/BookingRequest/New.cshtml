@@ -13,7 +13,7 @@
         <form action="/BookingRequest/Create" method="post">
             <div class="form-group">
                 <label class="control-label">Hospital Title</label>
-                <select class="form-control" name="hospitalid">
+                <select class="form-control" name="hospitalid" id="hospitalid">
                     @{
                         foreach (var hospital in Model.Hospitals)
                         {
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Type Doctor</label>
-                <select class="form-control" name="staffid">
+                <select class="form-control" name="doctype" id="doctype">
                     @{
                         foreach (var staff in Model.Staffs)
                         {
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Doctor First Name</label>
-                <select class="form-control" name="staffid">
+                <select class="form-control" name="stafffname" id="stafffname">
                     @{
                         foreach (var staff in Model.Staffs)
                         {
@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Doctor Last Name</label>
-                <select class="form-control" name="staffid">
+                <select class="form-control" name=" stafflname" id="Stafflname">
                     @{
                         foreach (var staff in Model.Staffs)
                         {

@@ -28,6 +28,8 @@ namespace HospitalTeam2.Models
         public IEnumerable<Schedule> schedules { get; set; }
 
         //one doctor has many bookingrequests
+
+        [InverseProperty("Staff")]
         public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
         //one department has many staff

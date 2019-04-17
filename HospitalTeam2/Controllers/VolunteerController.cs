@@ -100,7 +100,7 @@ namespace HospitalTeam2.Controllers
             VolunteerEdit voleditview = new VolunteerEdit();
 
             voleditview.Hospitals = db.Hospitals.ToList();
-            voleditview.Volunteer = db.Volunteers.Include(h => h.Hospital).SingleOrDefault(vl => vl.VolunteerID == id); //finds all volunteer
+            voleditview.Volunteer = db.Volunteers.Include(v => v.Hospital).SingleOrDefault(h => h.VolunteerID == id); //finds all volunteer
 
             //GOTO: Views/Job/Edit.cshtml
             return View(voleditview);
@@ -108,35 +108,35 @@ namespace HospitalTeam2.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(int? id, int HospitalID, string FirstName, string LastName, string Middle, string City, string Province, string Zip, string Phone, string Email, string Age, string Gender, string Education, string Experience, string Availability, string Name, string Phone_em, string Relationship, string HealthCondition)
+        public ActionResult Edit(int? id, string FirstName, string LastName, string Middle, string City, string Province, string Zip, string Phone, string Email, string Age, string Gender, string Education, string Experience, string Availability, string Name, string Phone_em, string Relationship, string HealthCondition)
         {
             if ((id == null) || (db.Volunteers.Find(id) == null))
             {
                 return NotFound();
             }
-            string query = "update volunteers set HospitalID=@hid, FirstName=@fname, LastName=@lname, Middle=@mname, City=@city, Province=@province, Zip=@zip, Phone=@phone, Email=@email, Age=@age, Gender=@gender, Education=@education, Experience=@experience, Availability=@availability, Name=@name, Phone_em=@phone_em, Relationship=@relationship, HealthCondition=@healthcondition" +
+            string query = "update volunteers set  FirstName=@fname, LastName=@lname, Middle=@mname, City=@city, Province=@province, Zip=@zip, Phone=@phone, Email=@email, Age=@age, Gender=@gender, Education=@education, Experience=@experience, Availability=@availability, Name=@name, Phone_em=@phone_em, Relationship=@relationship, HealthCondition=@healthcondition" +
                 " where volunteerid=@id";
-            SqlParameter[] myparams = new SqlParameter[19];
+            SqlParameter[] myparams = new SqlParameter[18];
 
-            myparams[0] = new SqlParameter("@hid", HospitalID);
-            myparams[1] = new SqlParameter("@fname", FirstName);
-            myparams[2] = new SqlParameter("@lname", LastName);
-            myparams[3] = new SqlParameter("@mname", Middle);
-            myparams[4] = new SqlParameter("@city", City);
-            myparams[5] = new SqlParameter("@province", Province);
-            myparams[6] = new SqlParameter("@zip", Zip);
-            myparams[7] = new SqlParameter("@phone", Phone);
-            myparams[8] = new SqlParameter("@email", Email);
-            myparams[9] = new SqlParameter("@age", Age);
-            myparams[10] = new SqlParameter("@gender", Gender);
-            myparams[11] = new SqlParameter("@education", Education);
-            myparams[12] = new SqlParameter("@experience", Experience);
-            myparams[13] = new SqlParameter("@availability", Availability);
-            myparams[14] = new SqlParameter("@name", Name);
-            myparams[15] = new SqlParameter("@phone_em", Phone_em);
-            myparams[16] = new SqlParameter("@relationship", Relationship);
-            myparams[17] = new SqlParameter("@healthcondition", HealthCondition);
-            myparams[18] = new SqlParameter("@id", id);
+           
+            myparams[0] = new SqlParameter("@fname", FirstName);
+            myparams[1] = new SqlParameter("@lname", LastName);
+            myparams[2] = new SqlParameter("@mname", Middle);
+            myparams[3] = new SqlParameter("@city", City);
+            myparams[4] = new SqlParameter("@province", Province);
+            myparams[5] = new SqlParameter("@zip", Zip);
+            myparams[6] = new SqlParameter("@phone", Phone);
+            myparams[7] = new SqlParameter("@email", Email);
+            myparams[8] = new SqlParameter("@age", Age);
+            myparams[9] = new SqlParameter("@gender", Gender);
+            myparams[10] = new SqlParameter("@education", Education);
+            myparams[11] = new SqlParameter("@experience", Experience);
+            myparams[12] = new SqlParameter("@availability", Availability);
+            myparams[13] = new SqlParameter("@name", Name);
+            myparams[14] = new SqlParameter("@phone_em", Phone_em);
+            myparams[15] = new SqlParameter("@relationship", Relationship);
+            myparams[16] = new SqlParameter("@healthcondition", HealthCondition);
+            myparams[17] = new SqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myparams);
 

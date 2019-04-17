@@ -38,14 +38,7 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Age")]
         public string Age { get; set; }
 
-        [Required, StringLength(255), Display(Name = "StaffFirstName")]
-        public string StaffFirstName { get; set; }
-
-        [Required, StringLength(255), Display(Name = "StaffLastName")]
-        public string StaffLastName { get; set; }
-
-        [Required, StringLength(255), Display(Name = "TypeDoctor")]
-        public string TypeDoctor { get; set; }
+       
 
         //each bookingrequest has one hospital
 

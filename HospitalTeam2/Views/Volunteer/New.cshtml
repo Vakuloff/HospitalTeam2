@@ -11,9 +11,9 @@
 <div class="row">
     <div class="col-md-4">
         <form action="/Volunteer/Create" method="post">
-
-            <label>Hospital Title</label>
-            <select name="hospitalid">
+<div class="form-group">
+            <label class="control-label">Hospital Title</label>
+            <select class="form-control" name="hospitalid">
                 @{
                     foreach (var hospital in Model.Hospitals)
                     {
@@ -22,62 +22,78 @@
 
                 }
             </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">First Name</label>
+            <input class="form-control" type="text" name="FirstName_New" />
+          </div>
+           <div class="form-group">
+            <label class="control-label">Last Name</label>
+            <input class="form-control" type="text" name="LastName_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Middle Name</label>
+            <input class="form-control" type="text" name="Middle_New" /> 
+             </div>
+            <div class="form-group">
+            <label class="control-label">City</label>
+            <input class="form-control"  type="text" name="City_New" />
+             </div>
+            <div class="form-group">
+            <label class="control-label">Province</label>
+            <input class="form-control" type="text" name="Province_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">ZIP</label>
+            <input class="form-control" type="text" name="Zip_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Phone</label>
+            <input class="form-control" type="text" name="Phone_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Email</label>
+            <input class="form-control" type="text" name="Email_New" />
+             </div>
+            <div class="form-group">
+            <label class="control-label">Age</label>
+            <input class="form-control"type="text" name="Age_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Gender</label>
+            <input class="form-control" type="text" name="Gender_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Education</label>
+            <input class="form-control"type="text" name="Education_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Experience</label>
+            <input class="form-control"type="text" name="Experience_New" />
+                </div>
+            <div class="form-group">
+            <label class="control-label">Availability</label>
+            <input class="form-control"type="text" name="Availability_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Name</label>
+            <input class="form-control" type="text" name="Name_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Phone</label>
+            <input class="form-control" type="text" name="Phone_em_New" />
+            </div>
+            <div class="form-group">
+            <label class="control-label">Relationship</label>
+            <input class="form-control"type="text" name="Relationship_New" />
+                </div>
+            <div class="form-group">
+            <label class="control-label">Health Condition</label>
+            <input class="form-control"type="text" name="HealthCondition_New" />
+            </div>
 
 
-            <label>First Name</label>
-            <input type="text" name="FirstName_New" />
-
-            <label>Last Name</label>
-            <input type="text" name="LastName_New" />
-
-            <label>Middle Name</label>
-            <input type="text" name="Middle_New" /> 
-
-            <label>City</label>
-            <input type="text" name="City_New" />
-
-            <label>Province</label>
-            <input type="text" name="Province_New" />
-
-            <label>ZIP</label>
-            <input type="text" name="Zip_New" />
-
-            <label>Phone</label>
-            <input type="text" name="Phone_New" />
-
-            <label>Email</label>
-            <input type="text" name="Email_New" />
-
-            <label>Age</label>
-            <input type="text" name="Age_New" />
-
-            <label>Gender</label>
-            <input type="text" name="Gender_New" />
-
-            <label>Education</label>
-            <input type="text" name="Education_New" />
-
-            <label>Experience</label>
-            <input type="text" name="Experience_New" />
-
-            <label>Availability</label>
-            <input type="text" name="Availability_New" />
-
-            <label>Name</label>
-            <input type="text" name="Name_New" />
-
-            <label>Phone</label>
-            <input type="text" name="Phone_em_New" />
-
-            <label>Relationship</label>
-            <input type="text" name="Relationship_New" />
-
-            <label>Health Condition</label>
-            <input type="text" name="HealthCondition_New" />
-
-
-
-            <input type="submit" value="submit" />
+            <input type="submit" value="submit" class="btn btn-default" />
 
         </form>
     </div>
