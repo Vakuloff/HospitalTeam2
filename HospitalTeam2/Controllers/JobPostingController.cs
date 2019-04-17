@@ -19,7 +19,7 @@ using HospitalTeam2.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.Data;
 using System.Diagnostics;
-
+//
 namespace HospitalTeam2.Controllers
 {
     public class JobPostingController : Controller
