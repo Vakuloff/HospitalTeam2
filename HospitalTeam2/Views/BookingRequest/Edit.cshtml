@@ -26,6 +26,7 @@
                     }
 
                 </select>
+                </div>
                 <div class="form-group">
                     <div class="control-label">Doctor</div>
                     <select class="form-control" id="StaffId" name="StaffId">
@@ -76,16 +77,12 @@
                     <input class="form-control" type="text" value="@Model.BookingRequests.Age" id="Age" name="Age" />
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Submit" />
+                    <input type="submit" class="btn btn-primary btn-block"  value="Submit" />
                 </div>
 </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="List">Back to List</a>
+    @Html.ActionLink("Back to List", "List")
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

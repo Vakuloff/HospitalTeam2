@@ -56,7 +56,7 @@ namespace HospitalTeam2.Controllers
 
         }
 
-        //
+        
 
         public ActionResult New()
         { 

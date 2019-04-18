@@ -9,61 +9,69 @@
 <p>
     <a asp-action="New">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Hospital.HospitalID)
-            </th>
+<div class="container">
+    <div class="table-responsive">
+        <table   class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Hospital.HospitalID)
+                    </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Department.DepartmentID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobPostingTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobPostingType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobPostingDesc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobPostingReq)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Department.DepartmentID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.JobPostingTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.JobPostingType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.JobPostingDesc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.JobPostingReq)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.DepartmentTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobPostingTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobPostingType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobPostingDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobPostingReq)
-            </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department.DepartmentTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobPostingTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobPostingType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobPostingDesc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobPostingReq)
+                        </td>
 
 
 
-           <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.JobPostingID }) |
-            @Html.ActionLink("Show", "Show", new { id = item.JobPostingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.JobPostingID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.JobPostingID }) |
+                            @Html.ActionLink("Show", "Show", new { id = item.JobPostingID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.JobPostingID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script> 

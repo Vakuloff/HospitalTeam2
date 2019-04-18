@@ -9,96 +9,104 @@
 <p>
     <a asp-action="New">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Hospital.HospitalTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staff.TypeDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staff.StaffFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Staff.StaffLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-            </th>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Hospital.HospitalTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Staff.TypeDoctor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Staff.StaffFirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Staff.StaffLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reason)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </th>
 
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.TypeDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.StaffFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staff.StaffLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            
-            <td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hospital.HospitalTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff.TypeDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff.StaffFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Staff.StaffLastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Reason)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
 
-                @Html.ActionLink("Edit", "Edit", new { id = item.BookingID }) |
-                @Html.ActionLink("Show", "Show", new { id = item.BookingID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.BookingID })
-                
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <td>
+
+                            @Html.ActionLink("Edit", "Edit", new { id = item.BookingID }) |
+                            @Html.ActionLink("Show", "Show", new { id = item.BookingID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.BookingID })
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script> 
