@@ -19,6 +19,8 @@ using HospitalTeam2.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
 
+
+
 namespace HospitalTeam2.Controllers
 {
     public class BookingRequestController : Controller
@@ -53,6 +55,8 @@ namespace HospitalTeam2.Controllers
             return View(bookingRequests);
 
         }
+
+        //
 
         public ActionResult New()
         { 
