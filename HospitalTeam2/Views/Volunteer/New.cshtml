@@ -4,16 +4,17 @@
     ViewData["Title"] = "New";
 }
 
-<h2>New</h2>
-
-<h4>Volunteer</h4>
-<hr />
+<div id="volunteerbanner">
+    <img src="~/images/volunteer.png" class="img-fluid" alt="Responsive image" />
+</div>
+<h3>Apply Now</h3>
 <div class="row">
-    <div class="col-md-4">
-        <form action="/Volunteer/Create" method="post">
-<div class="form-group">
-            <label class="control-label">Hospital Title</label>
-            <select class="form-control" name="hospitalid">
+<div id="responsive-form" class="clearfix">
+
+    <form action="/Volunteer/Create" method="post">
+        <div class="form-row">
+            <h4>Hospital Title</h4>
+            <select class="column-full" name="hospitalid">
                 @{
                     foreach (var hospital in Model.Hospitals)
                     {
@@ -23,85 +24,63 @@
                 }
             </select>
         </div>
-        <div class="form-group">
-            <label class="control-label">First Name</label>
-            <input class="form-control" type="text" name="FirstName_New" />
-          </div>
-           <div class="form-group">
-            <label class="control-label">Last Name</label>
-            <input class="form-control" type="text" name="LastName_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Middle Name</label>
-            <input class="form-control" type="text" name="Middle_New" /> 
-             </div>
-            <div class="form-group">
-            <label class="control-label">City</label>
-            <input class="form-control"  type="text" name="City_New" />
-             </div>
-            <div class="form-group">
-            <label class="control-label">Province</label>
-            <input class="form-control" type="text" name="Province_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">ZIP</label>
-            <input class="form-control" type="text" name="Zip_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Phone</label>
-            <input class="form-control" type="text" name="Phone_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Email</label>
-            <input class="form-control" type="text" name="Email_New" />
-             </div>
-            <div class="form-group">
-            <label class="control-label">Age</label>
-            <input class="form-control"type="text" name="Age_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Gender</label>
-            <input class="form-control" type="text" name="Gender_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Education</label>
-            <input class="form-control"type="text" name="Education_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Experience</label>
-            <input class="form-control"type="text" name="Experience_New" />
-                </div>
-            <div class="form-group">
-            <label class="control-label">Availability</label>
-            <input class="form-control"type="text" name="Availability_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Name</label>
-            <input class="form-control" type="text" name="Name_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Phone</label>
-            <input class="form-control" type="text" name="Phone_em_New" />
-            </div>
-            <div class="form-group">
-            <label class="control-label">Relationship</label>
-            <input class="form-control"type="text" name="Relationship_New" />
-                </div>
-            <div class="form-group">
-            <label class="control-label">Health Condition</label>
-            <input class="form-control"type="text" name="HealthCondition_New" />
-            </div>
+        <h4>Contact Information</h4>
+        <div class="form-row">
+            <input class="column-half" type="text" name="FirstName_New" placeholder="First Name" />
+            <input class="column-half" type="text" name="LastName_New" placeholder="Last Name" />
+        </div>
+        <br />
+        <div class="form-row">
+            <input class="column-full" type="text" name="Middle_New" placeholder="Middle Name" />
+        </div>
+        <br />
+        <div class="form-row">
+            <input class="column-half" type="text" name="City_New" placeholder="City" />
+            <input class="column-half" type="text" name="Province_New" placeholder="Province" />
+        </div>
+        <br />
+        <div class="form-row>">
+            <input class="column-full" type="text" name="Zip_New" placeholder="ZIP" />
+        </div>
+        <div class="form-row">
+            <input class="column-half" type="text" name="Phone_New" placeholder="Phone" />
+            <input class="column-half" type="text" name="Email_New" placeholder="Email" />
+        </div>
+        <h4>Demographic Information</h4>
+        <div class="form-row">
+            <input class="column-half" type="text" name="Age_New" placeholder="Age" />
+            <input class="column-half" type="text" name="Gender_New" placeholder="Gender" />
+        </div>
+        <div class="form-row">
+            <input class="column-half" type="text" name="Education_New" placeholder="Education" />
+            <input class="column-half" type="text" name="Experience_New" placeholder="Experience" />
+        </div>
+        <div class="form-row">
+            <input class="column-full" type="text" name="Availability_New" placeholder="Availability" />
+        </div>
+        <h4>Emergency Contact</h4>
+        <div class="form-row">
+            <input class="column-half" type="text" name="Name_New" placeholder="Name" />
+            <input class="column-half" type="text" name="Phone_em_New" placeholder="Phone" />
+        </div>
+        <div class="form-row">
+            <input class="column-full" type="text" name="Relationship_New" placeholder="Relationship" />
+        </div>
+        <div class="form-row">
+            <textarea class="column-full" type="text" name="HealthCondition_New" placeholder="Health Condition"></textarea>
+        </div>
 
 
-            <input type="submit" value="submit" class="btn btn-default" />
+        <input type="submit" value="submit" class="btn btn-primary btn-block" />
 
-        </form>
+    </form>
+
+    <div>
+        <a asp-action="List">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="List">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

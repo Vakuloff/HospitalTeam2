@@ -4,13 +4,18 @@
     ViewData["Title"] = "New";
 }
 
-<h2>New</h2>
+<div id="careerbanner">
+    <img src="../images/0.jpg" class="img-fluid" alt="Responsive image" />
+</div>
 
-<h4>Job Posting</h4>
-<hr />
+
 <div class="row">
     <div class="col-md-4">
+        
+            <h3>Create Job Posting</h3>
+       
         <form action="/JobPosting/Create" method="post">
+
             <div class="form-group">
                 <label class="control-label">Hospital</label>
                 <select class="form-control" name="hospitalid" id="hospitalid">

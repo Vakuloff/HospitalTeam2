@@ -39,7 +39,7 @@ namespace HospitalTeam2.Controllers
         }
 
 
-        public ActionResult List()
+        public ActionResult List(int pagenum)
         {
 
 
@@ -50,7 +50,7 @@ namespace HospitalTeam2.Controllers
             return View(jobapplications);
 
         }
-
+        
 
         public ActionResult New()
         {

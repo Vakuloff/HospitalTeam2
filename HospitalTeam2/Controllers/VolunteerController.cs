@@ -17,6 +17,8 @@ using HospitalTeam2.Models;
 using HospitalTeam2.Models.ViewModels;
 using HospitalTeam2.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace HospitalTeam2.Controllers
 {
@@ -48,8 +50,32 @@ namespace HospitalTeam2.Controllers
 
             return View(volunteers);
 
-        }
+            }
 
+        // GET: Volunteer with pagination                 // Multiple actions matched.
+        /* public ActionResult List (int pagenum)
+      {
+         var volunteer = db.Volunteers.ToList();
+         //get total vol. in the db
+         int volunteercount = volunteer.Count();
+         //set number of job on page
+         int perpage = 3;
+         //find number of pages
+         int maxpage = (int)Math.Ceiling((decimal)volunteercount / perpage) - 1;
+         if (maxpage < 0) maxpage = 0;
+         if (pagenum < 0) pagenum = 0;
+         if (pagenum > maxpage) pagenum = maxpage;
+         int start = perpage * pagenum;
+         ViewData["pagenum"] = (int)pagenum;
+         ViewData["PaginationSummary"] = "";
+         if (maxpage > 0)
+         {
+             ViewData["PaginationSummary"] =
+                 (pagenum + 1).ToString() + " of " +
+                 (maxpage + 1).ToString();
+         }
+         return View(db.Volunteers.Skip(start).Take(perpage).ToList());
+     }*/
 
         public ActionResult New()
         {

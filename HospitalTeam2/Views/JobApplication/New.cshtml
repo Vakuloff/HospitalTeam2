@@ -4,12 +4,13 @@
     ViewData["Title"] = "New";
 }
 
-<h2>New</h2>
-
-<h4>JobApplication</h4>
-<hr />
+<div  id="careerbanner">
+    <img src="../images/careers.jpg" class="img-fluid" alt="Responsive image" />
+    
+</div>
 <div class="row">
     <div class="col-md-4">
+        <h3>Apply Now</h3>
         <form action="/JobApplication/Create" method="post">
             <div class="form-group">
                 <label class="control-label">Job Posting</label>
@@ -33,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Email</label>
-                <input  class="form-control"type="text" name="Email_New" />
+                <input class="form-control" type="text" name="Email_New" />
             </div>
             <div class="form-group">
                 <label class="control-label">Phone</label>
@@ -49,8 +50,8 @@
             </div>
 
             <div class="form-group">
-                <input  type="submit" value="submit" class="btn btn-primary btn-block" />
-</div>
+                <input type="submit" value="submit" class="btn btn-primary btn-block" />
+            </div>
         </form>
     </div>
 </div>

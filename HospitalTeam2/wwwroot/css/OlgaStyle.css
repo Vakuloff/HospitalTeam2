@@ -1,0 +1,78 @@
+﻿html {
+    font-size: calc(1em + 1vw)
+}
+#button {
+    background-color:blue;
+}
+/*-----Volunteer form----*/
+#responsive-form {
+  max-width:500px;
+  margin:0 auto;
+  width:100%;
+  float:left;
+}
+
+.form-row {
+    width: 100%;
+}
+
+.column-half, .column-full {
+   float: left;
+   position: relative;
+   padding: 0.65rem;
+   width:100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.input, .textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float:left;
+}
+.clearfix h4 {
+    color: #287CBE;
+}
+
+/*-------Job Application, Job Posting------*/
+#careerbanner , #volunteerbanner{
+    background-size: cover;
+    background-position: 60% 40%;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin-top: 50px;
+    float: right;
+    margin-top: 100px;
+}
+
+/*-----------Booking Request--------------*/
+#content_booking {
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+
+h3 {
+    font-size: 3.0vh;
+}
+/**---------------- Media query ----------------**/
+@media only screen and (min-width: 320) {
+    .column-half{
+  width: 50%;
+}
+   
+
+}
