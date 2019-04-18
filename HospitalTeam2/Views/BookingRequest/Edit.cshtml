@@ -6,18 +6,18 @@
 
 <h2>Edit</h2>
 
-<h4>@Model.BookingRequests.FirstName@Model.BookingRequests.LastName</h4>
+<h4>@Model.BookingRequests.FirstName  @Model.BookingRequests.LastName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="POST" action="/BookingRequest/Edit/@Model.BookingRequests.BookingID">
             <div class="form-group">
                 <div class="control-label">Hospital Title</div>
-                <select class="form-control" id="HospitalJobPosting" name="HospitalJobPosting">
+                <select class="form-control" id="HospitalID" name="HospitalID">
                     @foreach (var Hospital in Model.Hospitals)
                     {
                         string current = "false";
-                        @if (Hospital.HospitalID == Model.BookingRequests.HospitalID)
+                        @if (Hospital.HospitalID == Model.BookingRequests.Hospital.HospitalID)
                         {
                             current = "true";
                         }
@@ -27,53 +27,22 @@
 
                 </select>
                 <div class="form-group">
-                    <div class="control-label">Type Doctor</div>
-                    <select class="form-control" id="staffbooking" name="staffbooking">
+                    <div class="control-label">Doctor</div>
+                    <select class="form-control" id="StaffId" name="StaffId">
                         @foreach (var Staff in Model.Staffs)
                         {
                             string current = "false";
-                            @if (Staff.StaffId == Model.BookingRequests.StaffID)
+                            @if (Staff.StaffId == Model.BookingRequests.Staff.StaffId)
                             {
                                 current = "true";
                             }
 
-                            <option value="@Staff.StaffId" selected="@current">@Staff.TypeDoctor</option>
+                            <option value="@Staff.StaffId" selected="@current">@(Staff.StaffFirstName) @(Staff.StaffLastName) dept: @(Staff.Department.DepartmentTitle)</option>
                         }
 
                     </select>
                 </div>
-                <div class="form-group">
-                    <div class="control-label">Doctor First Name</div>
-                    <select class="form-control" id="staffbooking" name="staffbooking">
-                        @foreach (var Staff in Model.Staffs)
-                        {
-                            string current = "false";
-                            @if (Staff.StaffId == Model.BookingRequests.StaffID)
-                            {
-                                current = "true";
-                            }
-
-                            <option value="@Staff.StaffId" selected="@current">@Staff.StaffFirstName</option>
-                        }
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="control-label">Doctor last name</div>
-                    <select class="form-control" id="staffbooking" name="staffbooking">
-                        @foreach (var Staff in Model.Staffs)
-                        {
-                            string current = "false";
-                            @if (Staff.StaffId == Model.BookingRequests.StaffID)
-                            {
-                                current = "true";
-                            }
-
-                            <option value="@Staff.StaffId" selected="@current">@Staff.StaffLastName</option>
-                        }
-
-                    </select>
-                </div>
+                
                 <div class="form-group">
                     <label class="control-label">Reason</label>
                     <input class="form-control" type="text" value="@Model.BookingRequests.Reason" id="Reason" name="Reason" />
@@ -106,12 +75,15 @@
                     <label class="control-label">Age</label>
                     <input class="form-control" type="text" value="@Model.BookingRequests.Age" id="Age" name="Age" />
                 </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" />
+                </div>
 </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>
 
 @section Scripts {

@@ -10,8 +10,8 @@
     <div class="col-md-4">
         <form method="POST" action="/JobPosting/Edit/@Model.JobPostings.JobPostingID">
             <div class="form-group">
-                <div class="control-label">Hospital Title</div>
-                <select class="form-control" id="HospitalTitle" name="HospitalTitle">
+                <div class="control-label">Hospital</div>
+                <select class="form-control" id="HospitalID" name="HospitalID">
                     @foreach (var Hospital in Model.Hospitals)
                     {
                         string current = "false";
@@ -26,10 +26,10 @@
                 </select>
 
             </div>
-            <div class="control-label">Department Title</div>
+            <div class="control-label">Department</div>
 
             <div>
-                <select class="form-control" id="DepartmentTitle" name="DepartmentTitle">
+                <select class="form-control" id="DepartmentID" name="DepartmentID">
                     @foreach (var Department in Model.Departments)
                     {
                         string current = "false";

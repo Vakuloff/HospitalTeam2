@@ -19,7 +19,7 @@ using HospitalTeam2.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.Data;
 using System.Diagnostics;
-//
+
 namespace HospitalTeam2.Controllers
 {
     public class JobPostingController : Controller
@@ -67,7 +67,7 @@ namespace HospitalTeam2.Controllers
             string query = "select * from jobposting where jobpostingid=@id";
             SqlParameter param = new SqlParameter("@id", id);
 
-            JobPosting jobpostshow = db.JobPostings.Include(jp => jp.Hospital).ThenInclude(jp =>jp.Departments).SingleOrDefault(h => h.JobPostingID == id);
+            JobPosting jobpostshow = db.JobPostings.Include(jp => jp.Hospital).Include(jp =>jp.Department).SingleOrDefault(h => h.JobPostingID == id);
 
             return View(jobpostshow);
 
@@ -142,7 +142,7 @@ namespace HospitalTeam2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, string JobPostingTitle, string JobPostingType, string JobPostingDesc, string JobPostingReq, string HospitalTitle, string DepartmentTitle)
+        public ActionResult Edit(int? id, string JobPostingTitle, string JobPostingType, string JobPostingDesc, string JobPostingReq, int HospitalID, int DepartmentID)
         {
             Debug.WriteLine("Fk department ");
 
@@ -152,7 +152,7 @@ namespace HospitalTeam2.Controllers
 
             }
             //Raw Update MSSQL query
-            string query = "update jobpostings set  JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req, HospitalTitle=@htitle, DepartmentTitle=@dtitle where JobPostingID=@id";
+            string query = "update jobpostings set  JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req, HospitalID=@hid, DepartmentID=@did where JobPostingID=@id";
 
 
             SqlParameter[] myparams = new SqlParameter[7];
@@ -165,8 +165,8 @@ namespace HospitalTeam2.Controllers
             //Parameter for @req "JobReq"
             myparams[3] = new SqlParameter("@req", JobPostingReq);
 
-            myparams[4] = new SqlParameter("@htitle", HospitalTitle);
-            myparams[5] = new SqlParameter("@dtitle", DepartmentTitle);
+            myparams[4] = new SqlParameter("@hid", HospitalID);
+            myparams[5] = new SqlParameter("@did", DepartmentID);
 
             //Pararameter for (Position) id PRIMARY KEY
             myparams[6] = new SqlParameter("@id", id);
