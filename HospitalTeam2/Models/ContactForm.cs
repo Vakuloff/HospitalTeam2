@@ -14,9 +14,6 @@ namespace HospitalTeam2.Models
         [Key, ScaffoldColumn(false)]
         public int ContactId { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Message Id")]
-        public string MessageId { get; set; }
-
         [Required, StringLength(255), Display(Name = "Full Name")]
         public string FullName { get; set; }
 
@@ -37,7 +34,7 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Message Status")]
         public string MessageStatus { get; set; }
 
-        [Required, StringLength(255), Display(Name = "Admin Reply")]
+        [StringLength(255), Display(Name = "Admin Reply")]
         public string AdminReply { get; set; }
 
         [ForeignKey("Hospital")]

@@ -53,6 +53,8 @@ namespace HospitalTeam2.Models
 
         //one hospital has many staff
         public IEnumerable<Staff> Staffs { get; set; }
+        //one hospital has many messages
+        public IEnumerable<ContactForm> ContactForms { get; set; }
 
     }
 }

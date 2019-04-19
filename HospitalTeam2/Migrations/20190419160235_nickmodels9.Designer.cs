@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190419160235_nickmodels9")]
+    partial class nickmodels9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +154,7 @@ namespace HospitalTeam2.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdminReply")
+                        .IsRequired()
                         .HasMaxLength(255);
 
                     b.Property<string>("Email")
@@ -166,6 +168,10 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("HospitalID");
 
                     b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("MessageId")
                         .IsRequired()
                         .HasMaxLength(255);
 

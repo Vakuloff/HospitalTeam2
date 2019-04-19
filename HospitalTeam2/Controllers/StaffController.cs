@@ -37,7 +37,7 @@ namespace HospitalTeam2.Controllers
 
 
         // GET: Staff
-        public ActionResult Index()
+        public IActionResult Index()
         {
 
             return View(db.Staffs.ToList());
@@ -50,11 +50,6 @@ namespace HospitalTeam2.Controllers
 
             return View(staffs);
         }
-        //public ActionResult Show(int id)
-        //{
-        //    //wrapper
-        //    return RedirectToAction("Show/" + id);
-        //}
         public ActionResult Show(int? id)
         {
             if ((id == null) || (db.Staffs.Find(id) == null))
@@ -63,8 +58,8 @@ namespace HospitalTeam2.Controllers
             }
             string query = "select * from staffs where staffid=@id";
             SqlParameter param = new SqlParameter("@id", id);
-            //var staffstoshow = db.Staffs.Include(s => s.Department).Include(s => s.hospital);
-            Staff staffstoshow = db.Staffs.Include(s => s.Department).Include(s => s.hospital).SingleOrDefault(h => h.StaffId == id); ;
+
+            Staff staffstoshow = db.Staffs.Include(s => s.Department).Include(s => s.hospital).SingleOrDefault(h => h.StaffId == id);
             return View(staffstoshow);
         }
 
@@ -81,11 +76,8 @@ namespace HospitalTeam2.Controllers
         [HttpPost]
         public ActionResult Create(string StaffFirstName, string StaffLastName, string TypeDoctor, int DepartmentID,  int HospitalId)
         {
-
-
             //Query   
             string query = "insert into staffs ( StaffFirstName, StaffLastName, TypeDoctor, DepartmentID,  HospitalId) values (@sfn, @sln, @td, @depid,  @hid)";
-
 
             SqlParameter[] myparams = new SqlParameter[5];
 
@@ -117,13 +109,14 @@ namespace HospitalTeam2.Controllers
             staffeditview.Hospitals = db.Hospitals.ToList();
             //Finds all departments
             staffeditview.Departments = db.Departments.ToList();
-            staffeditview.Staffs = db.Staffs.Include(s => s.hospital).Include(s => s.Department).SingleOrDefault(h => h.StaffId == id); //finds all staff
-
+            //finds all staff
+            staffeditview.Staffs = db.Staffs.Include(s => s.hospital).Include(s => s.Department).SingleOrDefault(h => h.StaffId == id);
+            //GOTO: Views/Staff/Edit.cshtml
             return View(staffeditview);
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, string StaffFirstName_New, string StaffLastName_New, string TypeDoctor_New, int DepartmentId, int HospitalId)
+        public ActionResult Edit(int? id, string StaffFirstName_New, string StaffLastName_New, string TypeDoctor_New, int DepartmentID, int HospitalId)
         {
 
             if ((id == null) || (db.Staffs.Find(id) == null))
@@ -133,7 +126,7 @@ namespace HospitalTeam2.Controllers
             }
             //Raw Update MSSQL query
 
-            string query = "update staffs set StaffFirstName = @sfn, StaffLastName=@sln, TypeDoctor=@td,  DepartmentId=@depid, HospitalId=@hid where StaffId=@id";
+            string query = "update staffs set StaffFirstName=@sfn, StaffLastName=@sln, TypeDoctor=@td,  DepartmentId=@depid, HospitalId=@hid where StaffId=@id";
 
 
             SqlParameter[] myparams = new SqlParameter[6];
@@ -144,11 +137,12 @@ namespace HospitalTeam2.Controllers
 
             myparams[2] = new SqlParameter("@td", TypeDoctor_New);
 
-            myparams[3] = new SqlParameter("@depid", DepartmentId);
+            myparams[3] = new SqlParameter("@depid", DepartmentID);
 
             myparams[4] = new SqlParameter("@hid", HospitalId);
 
             myparams[5] = new SqlParameter("@id", id);
+
             //Execute the custom SQL command with parameters
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -181,6 +175,14 @@ namespace HospitalTeam2.Controllers
             db.Staffs.Remove(staff);
             db.SaveChanges();
             return RedirectToAction("List");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

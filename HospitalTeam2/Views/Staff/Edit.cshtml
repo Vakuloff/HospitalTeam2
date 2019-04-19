@@ -10,18 +10,18 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form action="/Staff/Edit" method="post">
+        <form action="/Staff/Edit/@(Model.Staffs.StaffId)" method="post">
             <div class="form-group">
                 <label class="control-label">First name</label>
-                <input class="form-control" type="text" name="StaffFirstName_New" />
+                <input class="form-control" type="text" value="@Model.Staffs.StaffFirstName" name="StaffFirstName_New" />
             </div>
             <div class="form-group">
                 <label class="control-label">Last name</label>
-                <input class="form-control" type="text" name="StaffLastName_New" />
+                <input class="form-control" type="text" value="@Model.Staffs.StaffLastName" name="StaffLastName_New" />
             </div>
             <div class="form-group">
                 <label class="control-label">Doctor Type</label>
-                <input class="form-control" type="text" name="TypeDoctor_New" />
+                <input class="form-control" type="text" value="@Model.Staffs.TypeDoctor" name="TypeDoctor_New" />
             </div>
             <div class="form-group">
                 <label class="control-label">Department</label>
@@ -29,11 +29,17 @@
                     @{
                         foreach (var department in Model.Departments)
                         {
+                            string current = "false";
+                            @if (department.DepartmentID == Model.Staffs.Department.DepartmentID)
+                            {
+                                current = "true";
+                            }
                             <option value="@(department.DepartmentID)">@(department.DepartmentTitle)</option>
                         }
                     }
                 </select>
             </div>
+
 
             <div class="form-group">
                 <label class="control-label">Hospital</label>
@@ -41,6 +47,11 @@
                     @{
                         foreach (var hospital in Model.Hospitals)
                         {
+                            string current = "false";
+                            @if (hospital.HospitalID == Model.Staffs.hospital.HospitalID)
+                            {
+                                current = "true";
+                            }
                             <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
                         }
 
