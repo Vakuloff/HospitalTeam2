@@ -55,6 +55,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Wireframes\Alert\" />
+    <Folder Include="Wireframes\ContactForm\" />
+    <Folder Include="Wireframes\StaffSchedule\" />
     <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
