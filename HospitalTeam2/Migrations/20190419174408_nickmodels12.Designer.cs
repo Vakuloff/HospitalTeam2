@@ -11,9 +11,10 @@ using System;
 namespace HospitalTeam2.Migrations
 {
     [DbContext(typeof(HospitalCMSContext))]
-    partial class HospitalCMSContextModelSnapshot : ModelSnapshot
+    [Migration("20190419174408_nickmodels12")]
+    partial class nickmodels12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

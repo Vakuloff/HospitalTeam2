@@ -37,6 +37,7 @@ namespace HospitalTeam2.Data
         public DbSet<Parking> Parkings { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Alert> Alerts { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<NavMenu> NavMenus { get; set; }
@@ -121,6 +122,7 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Parking>().ToTable("Parkings");
             modelBuilder.Entity<Schedule>().ToTable("Schedules");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
+            modelBuilder.Entity<Alert>().ToTable("Alerts");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
             modelBuilder.Entity<Feedback>().ToTable("Feedback");
             modelBuilder.Entity<NavMenu>().ToTable("NavMenus");
