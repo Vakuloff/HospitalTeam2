@@ -26,7 +26,7 @@ namespace HospitalTeam2
                     var serviceProvider = services.GetRequiredService<IServiceProvider>();
 
                     DbInitializer.Initialize(context);
-                    DbInitializer.CreateRoles(serviceProvider).Wait();
+                    DbInitializer.CreateRoles(context, serviceProvider).Wait();
                 }
                 catch (Exception ex)
                 {

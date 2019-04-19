@@ -6,24 +6,34 @@
 
 <h2>Users</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            Roles
-        </th>
-    </tr>
+
+
+<table id="dtUsers" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                Roles
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hospital)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -46,17 +56,31 @@
                 @roles
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Hospital)
+            </td>
+            <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.HospitalID }) |*@
                 @Html.ActionLink("Details", "GetUser", "Manage", new { id = item.Id })
                 @if (item.Email.ToLower() != "admin@admin.com")
                 {
                     <form asp-action="Delete">
                         <input type="hidden" asp-for="@item.Id" name="id" />
-                        <input type="submit" value="Delete" class="btn btn-default" />                         
+                        <input type="submit" value="Delete" class="btn btn-default" />
                     </form>
-                   
+
                 }
             </td>
         </tr>
     }
 </table>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dtUsers').DataTable();
+        });
+    </script>
+}

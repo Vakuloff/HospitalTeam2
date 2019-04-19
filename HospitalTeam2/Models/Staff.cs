@@ -25,10 +25,10 @@ namespace HospitalTeam2.Models
 
 
         //one staff has many shifts
-        public IEnumerable<Schedule> schedules { get; set; }
+        public ICollection<Schedule> schedules { get; set; }
 
         //one doctor has many bookingrequests
-        public IEnumerable<BookingRequest> BookingRequests { get; set; }
+        public ICollection<BookingRequest> BookingRequests { get; set; }
 
         //one department has many staff
         [ForeignKey("Department")]

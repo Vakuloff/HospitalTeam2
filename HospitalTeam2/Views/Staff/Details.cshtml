@@ -1,0 +1,75 @@
+﻿@model HospitalTeam2.Models.Staff
+
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h2>Details</h2>
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StaffFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StaffLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeDoctor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TypeDoctor)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.schedules != null && Model.schedules.Count() > 0)
+{
+<p>Available Time Slots :</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+               Start Time
+            </th>
+            <th>
+                End Time
+            </th>
+            <th>
+               
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.schedules)
+            {
+        <tr>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+            <td>
+                @item.StartShift.ToString("hh:mm")
+            </td>
+            <td>
+                @item.EndShift.ToString("hh:mm")
+            </td>
+            <td>
+              <a href="#">Book Appointment</a>
+            </td>
+
+        </tr>
+            }
+    </tbody>
+</table>
+
+}

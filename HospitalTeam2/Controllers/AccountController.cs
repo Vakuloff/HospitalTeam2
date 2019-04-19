@@ -217,6 +217,10 @@ namespace HospitalNew.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             var allRoles = (db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name })).ToList();
             ViewBag.Roles = allRoles;
+
+            var allHospitals = (db.Hospitals.OrderBy(r => r.HospitalTitle).ToList().Select(rr => new SelectListItem { Value = rr.HospitalID.ToString(), Text = rr.HospitalTitle })).ToList();
+            ViewBag.Hospitals = allHospitals;
+
             return View();
         }
 
@@ -230,18 +234,50 @@ namespace HospitalNew.Controllers
                 var checkExists = await _userManager.FindByEmailAsync(model.Email);
                 if (checkExists == null)
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName,
-                        LastName = model.LastName,PhoneNumber=model.PhoneNumber };
-                    var result = await _userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
+
+                    ApplicationUser user = null;
+                    if (model.Hospital == 0)
                     {
-                        _logger.LogInformation("User created a new account with password.");
-                        await _userManager.AddToRoleAsync(user, model.UserRole);
-                        _logger.LogInformation("User created a new account with password.");
-                        return RedirectToLocal(returnUrl);
+                        user = new ApplicationUser
+                        {
+                            UserName = model.Email,
+                            Email = model.Email,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            PhoneNumber = model.PhoneNumber
+                        };
                     }
-                  
-                    AddErrors(result);
+                    else
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = model.Email,
+                            Email = model.Email,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            PhoneNumber = model.PhoneNumber,
+                            HospitalId = model.Hospital
+                        };
+                    }
+
+                    try
+                    {
+                        var result = await _userManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            _logger.LogInformation("User created a new account with password.");
+                            await _userManager.AddToRoleAsync(user, model.UserRole);
+                            _logger.LogInformation("User created a new account with password.");
+                            return RedirectToLocal(returnUrl);
+                        }
+
+                        AddErrors(result);
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, "There is some issue in registering a user.");
+                    }
+
                 }
                 else
                 {
@@ -251,6 +287,9 @@ namespace HospitalNew.Controllers
 
             var allRoles = (db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name })).ToList();
             ViewBag.Roles = allRoles;
+
+            var allHospitals = (db.Hospitals.OrderBy(r => r.HospitalTitle).ToList().Select(rr => new SelectListItem { Value = rr.HospitalID.ToString(), Text = rr.HospitalTitle })).ToList();
+            ViewBag.Hospitals = allHospitals;
             // If we got this far, something failed, redisplay form
             return View(model);
         }

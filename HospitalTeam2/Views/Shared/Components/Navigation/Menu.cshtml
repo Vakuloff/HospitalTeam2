@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<NavMenu>
-
+@if (Model != null)
+{
 <ul class="nav navbar-nav">
 
     @foreach (var item in Model)
@@ -8,19 +9,18 @@
         {
             if (item.ChildMenuItems != null && item.ChildMenuItems.Count > 0)
             {
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         @item.Title
                         <span class="caret"></span>
-                    </button>
+                    </a>
                     <ul class="dropdown-menu">
                         @foreach (var child in item.ChildMenuItems)
                         {
                             <li><a href="@child.Url">@child.Title</a></li>
                         }
-
                     </ul>
-                </div>
+                </li>                
             }
             else
             {
@@ -31,3 +31,4 @@
     }
 
 </ul>
+}

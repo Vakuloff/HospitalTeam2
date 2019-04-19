@@ -47,6 +47,14 @@
                         asp-items="@(new SelectList((IEnumerable<SelectListItem>)ViewBag.Roles,"Value","Text"))"></select>
                 <span asp-validation-for="UserRole" class="text-danger"></span>
             </div>
+           
+            <div class="form-group">
+                <label asp-for="Hospital"></label>
+                <select asp-for="Hospital" class="form-control"
+                        asp-items="@(new SelectList((IEnumerable<SelectListItem>)ViewBag.Hospitals,"Value","Text","Select Hospital"))"></select>
+                
+            </div>
+
             <button type="submit" class="btn btn-default">Register</button>
         </form>
     </div>

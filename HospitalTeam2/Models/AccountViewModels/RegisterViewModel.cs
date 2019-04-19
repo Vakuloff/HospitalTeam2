@@ -37,5 +37,8 @@ namespace HospitalTeam2.Models.AccountViewModels
         [Required]
         [Display(Name = "User Role")]
         public string UserRole { get; set; }
+               
+        [Display(Name = "Hospital")]
+        public int Hospital { get; set; }
     }
 }

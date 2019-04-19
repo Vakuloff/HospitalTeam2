@@ -52,10 +52,11 @@ namespace HospitalTeam2.Controllers
         [HttpGet]
         public async Task<IActionResult> AllUsers(string id)
         {
-            var userList = _userManager.Users.ToList();
+            var userList = db.Users.ToList();
             List<IndexViewModel> userDetails = new List<IndexViewModel>();
             foreach (var user in userList)
             {
+                var hospital = db.Hospitals.FirstOrDefault(hptl => hptl.HospitalID == user.HospitalId);
                 var roles = await _userManager.GetRolesAsync(user);
                 userDetails.Add(new IndexViewModel
                 {
@@ -67,7 +68,8 @@ namespace HospitalTeam2.Controllers
                     PhoneNumber = user.PhoneNumber,
                     IsEmailConfirmed = user.EmailConfirmed,
                     StatusMessage = StatusMessage,
-                    Roles = roles.ToList()
+                    Roles = roles.ToList(),
+                    Hospital = hospital?.HospitalTitle
                 });
             }
 
@@ -91,7 +93,8 @@ namespace HospitalTeam2.Controllers
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                Hospital = user.Hospital?.HospitalTitle
             };
 
             return View(model);

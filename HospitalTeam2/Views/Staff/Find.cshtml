@@ -1,0 +1,92 @@
+﻿@model HospitalTeam2.Models.ViewModels.FindDoctorViewModel
+
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h2>Find a Doctor</h2>
+
+<div class="row">
+    <div class="container">
+        <p>Select Department Below :</p>
+
+        <form action="/Staff/Find" method="post">
+            @foreach (var item in Model.Departments)
+            {
+                if (Model.DepartmentIds != null && Model.DepartmentIds.Length > 0)
+                {
+                    if (Model.DepartmentIds.ToList().Exists(dept => dept == item.DepartmentID))
+                    {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" checked name="DepartmentIds" value="@item.DepartmentID">@string.Format("{0}-{1}", item.DepartmentTitle,item.Hospital.HospitalTitle)
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="DepartmentIds" value="@item.DepartmentID">@string.Format("{0}-{1}", item.DepartmentTitle, item.Hospital.HospitalTitle)
+                        </label>
+                    }
+
+                }
+                else
+                {
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="DepartmentIds" value="@item.DepartmentID">@string.Format("{0}-{1}", item.DepartmentTitle, item.Hospital.HospitalTitle)
+                        </label>
+                }
+
+            }
+            <br />
+
+            <input type="submit" class="btn btn-primary" value="Search" />
+
+        </form>
+    </div>
+</div>
+@if (Model.Doctors != null && Model.Doctors.Count > 0)
+{
+    <p>List of avalable Doctor :</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Hospital
+                </th>
+                <th>
+                    Department
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Doctors)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StaffFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StaffLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departments.Hospital.HospitalTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departments.DepartmentTitle)
+                    </td>
+                    <td>
+                        <a href="/Staff/Details/@item.StaffId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

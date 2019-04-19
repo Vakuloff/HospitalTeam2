@@ -31,5 +31,8 @@ namespace HospitalTeam2.Models.ManageViewModels
         public string StatusMessage { get; set; }
 
         public List<string> Roles { get; set; }
+
+        [Required, Display(Name = "Hospital Name")]
+        public string Hospital { get; set; }
     }
 }

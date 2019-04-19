@@ -9,14 +9,15 @@ namespace HospitalTeam2.Data
 {
     public static class DbInitializer
     {
+
         public static void Initialize(HospitalCMSContext context)
-        {          
+        {
             context.Database.EnsureCreated();
 
             return;
         }
 
-        public static async Task CreateRoles(IServiceProvider serviceProvider)
+        public static async Task CreateRoles(HospitalCMSContext context, IServiceProvider serviceProvider)
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -43,6 +44,97 @@ namespace HospitalTeam2.Data
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
+
+            string[] menuNames =
+                {
+                    "Patients/Visitors",
+                    "About Us",
+                    "Volunteers",
+                    "Contact",
+                    "Blog",
+                    "Donation",
+                    "Staff Schedule",
+                    "Find a Doctor",
+                    "Book Appointment",
+                    "parking",
+                    "Careers",
+                    "Emergency Alert",
+                    "Event Calender"
+                };
+
+            foreach (var menu in menuNames)
+            {               
+                if (!context.NavMenus.ToList().Exists(nav => nav.Title == menu))
+                {
+                    if(menu== "Patients/Visitors")
+                    {
+                        context.Add(new NavMenu() { Title=menu,IsShown=true,Url= "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "About Us")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Volunteers")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Contact")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Blog")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Donation")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Staff Schedule")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Menus" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Find a Doctor")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "/Staff/find" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Book Appointment")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "#" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "parking")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "#" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Careers")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "#" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Emergency Alert")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "#" });
+                        context.SaveChanges();
+                    }
+                    else if (menu == "Event Calender")
+                    {
+                        context.Add(new NavMenu() { Title = menu, IsShown = true, Url = "#" });
+                        context.SaveChanges();
+                    }
+
+
                 }
             }
 

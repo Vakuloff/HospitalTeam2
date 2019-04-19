@@ -1,4 +1,6 @@
 ﻿using HospitalTeam2.Data;
+using HospitalTeam2.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,15 +14,26 @@ namespace HospitalTeam2
     {
         private readonly HospitalCMSContext _context;
 
-        public NavigationViewComponent(HospitalCMSContext context)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        public NavigationViewComponent(SignInManager<ApplicationUser> signInManager, HospitalCMSContext context)
         {
             _context = context;
+            _signInManager = signInManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var navMenus = await _context.NavMenus.ToListAsync();
-            return View("Menu", navMenus);
+            if(_signInManager.IsSignedIn(UserClaimsPrincipal))
+            {
+                var navMenus = await _context.NavMenus.ToListAsync();
+                return View("Menu", navMenus);
+            }
+            else
+            {
+                return View("Menu");
+            }
+           
         }
     }
 }
