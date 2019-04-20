@@ -46,7 +46,17 @@
                 @item.DonorMessage
             </td>
             <td>
-                <img src="/images/Donors/@item.ImageUrl" class="imageCell" />
+                @if (item.HasPic == 1)
+                {
+
+                    <div class="img-container">
+                        <img src="~/images/Donors/@(item.DonorID).@(item.ImageUrl)" />
+                    </div>
+                }
+                else
+                {
+                    <span>None</span>
+                }
 
             </td>
             <td>
