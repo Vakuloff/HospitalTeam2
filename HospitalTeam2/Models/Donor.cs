@@ -21,7 +21,9 @@ namespace HospitalTeam2.Models
 
         [Required, StringLength(2000), Display(Name = "Message")]
         public string DonorMessage { get; set; }
-        
+
+        public int HasPic { get; set; }
+
         public string ImageUrl { get; set; }
 
         

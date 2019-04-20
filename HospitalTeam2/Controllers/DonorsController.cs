@@ -88,19 +88,9 @@ namespace HospitalTeam2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor, IFormFile imageUrl)
+        public async Task<IActionResult> Create([Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor)
         {
-            if (imageUrl == null || imageUrl.Length == 0)
-            {
-                donor.ImageUrl = "no-image.png";
-            }
-            else
-            {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/donors", imageUrl.FileName);
-                var stream = new FileStream(path, FileMode.Create);
-                donor.ImageUrl = imageUrl.FileName;
-            }
-                         
+                                   
 
 
             if (ModelState.IsValid)
@@ -130,21 +120,43 @@ namespace HospitalTeam2.Controllers
         }
 
         // POST: Donors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage,ImageUrl")] Donor donor, IFormFile ImageUrl)
+        public async Task<IActionResult> Edit(int id, [Bind("DonorID,DonorName,DonorMessage")] Donor donor, IFormFile imageUrl)
         {
-            if (ImageUrl == null || ImageUrl.Length == 0)
+            //Taken from christines example
+            donor.HasPic = 0;
+            var webRoot = _env.WebRootPath;
+            if (imageUrl != null)
             {
-                donor.ImageUrl = "no-image.png";
-            }
-            else
-            {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/donors", ImageUrl.FileName);
-                var stream = new FileStream(path, FileMode.Create);
-                donor.ImageUrl = ImageUrl.FileName;
+                if (imageUrl.Length > 0)
+                {
+                    
+                    var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                    var extension = Path.GetExtension(imageUrl.FileName).Substring(1);
+
+                    if (valtypes.Contains(extension))
+                    {
+
+                        //generic .img extension, web translates easily.
+                        string fn = donor.DonorID + "." + extension;
+
+                        //get a direct file path to imgs/authors/
+                        string path = Path.Combine(webRoot, "images/donors");
+                        path = Path.Combine(path, fn);
+
+                        //save the file
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            imageUrl.CopyTo(stream);
+                        }
+                        //let the model know that there is a picture with an extension
+                        donor.HasPic = 1;
+                        donor.ImageUrl = extension;
+
+                    }
+                }
             }
             if (id != donor.DonorID)
             {
