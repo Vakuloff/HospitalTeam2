@@ -10,7 +10,7 @@ namespace HospitalTeam2.Models.ViewModels
 {
     public class BookingRequestEdit
     {
-        public virtual BookingRequest BookingRequest { get; set; }
+        public virtual BookingRequest BookingRequests { get; set; }
 
         public IEnumerable<Hospital> Hospitals { get; set; }
 

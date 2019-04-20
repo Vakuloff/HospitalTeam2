@@ -1,0 +1,70 @@
+﻿@model HospitalTeam2.Models.ViewModels.StaffEdit
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit @Model.Staffs.StaffFirstName</h2>
+
+<h4>Staff</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="/Staff/Edit/@(Model.Staffs.StaffId)" method="post">
+            <div class="form-group">
+                <label class="control-label">First name</label>
+                <input class="form-control" type="text" value="@Model.Staffs.StaffFirstName" name="StaffFirstName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last name</label>
+                <input class="form-control" type="text" value="@Model.Staffs.StaffLastName" name="StaffLastName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Doctor Type</label>
+                <input class="form-control" type="text" value="@Model.Staffs.TypeDoctor" name="TypeDoctor_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Department</label>
+                <select class="form-control" name="DepartmentId">
+                    @{
+                        foreach (var department in Model.Departments)
+                        {
+                            string current = "false";
+                            @if (department.DepartmentID == Model.Staffs.Department.DepartmentID)
+                            {
+                                current = "true";
+                            }
+                            <option value="@(department.DepartmentID)">@(department.DepartmentTitle)</option>
+                        }
+                    }
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Hospital</label>
+                <select class="form-control" name="hospitalid">
+                    @{
+                        foreach (var hospital in Model.Hospitals)
+                        {
+                            string current = "false";
+                            @if (hospital.HospitalID == Model.Staffs.hospital.HospitalID)
+                            {
+                                current = "true";
+                            }
+                            <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

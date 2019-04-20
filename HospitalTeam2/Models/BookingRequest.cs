@@ -38,6 +38,8 @@ namespace HospitalTeam2.Models
         [Required, StringLength(255), Display(Name = "Age")]
         public string Age { get; set; }
 
+       
+
         //each bookingrequest has one hospital
 
         public virtual Hospital Hospital { get; set; }

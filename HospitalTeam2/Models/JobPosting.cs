@@ -39,6 +39,7 @@ namespace HospitalTeam2.Models
         [ForeignKey("Department")]
         public int DepartmentID { get; set; }
 
+        [InverseProperty("JobPosting")]
         public IEnumerable<JobApplication> JobApplications { get; set; }
     }
 }

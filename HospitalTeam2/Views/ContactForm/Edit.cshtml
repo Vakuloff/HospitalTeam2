@@ -1,0 +1,81 @@
+﻿@model HospitalTeam2.Models.ViewModels.ContactFormEdit
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>ContactForm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="/ContactForm/Edit/@(Model.ContactForms.ContactId)" method="post">
+            <div class="form-group">
+                <label class="control-label">Full Name</label>
+                <input class="form-control" type="text" value="@Model.ContactForms.FullName" name="FullName_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone Number</label>
+                <input class="form-control" type="text" value="@Model.ContactForms.PhoneNumber" name="PhoneNumber_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" value="@Model.ContactForms.Email" name="Email_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Topic</label>
+                <select class="form-control" name="Topic_New">
+                    <option value="General">General</option>
+                    <option value="IT">IT problems</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Parking">Parking</option>
+                    <option value="Donations">Donations</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Message</label>
+                <input class="form-control" type="text" value="@Model.ContactForms.Message" name="Message_New"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Message Status</label>
+                <select class="form-control" name="MessageStatus_New">
+                    <option value="InProcess">In process</option>
+                    <option value="RequireInformation">Require Information</option>
+                    <option value="Done">Done</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Reply</label>
+                <textarea class="form-control" text="@Model.ContactForms.AdminReply" name="AdminReply_New"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Hospital</label>
+                <select class="form-control" name="hospitalid">
+                    @{
+                        foreach (var hospital in Model.Hospitals)
+                        {
+                            string current = "false";
+                            @if (hospital.HospitalID == Model.ContactForms.Hospital.HospitalID)
+                            {
+                                current = "true";
+                            }
+                            <option value="@(hospital.HospitalID)">@(hospital.HospitalTitle)</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

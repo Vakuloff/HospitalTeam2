@@ -25,17 +25,24 @@ namespace HospitalTeam2.Models
 
 
         //one staff has many shifts
-        public ICollection<Schedule> schedules { get; set; }
+        public IEnumerable<Schedule> schedules { get; set; }
 
         //one doctor has many bookingrequests
-        public ICollection<BookingRequest> BookingRequests { get; set; }
+
+        [InverseProperty("Staff")]
+        public IEnumerable<BookingRequest> BookingRequests { get; set; }
 
         //one department has many staff
-        [ForeignKey("Department")]
+        [ForeignKey("DepartmentID")]
         public int DepartmentID { get; set; }
 
-        public virtual Department Departments { get; set; }
-        
+        public virtual Department Department { get; set; }
+        //one hospital has many staff
+        [ForeignKey("HospitalId")]
+        public int HospitalId { get; set; }
+
+        public virtual Hospital hospital { get; set; }
+
         //position
         //department
     }

@@ -41,17 +41,20 @@ namespace HospitalTeam2.Models
         //one hospital has many volunteers
         public IEnumerable<Volunteer> Volunteers { get; set; }
 
-        //one hospital has many bookingrequests
-        public IEnumerable<BookingRequest> BookingRequests { get; set; }
+        //one hospital and bookingrequests
+        [InverseProperty("Hospital")]
+        public List<BookingRequest> BookingRequests { get; set; }
 
         //parking that belong to hospital
         public IList<Parking> parking { get; set; }
 
-        //one hospital has many bookingrequests
+        //one hospital has many alert
         public IEnumerable<Alert> Alerts { get; set; }
 
         //one hospital has many staff
         public IEnumerable<Staff> Staffs { get; set; }
+        //one hospital has many messages
+        public IEnumerable<ContactForm> ContactForms { get; set; }
 
     }
 }

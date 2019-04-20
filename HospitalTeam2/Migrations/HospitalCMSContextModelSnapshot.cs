@@ -39,7 +39,7 @@ namespace HospitalTeam2.Migrations
 
                     b.HasIndex("HospitalID");
 
-                    b.ToTable("Alert");
+                    b.ToTable("Alerts");
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.ApplicationUser", b =>
@@ -157,7 +157,6 @@ namespace HospitalTeam2.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdminReply")
-                        .IsRequired()
                         .HasMaxLength(255);
 
                     b.Property<string>("Email")
@@ -171,10 +170,6 @@ namespace HospitalTeam2.Migrations
                     b.Property<int>("HospitalID");
 
                     b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("MessageId")
                         .IsRequired()
                         .HasMaxLength(255);
 
@@ -494,7 +489,7 @@ namespace HospitalTeam2.Migrations
 
                     b.Property<int>("DepartmentID");
 
-                    b.Property<int?>("HospitalID");
+                    b.Property<int>("HospitalId");
 
                     b.Property<string>("StaffFirstName")
                         .IsRequired()
@@ -512,7 +507,7 @@ namespace HospitalTeam2.Migrations
 
                     b.HasIndex("DepartmentID");
 
-                    b.HasIndex("HospitalID");
+                    b.HasIndex("HospitalId");
 
                     b.ToTable("Staffs");
                 });
@@ -737,7 +732,7 @@ namespace HospitalTeam2.Migrations
             modelBuilder.Entity("HospitalTeam2.Models.ContactForm", b =>
                 {
                     b.HasOne("HospitalTeam2.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("ContactForms")
                         .HasForeignKey("HospitalID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -807,14 +802,15 @@ namespace HospitalTeam2.Migrations
 
             modelBuilder.Entity("HospitalTeam2.Models.Staff", b =>
                 {
-                    b.HasOne("HospitalTeam2.Models.Department", "Departments")
+                    b.HasOne("HospitalTeam2.Models.Department", "Department")
                         .WithMany("Staff")
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HospitalTeam2.Models.Hospital")
+                    b.HasOne("HospitalTeam2.Models.Hospital", "hospital")
                         .WithMany("Staffs")
-                        .HasForeignKey("HospitalID");
+                        .HasForeignKey("HospitalId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HospitalTeam2.Models.Volunteer", b =>

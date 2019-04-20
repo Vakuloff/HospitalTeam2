@@ -12,12 +12,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HospitalTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HospitalTitle)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.JobPostingTitle)
         </dt>
         <dd>
@@ -42,12 +36,6 @@
             @Html.DisplayFor(model => model.JobPostingReq)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.JobApplicationID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JobApplicationID)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Department)
         </dt>
         <dd>
@@ -57,13 +45,13 @@
             @Html.DisplayNameFor(model => model.Hospital)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Hospital.Address)
+            @Html.DisplayFor(model => model.Hospital.HospitalTitle)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="JobPostingID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="List">Back to List</a>
     </form>
 </div>

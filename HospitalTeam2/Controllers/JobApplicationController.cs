@@ -35,11 +35,11 @@ namespace HospitalTeam2.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return View(db.JobApplications.ToList());
         }
 
 
-        public ActionResult List()
+        public ActionResult List(int pagenum)
         {
 
 
@@ -50,6 +50,7 @@ namespace HospitalTeam2.Controllers
             return View(jobapplications);
 
         }
+        
 
         public ActionResult New()
         {
@@ -79,6 +80,8 @@ namespace HospitalTeam2.Controllers
 
             return RedirectToAction("List");
         }
+
+      
         //we decided that admin can't edit jobapplication
 
 
@@ -130,8 +133,8 @@ namespace HospitalTeam2.Controllers
             //select * from jobapplications 
             //left join jobs on jobs.jobid = jobapplications.jobid
             //where jobapplicationod=id
-            var jobapp = db.JobApplications.Where(ja => ja.JobApplicationID == id).Include(ja => ja.JobPostingID);
-
+            JobApplication jobapp = db.JobApplications.Include(ja => ja.JobPosting).SingleOrDefault(jp => jp.JobApplicationID == id);
+           
             return View(jobapp);
 
         }

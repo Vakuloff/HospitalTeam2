@@ -18,6 +18,7 @@ using HospitalTeam2.Models.ViewModels;
 using HospitalTeam2.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.Data;
+using System.Diagnostics;
 
 namespace HospitalTeam2.Controllers
 {
@@ -28,7 +29,7 @@ namespace HospitalTeam2.Controllers
 
         private readonly IHostingEnvironment _env;
 
-        public SqlDbType JobPostingTitle { get; private set; }
+        public SqlDbType StaffFirstName { get; private set; }
 
         public JobPostingController(HospitalCMSContext context, IHostingEnvironment env)
         {
@@ -47,7 +48,10 @@ namespace HospitalTeam2.Controllers
         {
             //LIST WILL SHOW ALL JOB POSITIONS
             //WHAT INFORMATION DO I NEED
-            List<JobPosting> jobposting = db.JobPostings.Include(h => h.Hospital).Include(d => d.Department).ToList();
+
+            //JobPosting testposting = new JobPosting();
+            
+            List<JobPosting> jobposting = db.JobPostings.Include(jp=>jp.Hospital).Include(jp=>jp.Department).ToList();
 
             //GOTO Views/jobposition/List.cshtml
             return View(jobposting);
@@ -63,7 +67,7 @@ namespace HospitalTeam2.Controllers
             string query = "select * from jobposting where jobpostingid=@id";
             SqlParameter param = new SqlParameter("@id", id);
 
-            JobPosting jobpostshow = db.JobPostings.Include(v => v.Hospital).ThenInclude(d =>d.Departments).SingleOrDefault(jp => jp.JobPostingID == id);
+            JobPosting jobpostshow = db.JobPostings.Include(jp => jp.Hospital).Include(jp =>jp.Department).SingleOrDefault(h => h.JobPostingID == id);
 
             return View(jobpostshow);
 
@@ -91,10 +95,11 @@ namespace HospitalTeam2.Controllers
 
 
             //Query   
-            string query = "insert into jobpostings (HospitalID, DepartmentID, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq) values (@hid, @did, @title, @type, @desc, @req)";
+            string query = "insert into jobpostings (HospitalID, DepartmentID, JobPostingTitle, JobPostingType, JobPostingDesc, JobPostingReq, DepartmentTitle, HospitalTitle) values (@hid, @did, @title, @type, @desc, @req, @d1, @d2)";
+            //DUMMY DATA FOR DEPARTMENTITLE AND HOSPITAL TITLE BECAUSE WE DON'T NEED THAT BUT IT'S FROM THE PREVIOUS DATABASE
+            //CORRECT WAY IS TO REMOVE THESE COLUMNS ENTIRE FROM THE DB
 
-
-            SqlParameter[] myparams = new SqlParameter[6];
+            SqlParameter[] myparams = new SqlParameter[8];
             //@hospital (id) FOREIGN KEY param
             myparams[0] = new SqlParameter("@hid", HospitalID);
             //@department (id) FOREIGN KEY param
@@ -107,7 +112,11 @@ namespace HospitalTeam2.Controllers
             myparams[4] = new SqlParameter("@desc", JobPostingDesc_New);
             //@req parameter
             myparams[5] = new SqlParameter("@req", JobPostingReq_New);
-           
+
+            var dummytext = "";
+
+            myparams[6] = new SqlParameter("@d1", dummytext);
+            myparams[7] = new SqlParameter("@d2", dummytext);
             
             db.Database.ExecuteSqlCommand(query, myparams);
 
@@ -121,19 +130,21 @@ namespace HospitalTeam2.Controllers
 
             JobPostingEdit positioneditview = new JobPostingEdit();
 
-
-            positioneditview.Hospitals = db.Hospitals.ToList(); //Finds all hospitals
+            //find all hospitals
+            positioneditview.Hospitals = db.Hospitals.ToList();
+            //find all departments
             positioneditview.Departments = db.Departments.ToList();
 
-            positioneditview.JobPostings = db.JobPostings.Include(h => h.HospitalID).SingleOrDefault(j => j.JobPostingID == id); //finds all job
+            positioneditview.JobPostings = db.JobPostings.Include(jp => jp.Hospital).Include(jp => jp.Department).SingleOrDefault(h => h.JobPostingID == id); //finds all job
 
             //GOTO: Views/Job/Edit.cshtml
             return View(positioneditview);
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, int HospitalID,int DepartmentID, string JobPostingTitle, string JobPostingType, string JobPostingDesc, string JobPostingReq)
+        public ActionResult Edit(int? id, string JobPostingTitle, string JobPostingType, string JobPostingDesc, string JobPostingReq, int HospitalID, int DepartmentID)
         {
+            Debug.WriteLine("Fk department ");
 
             if ((id == null) || (db.JobPostings.Find(id) == null))
             {
@@ -141,23 +152,22 @@ namespace HospitalTeam2.Controllers
 
             }
             //Raw Update MSSQL query
-            string query = "update jobpostings set HospitalID=@hid, DepartmentID = @did, JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req where JobPostingID=@id";
+            string query = "update jobpostings set  JobPostingTitle=@title,  JobPostingType=@type,JobPostingDesc=@desc, JobPostingReq=@req, HospitalID=@hid, DepartmentID=@did where JobPostingID=@id";
 
 
-            SqlParameter[] myparams = new SqlParameter[6];
-            //Parameter for @hospital FK
-            myparams[0] = new SqlParameter("@hid", HospitalID);
-            //Parameter for (department) id FOREIGN KEY
-            myparams[1] = new SqlParameter("@did",DepartmentID);
+            SqlParameter[] myparams = new SqlParameter[7];
             //Parameter for @title "jobPostTitle"
-            myparams[2] = new SqlParameter("@title", JobPostingTitle); 
+            myparams[0] = new SqlParameter("@title", JobPostingTitle); 
             //Parameter for @type "jobpostingtype"
-            myparams[3] = new SqlParameter("@type", JobPostingType);
+            myparams[1] = new SqlParameter("@type", JobPostingType);
             //Parameter for @desc "JobDesc"
-            myparams[4] = new SqlParameter("@desc", JobPostingDesc);
+            myparams[2] = new SqlParameter("@desc", JobPostingDesc);
             //Parameter for @req "JobReq"
-            myparams[5] = new SqlParameter("@req", JobPostingReq);
-            
+            myparams[3] = new SqlParameter("@req", JobPostingReq);
+
+            myparams[4] = new SqlParameter("@hid", HospitalID);
+            myparams[5] = new SqlParameter("@did", DepartmentID);
+
             //Pararameter for (Position) id PRIMARY KEY
             myparams[6] = new SqlParameter("@id", id);
 

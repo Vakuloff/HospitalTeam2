@@ -34,10 +34,29 @@ namespace HospitalTeam2.Controllers
             _env = env;
         }
 
-        // GET: Donors
-        public async Task<IActionResult> Index()
+        // GET: Donors with pagination 
+        public async Task<IActionResult> Index(int pagenum)
         {
-            return View(await _context.Donors.ToListAsync());
+            var _donors = await _context.Donors.ToListAsync();
+            //get total donors in the db
+            int donorcount = _donors.Count();
+            //set number of donors on page
+            int perpage = 3;
+            //find number of pages
+            int maxpage = (int)Math.Ceiling((decimal)donorcount / perpage) - 1;
+            if (maxpage < 0) maxpage = 0;
+            if (pagenum < 0) pagenum = 0;
+            if (pagenum > maxpage) pagenum = maxpage;
+            int start = perpage * pagenum;
+            ViewData["pagenum"] = (int)pagenum;
+            ViewData["PaginationSummary"] = "";
+            if (maxpage > 0)
+            {
+                ViewData["PaginationSummary"] =
+                    (pagenum + 1).ToString() + " of " +
+                    (maxpage + 1).ToString();
+            }
+            return View(await _context.Donors.Skip(start).Take(perpage).ToListAsync());
         }
 
         // GET: Donors/Details/5

@@ -37,6 +37,7 @@ namespace HospitalTeam2.Data
         public DbSet<Parking> Parkings { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Alert> Alerts { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<NavMenu> NavMenus { get; set; }
@@ -68,9 +69,9 @@ namespace HospitalTeam2.Data
 
             //each job position has one department, each department has many job
             modelBuilder.Entity<JobPosting>()
-                .HasOne(d => d.Department)
-                .WithMany(jp => jp.JobPostings)
-                .HasForeignKey(d => d.DepartmentID);
+                .HasOne(jp => jp.Department)
+                .WithMany(d => d.JobPostings)
+                .HasForeignKey(jp => jp.DepartmentID);
 
             //each bookingrequest has one hospital, one hospital has many bookingapp
 
@@ -82,9 +83,9 @@ namespace HospitalTeam2.Data
             //each bookingrequest has one doctor, each doctor has many bookapp
 
             modelBuilder.Entity<BookingRequest>()
-                .HasOne(s => s.Staff)
-                .WithMany(b => b.BookingRequests)
-                .HasForeignKey(s => s.StaffID);
+                .HasOne(b => b.Staff)
+                .WithMany(s => s.BookingRequests)
+                .HasForeignKey(b => b.StaffID);
 
             //each department has one hospital, each hospital has many departments
             modelBuilder.Entity<Department>()
@@ -100,7 +101,7 @@ namespace HospitalTeam2.Data
 
             //each staff has one department, each department has many staffs
             modelBuilder.Entity<Staff>()
-                .HasOne(s => s.Departments)
+                .HasOne(s => s.Department)
                 .WithMany(d => d.Staff)
                 .HasForeignKey(s => s.DepartmentID);
 
@@ -121,6 +122,7 @@ namespace HospitalTeam2.Data
             modelBuilder.Entity<Parking>().ToTable("Parkings");
             modelBuilder.Entity<Schedule>().ToTable("Schedules");
             modelBuilder.Entity<Staff>().ToTable("Staffs");
+            modelBuilder.Entity<Alert>().ToTable("Alerts");
             modelBuilder.Entity<Volunteer>().ToTable("Volunteers");
             modelBuilder.Entity<Feedback>().ToTable("Feedback");
             modelBuilder.Entity<NavMenu>().ToTable("NavMenus");

@@ -3,39 +3,61 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="jumbotron">
+    <div class="containerH">
+        <h2>FAQ</h2>
+    </div>
+</div>
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="btn btn-primary">
+    <a asp-action="Create" style="color:white">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FaqQues)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FaqAns)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FaqQues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FaqAns)
-            </td>
-            <td>
+<div id="paginate">
+    @ViewData["PaginationSummary"]
+    @Html.ActionLink("Prev",
+        "Index",
+        new { pagenum= ((int)ViewData["pagenum"]-1)}
+        )
+    |
+    @Html.ActionLink("Next",
+        "Index",
+        new { pagenum = ((int)ViewData["pagenum"] + 1) }
+        )
+</div>
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div>
+            <div>
+                <h3>
+                    @Html.DisplayFor(modelItem => item.FaqQues)
+                </h3>
+                <br/>
+            </div>
+            <div>
+                <p>
+                    @Html.DisplayFor(modelItem => item.FaqAns)
+                </p>
+            </div>
+            <p>
                 <a asp-action="Edit" asp-route-id="@item.FaqID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.FaqID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.FaqID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </p>
+        </div>
+    }
+    </div>
+   
+    <div id="paginate">
+        @ViewData["PaginationSummary"]
+        @Html.ActionLink("Prev",
+            "Index",
+            new { pagenum= ((int)ViewData["pagenum"]-1)}
+            )
+        |
+        @Html.ActionLink("Next",
+            "Index",
+            new { pagenum = ((int)ViewData["pagenum"] + 1) }
+            )
+    </div>

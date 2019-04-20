@@ -11,28 +11,28 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HospitalTitle)
+            @Html.DisplayNameFor(model => model.Hospital)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.HospitalTitle)
+            @Html.DisplayFor(model => model.Hospital.HospitalTitle)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.TypeDoctor)
+            @Html.DisplayNameFor(model => model.Staff)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TypeDoctor)
+            @Html.DisplayFor(model => model.Staff.TypeDoctor)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.StaffFirstName)
+            @Html.DisplayNameFor(model => model.Staff)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.StaffFirstName)
+            @Html.DisplayFor(model => model.Staff.StaffFirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.StaffLastName)
+            @Html.DisplayNameFor(model => model.Staff)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.StaffLastName)
+            @Html.DisplayFor(model => model.Staff.StaffLastName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Reason)
@@ -82,21 +82,10 @@
         <dd>
             @Html.DisplayFor(model => model.Age)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hospital)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hospital.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Staff)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Staff.StaffFirstName)
-        </dd>
+        
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.BookingID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>

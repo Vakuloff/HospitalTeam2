@@ -4,6 +4,7 @@
     ViewData["Title"] = "New";
 }
 
+
 <h2>New</h2>
 
 
@@ -12,27 +13,31 @@
 <div class="row">
     <div class="col-md-4">
         <form action="/Hospital/Create" method="post">
+            <div class="form-group">
+                <label class="control-label">Hospital Title</label>
+                <input class="form-control"type="text" name="HospitalTitle_New" />
+               </div>
+            <div class="form-group">
+                <label class="control-label">Address</label>
+                <input class="form-control" type="text" name="Address_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" name="Email_New" />
+               </div>
+            <div>
+                <label class="control-label">Phone</label>
+                <input class="form-control"type="text" name="Phone_New" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                <input class="form-control"type="text" name="Description_New" />
+          </div>
 
-            <label>Hospital Title</label>
-            <input type="text" name="HospitalTitle_New" />
 
-            <label>Address</label>
-            <input type="text" name="Address_New" />
+                <input type="submit" class="btn btn-primary btn-block"  value="submit" />
 
-            <label>Email</label>
-            <input type="text" name="Email_New" />
-
-            <label>Phone</label>
-            <input type="text" name="Phone_New" />
-
-            <label>Description</label>
-            <input type="text" name="Description_New" />
-
-
-
-            <input type="submit" value="submit" />
-
-        </form>
+</form>
     </div>
 </div>
 
